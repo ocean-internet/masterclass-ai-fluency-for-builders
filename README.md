@@ -1,5 +1,12 @@
 # AI Fluency for Builders: From Zero to Your First AI-Augmented Tool
 
+> TODO
+> TL;DR
+
+## Inspiration
+
+- [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
+
 ## Course details
 
 AI is everywhere – but most teams still struggle to use it in practice. You don't need specialist knowledge to start experimenting.
@@ -31,3 +38,18 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 1. Follow the setup instructions in [docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
 2. Run `yarn test` to verify your environment
 3. Continue to Step 01 (coming soon)
+
+## Further Reading
+
+- [Agents: Chip Huyen](https://huyenchip.com/2025/01/07/agents.html)
+- [Building effective agents: Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
+- [The DNA of AI Agents - Common Patterns in Recent Design Principles: Cedric Chee](https://cedricchee.com/blog/the-dna-of-ai-agents/)
+- [Emerging Patterns in Building GenAI Products: Bharani Subramaniam & Martin Fowler](https://martinfowler.com/articles/gen-ai-patterns/)
+
+### AI Engineering
+
+> by Chip Huyen
+
+Recent breakthroughs in AI have not only increased demand for AI products, they've also lowered the barriers to entry for those who want to build AI products. The model-as-a-service...
+
+[Book](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)

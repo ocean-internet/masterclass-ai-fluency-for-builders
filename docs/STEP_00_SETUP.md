@@ -33,7 +33,7 @@ during learning.
 - Lower latency and no API bills
 - Inputs/outputs stay on your machine
 
-**Read more:** see Further Reading in the main README.
+**Read more:** see Further Reading in [README.md](../README.md).
 
 ---
 

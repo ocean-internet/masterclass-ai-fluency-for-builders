@@ -25,3 +25,9 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 - Iterating on prompts and fixing failure cases
 - Guiding AI reasoning: generating options, weighing trade-offs, reviewing outputs
 - Principles you can transfer to docs, testing, support, or other workflows
+
+## Getting Started
+
+1. Follow the setup instructions in [docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
+2. Run `yarn test` to verify your environment
+3. Continue to Step 01 (coming soon)

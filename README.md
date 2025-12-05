@@ -48,8 +48,6 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 ### AI Engineering
 
+[![image](https://www.oreilly.com/covers/urn:orm:book:9781098166298/100w/)](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)
+
 > by Chip Huyen
-
-Recent breakthroughs in AI have not only increased demand for AI products, they've also lowered the barriers to entry for those who want to build AI products. The model-as-a-service...
-
-[Book](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)

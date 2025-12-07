@@ -1,6 +1,6 @@
-# Step 01: Single-Prompt Generation + Basic Evaluation
+# Step 01: Single Prompt
 
-**Branch**: `step-01-single-prompt-plus-eval`  
+**Branch**: `step-01-single-prompt`  
 **Goal**: Generate an ADR from a decision context using a single prompt, then evaluate it with a basic LLM-as-judge. Both outputs validated with Zod. This establishes the Generate → Evaluate → Iterate pattern.
 
 ---
@@ -167,10 +167,10 @@ Then re-run generation and evaluation to see if the tradeoffs score improves.
 
 ## ➡️ Next
 
-Step 02 introduces structured chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
+Step 02 introduces sequential chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
 
-Continue to **Step 02 — Chain Generation + Structured Evaluation**
+Continue to **Step 02 — Sequential Chain**
 
 ```bash
-git checkout step-02-chain-eval
+git checkout step-02-sequential-chain
 ```

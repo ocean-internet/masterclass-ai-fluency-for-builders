@@ -124,7 +124,7 @@ After masterclass delivery, attendees should be able to:
 - ✅ `docs/TEACHING_NOTES.md` - Complete, ready for delivery
 - ✅ `docs/WHAT_NEXT.md` - Complete, comprehensive
 - ✅ `docs/STEP_00_SETUP.md` - Complete
-- ✅ `docs/STEP_01_SINGLE_PROMPT_PLUS_EVAL.md` - Complete
+- ✅ `docs/STEP_01_SINGLE_PROMPT.md` - Complete
 - ✅ `README.md` - Updated to reflect all 3 steps
 - ✅ `docs/PROJECT_SUMMARY.md` - This document
 

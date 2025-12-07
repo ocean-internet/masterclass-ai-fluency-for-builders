@@ -58,7 +58,7 @@
 
 **Show on screen:**
 
-- Workflow diagram slide (from `STEP_01_SINGLE_PROMPT_PLUS_EVAL.md`)
+- Workflow diagram slide (from `STEP_01_SINGLE_PROMPT.md`)
 - Point out the loop: Generate → Evaluate → Iterate
 - Parallel: Red → Green → Refactor (TDD)
 
@@ -97,7 +97,7 @@
 
 ---
 
-### Level 1: Single-Prompt Generation + Basic Evaluation (30 minutes)
+### Level 1: Single Prompt (30 minutes)
 
 #### Show & Tell: Generate ADR (10 min)
 
@@ -247,13 +247,13 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 
 ---
 
-### Level 2: Chain Generation + Structured Evaluation (35 minutes)
+### Level 2: Sequential Chain (35 minutes)
 
 #### Chain Introduction (10 min)
 
 **What to do:**
 
-1. Switch to Step 02 branch: `git checkout step-02-chain-eval` (if exists)
+1. Switch to Step 02 branch: `git checkout step-02-sequential-chain` (if exists)
 2. Show chain structure: `src/step02/generate-adr-chain.ts` (if exists)
 3. Walk through chain stages
 4. Run chain generation
@@ -377,13 +377,13 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 
 ---
 
-### Level 3: RAG + Context-Aware Evaluation (35 minutes)
+### Level 3: Retrieval-Augmented Generation (35 minutes)
 
 #### RAG Introduction (10 min)
 
 **What to do:**
 
-1. Switch to Step 03 branch: `git checkout step-03-rag-eval` (if exists)
+1. Switch to Step 03 branch: `git checkout step-03-retrieval-augmented-generation` (if exists)
 2. Show RAG pipeline: load PDFs → embed → vector store → retrieve → augment
 3. Generate ADR with retrieved context
 4. Show retrieved documents

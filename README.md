@@ -1,7 +1,8 @@
 # AI Fluency for Builders: From Zero to Your First AI-Augmented Tool
 
-> TODO
-> TL;DR
+## TL;DR
+
+Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to generate and evaluate Architecture Decision Records. Learn the Generate → Evaluate → Iterate pattern that scales to any AI workflow.
 
 ## Inspiration
 
@@ -33,11 +34,18 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 - Guiding AI reasoning: generating options, weighing trade-offs, reviewing outputs
 - Principles you can transfer to docs, testing, support, or other workflows
 
+## Course Structure
+
+- **Step 00: Setup** ([docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)) - Provision and test a local LLM runtime
+- **Step 01: Single Prompt + Evaluation** ([docs/STEP_01_SINGLE_PROMPT_PLUS_EVAL.md](docs/STEP_01_SINGLE_PROMPT_PLUS_EVAL.md)) - Generate an ADR with a single prompt, then evaluate it
+- **Step 02: Chain Generation** TODO - Generate ADRs using multi-step chains
+- **Step 03: RAG Generation** TODO - Generate ADRs with retrieval-augmented generation
+
 ## Getting Started
 
 1. Follow the setup instructions in [docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
 2. Run `yarn test` to verify your environment
-3. Continue to Step 01 (coming soon)
+3. Continue to [Step 01 — Single Prompt + Evaluation](docs/STEP_01_SINGLE_PROMPT_PLUS_EVAL.md)
 
 ## Further Reading
 

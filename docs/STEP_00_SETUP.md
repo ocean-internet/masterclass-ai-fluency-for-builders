@@ -186,8 +186,8 @@ yarn test
 
 With your environment ready, you're set to generate your very first ADR.
 
-Continue to **Step 01 — TODO**, TODO.
+Continue to **Step 01 — Single Prompt + Evaluation** ([docs/STEP_01_SINGLE_PROMPT_PLUS_EVAL.md](./STEP_01_SINGLE_PROMPT_PLUS_EVAL.md)).
 
 ```bash
-git checkout step-01-TODO
+git checkout step-01-single-prompt-plus-eval
 ```

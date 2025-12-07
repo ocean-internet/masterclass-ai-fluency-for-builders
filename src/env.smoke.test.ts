@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
 import ollama from "ollama";
+import { describe, expect, it } from "vitest";
+
 import { env } from "./env";
 
 const MODEL = env.OLLAMA_MODEL;

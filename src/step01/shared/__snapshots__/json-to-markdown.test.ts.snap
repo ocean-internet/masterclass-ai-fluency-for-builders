@@ -1,0 +1,74 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`json-to-markdown transformations > converts ADR JSON to markdown 1`] = `
+"# Use PostgreSQL
+
+## Context and Problem Statement
+
+We need to choose a database for our application.
+
+## Considered Options
+
+- PostgreSQL
+- MongoDB
+- SQLite
+
+## Decision Outcome
+
+Chosen option: PostgreSQL
+
+meets all requirements and provides strong consistency
+
+### Consequences
+
+- Good: Strong ACID guarantees ensure data integrity
+- Bad: More complex setup and maintenance required
+- Neutral: Requires SQL knowledge from team
+"
+`;
+
+exports[`json-to-markdown transformations > converts ADR evaluation JSON to markdown 1`] = `
+"# ADR Evaluation: ADR Title
+
+## Scores
+
+| Criterion     | Score (1-5) |
+| ------------- |------------ |
+| Clear         |   1         |
+| Justified     |   2         |
+| Comprehensive |   3         |
+| Actionable    |   4         |
+| **Average**   | **2.50**    |
+
+## Comments
+
+Good ADR overall, but could use more context about the alternatives.
+
+## Suggestions
+
+- Add more context about why MongoDB was considered
+- Clarify the tradeoffs section
+"
+`;
+
+exports[`json-to-markdown transformations > handles empty suggestions array in evaluation 1`] = `
+"# ADR Evaluation: Another ADR
+
+## Scores
+
+| Criterion     | Score (1-5) |
+| ------------- |------------ |
+| Clear         |   5         |
+| Justified     |   4         |
+| Comprehensive |   3         |
+| Actionable    |   2         |
+| **Average**   | **3.50**    |
+
+## Comments
+
+Perfect ADR, no suggestions needed.
+
+## Suggestions
+
+"
+`;

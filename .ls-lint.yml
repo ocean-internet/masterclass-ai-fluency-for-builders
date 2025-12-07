@@ -1,0 +1,16 @@
+ls:
+  .ts: kebab-case
+  .tsx: kebab-case
+  .js: kebab-case
+  .jsx: kebab-case
+  .json: kebab-case
+  .md: kebab-case | screamingsnakecase
+  .yml: kebab-case
+  .yaml: kebab-case
+  .hbs: kebab-case
+
+ignore:
+  - node_modules
+  - dist
+  - coverage
+  - .git

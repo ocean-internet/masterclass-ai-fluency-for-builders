@@ -35,6 +35,14 @@ By the end of this step, you will be able to:
 
 ---
 
+## 📊 Workflow Diagram
+
+```mermaid
+{{mermaid diagram showing the step workflow}}
+```
+
+---
+
 ## 🔑 Prerequisites
 
 - {{Tool/file/model required (e.g., `.env` with `OLLAMA_MODEL=<YOUR_MODEL>`)}}

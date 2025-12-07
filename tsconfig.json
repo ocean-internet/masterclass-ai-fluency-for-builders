@@ -7,7 +7,7 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      //"@module-alias/*": ["module-path/*"]
+      "@step01/*": ["step01/*"]
     },
 
     // tsx recommended options
@@ -23,6 +23,7 @@
     "types": ["node", "vitest/globals"],
 
     // Stricter Typechecking Options
+    "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 

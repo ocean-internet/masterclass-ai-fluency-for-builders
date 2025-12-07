@@ -4,15 +4,38 @@ import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import vitest from "eslint-plugin-vitest";
 import { defineConfig } from "eslint/config";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 export default defineConfig([
   {
-    ignores: ["dist/**", "node_modules/**"],
+    ignores: ["dist/**", "node_modules/**", "eslint.config.mts"],
   },
   ...tseslint.configs.recommended,
   {
     files: ["**/*.{ts,mts,cts}"],
     languageOptions: { globals: globals.node },
+    plugins: {
+      "simple-import-sort": simpleImportSort,
+    },
+    rules: {
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      complexity: ["error", 20],
+      "max-depth": ["error", 4],
+      "max-lines": ["error", 300],
+      "max-lines-per-function": ["error", 50],
+      "max-nested-callbacks": ["error", 10],
+      "max-params": ["error", 3],
+      "max-statements": ["error", 10],
+
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "objectLiteralProperty",
+          format: null,
+        },
+      ],
+    },
   },
   {
     files: ["**/*.{test,spec}.{ts,mts,cts}"],
@@ -25,7 +48,16 @@ export default defineConfig([
         ...globals.vitest,
       },
     },
-    rules: vitest.configs.recommended.rules,
+    rules: {
+      ...vitest.configs.recommended.rules,
+      complexity: ["error", 40],
+      "max-depth": ["error", 8],
+      "max-lines": ["error", 600],
+      "max-lines-per-function": ["error", 100],
+      "max-nested-callbacks": ["error", 20],
+      "max-params": ["error", 6],
+      "max-statements": ["error", 20],
+    },
   },
   {
     files: ["**/*.json"],
@@ -44,5 +76,6 @@ export default defineConfig([
     plugins: { markdown },
     language: "markdown/gfm",
     extends: ["markdown/recommended"],
+    ignores: ["**/adr-template*.md"],
   },
 ]);

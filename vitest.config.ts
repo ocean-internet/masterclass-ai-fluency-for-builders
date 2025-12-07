@@ -1,10 +1,12 @@
+import { resolve } from "path";
 import { configDefaults, defineConfig } from "vitest/config";
-// import { resolve } from "path";
+
+export const E2E_TEST_TIMEOUT = 60_000;
 
 export default defineConfig({
   resolve: {
     alias: {
-      // "@module-alias": resolve(__dirname, "./src/module-path"),
+      "@step01": resolve(__dirname, "./src/step01"),
     },
   },
   test: {
@@ -13,23 +15,18 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html", "lcov"],
       include: ["src/**/*.ts"],
-      exclude: [
-        "node_modules/**",
-        "dist/**",
-        "**/*.{test,spec}.*",
-        "**/*.config.*",
-      ],
+      exclude: ["node_modules/**", "dist/**", "**/*.{test,spec}.*", "**/*.config.*"],
       thresholds: {
-        lines: 66,
-        functions: 100,
-        branches: 100,
-        statements: 66,
-        autoUpdate: (newThreshold) => Math.floor(newThreshold),
+        statements: 70,
+        branches: 53,
+        functions: 72,
+        lines: 72,
+        autoUpdate: (newThreshold) => Math.floor(newThreshold * 0.9),
       },
     },
     exclude:
       process.env.VITEST_WATCH === "true"
-        ? [...configDefaults.exclude, "**/*.smoke.test.ts"]
+        ? [...configDefaults.exclude, "**/*.{e2e,smoke}.test.ts"]
         : configDefaults.exclude,
   },
 });

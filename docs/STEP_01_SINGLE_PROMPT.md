@@ -77,7 +77,7 @@ This step introduces the foundational pattern: Generate → Evaluate → Iterate
 ### 1. Generate the ADR
 
 ```bash
-yarn tsx src/step01/generate-adr.ts src/step01/__fixtures__/example-context.md
+yarn adr generate src/step01/__fixtures__/example-context.md
 ```
 
 **Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` with valid structure. The command prints the filename on success.
@@ -87,7 +87,7 @@ Open the generated file and review it. What looks good? What's missing or wrong?
 ### 2. Evaluate the ADR
 
 ```bash
-yarn tsx src/step01/evaluate-adr.ts docs/decisions/drafts/NNNN-*.md
+yarn adr evaluate docs/decisions/drafts/NNNN-*.md
 ```
 
 Replace `NNNN-*.md` with the actual filename from step 1.

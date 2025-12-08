@@ -7,7 +7,8 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "@step01/*": ["step01/*"]
+      "@step01/*": ["step01/*"],
+      "@shared/*": ["shared/*"]
     },
 
     // tsx recommended options

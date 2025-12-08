@@ -1,0 +1,24 @@
+{{#each this}}
+### {{this.title}}
+
+{{this.description}}
+
+{{#if this.arguments}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Good")}}
+- Good, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Neutral")}}
+- Neutral, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Bad")}}
+- Bad, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{/if}}
+
+{{/each}}

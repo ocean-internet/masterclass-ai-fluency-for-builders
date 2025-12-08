@@ -4,9 +4,10 @@ import { fileURLToPath } from "url";
 import { beforeAll, describe, expect, it } from "vitest";
 
 import { E2E_TEST_TIMEOUT } from "../../vitest.config";
+import { parseMadr } from "../test-utils/parse-madr";
 import { generateAdr } from "./generate-adr";
-import { parseMadr } from "./shared/parse-madr";
 
+const EXAMPLE_CONTEXT_FILE = "example-context.md";
 describe("Single-Prompt ADR", () => {
   let adr = "";
   let title = "";
@@ -16,8 +17,8 @@ describe("Single-Prompt ADR", () => {
 
   beforeAll(async () => {
     const __dirname = fileURLToPath(new URL(".", import.meta.url));
-    const fixturesDir = join(__dirname, "./__fixtures__");
-    const contextMarkdown = readFileSync(join(fixturesDir, "example-context.md"), "utf-8");
+    const fixturesDir = join(__dirname, "../__fixtures__");
+    const contextMarkdown = readFileSync(join(fixturesDir, EXAMPLE_CONTEXT_FILE), "utf-8");
 
     adr = await generateAdr(contextMarkdown);
     const parsed = await parseMadr(adr);
@@ -27,24 +28,15 @@ describe("Single-Prompt ADR", () => {
     consequences = parsed.consequences;
   }, E2E_TEST_TIMEOUT);
 
-  it("produces a single-stage-adr", async () => {
-    // First line is title - e.g. no-preamble
+  it("produces a single-prompt-adr", () => {
     expect(adr).toMatch(new RegExp(`^#\\s*`, "i"));
-    // Includes all headings
     expect(adr).toMatch(/##\s*Context and Problem Statement/i);
     expect(adr).toMatch(/##\s*Considered Options/i);
     expect(adr).toMatch(/##\s*Decision Outcome/i);
     expect(adr).toMatch(/###\s*Consequences/i);
-
-    // (Vitest captures stdout but shows it on failure; for success, it keeps logs compact)
-    console.log(`
---- Single-Stage ADR Output ---
-${adr}
--------------------------------
-      `);
   });
 
-  it("options section mentions Postgres, MongoDB, and a team 'choose' variant", async () => {
+  it("options section mentions Postgres, MongoDB, and a team 'choose' variant", () => {
     const mappedOptions = options.map(mapOption);
 
     expect(mappedOptions.length).toBe(3);
@@ -80,8 +72,8 @@ ${adr}
 
     const lowerTitle = title.toLowerCase();
 
-    expect(problem.some((p) => lowerTitle.includes(p))).toBeTruthy(); // some problem strings
-    expect(solution.every((s) => lowerTitle.includes(s))).toBeTruthy(); // every solution string
+    expect(problem.some((p) => lowerTitle.includes(p))).toBeTruthy();
+    expect(solution.every((s) => lowerTitle.includes(s))).toBeTruthy();
   });
 });
 

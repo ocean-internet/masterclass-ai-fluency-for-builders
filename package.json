@@ -5,9 +5,8 @@
   "description": "Masterclass: Building AI-augmented tools with local LLMs",
   "type": "module",
   "scripts": {
-    "start": "tsx -r tsconfig-paths/register src/index.ts",
+    "adr": "tsx -r tsconfig-paths/register src/index.ts",
     "tsx": "tsx -r tsconfig-paths/register",
-    "dev": "tsx watch -r tsconfig-paths/register src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",

@@ -105,7 +105,7 @@
 
 1. Open terminal in `src/step01/`
 2. Show example context: `cat __fixtures__/example-context.md`
-3. Run generation: `yarn tsx generate-adr.ts __fixtures__/example-context.md`
+3. Run generation: `yarn adr generate __fixtures__/example-context.md`
 4. Show output: Open generated ADR in `docs/decisions/drafts/`
 
 **Screen sharing:**
@@ -148,7 +148,7 @@
 
 **What to do:**
 
-1. Run evaluation: `yarn tsx evaluate-adr.ts docs/decisions/drafts/NNNN-*.md`
+1. Run evaluation: `yarn adr evaluate docs/decisions/drafts/NNNN-*.md`
 2. Show evaluation output: Open `.eval.md` file
 3. Explain evaluation rubric
 

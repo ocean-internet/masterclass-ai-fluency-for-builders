@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@step01": resolve(__dirname, "./src/step01"),
+      "@shared": resolve(__dirname, "./src/shared"),
     },
   },
   test: {
@@ -17,10 +18,10 @@ export default defineConfig({
       include: ["src/**/*.ts"],
       exclude: ["node_modules/**", "dist/**", "**/*.{test,spec}.*", "**/*.config.*"],
       thresholds: {
-        statements: 70,
-        branches: 53,
-        functions: 72,
-        lines: 72,
+        statements: 82,
+        branches: 62,
+        functions: 86,
+        lines: 84,
         autoUpdate: (newThreshold) => Math.floor(newThreshold * 0.9),
       },
     },

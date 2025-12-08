@@ -6,23 +6,26 @@ import { describe, expect, it } from "vitest";
 import { E2E_TEST_TIMEOUT } from "../../vitest.config";
 import { evaluateAdr } from "./evaluate-adr";
 
+const EXAMPLE_ADR_FILE = "0000-use-markdown-architectural-decision-records.md";
 describe("evaluateAdr E2E", () => {
   it(
     "evaluates ADR end-to-end with Ollama",
     async () => {
       const __dirname = fileURLToPath(new URL(".", import.meta.url));
-      const fixturesDir = join(__dirname, "./__fixtures__");
-      const adrMarkdown = readFileSync(join(fixturesDir, "example-adr.md"), "utf-8");
+      const decisionsDir = join(__dirname, "../../docs/decisions/");
+      const adrMarkdown = readFileSync(join(decisionsDir, EXAMPLE_ADR_FILE), "utf-8");
 
       const evalMarkdown = await evaluateAdr(adrMarkdown);
 
-      expect(typeof evalMarkdown).toBe("string");
-      expect(evalMarkdown.length).toBeGreaterThan(0);
-
-      expect(evalMarkdown).toContain("ADR Evaluation:");
-      expect(evalMarkdown).toContain("## Scores");
-      expect(evalMarkdown).toContain("## Comments");
-      expect(evalMarkdown).toContain("## Suggestions");
+      expect(evalMarkdown).toMatch(/^# ADR Evaluation:/);
+      expect(evalMarkdown).toMatch(/## Scores\n\n\| Criterion/);
+      expect(evalMarkdown).toMatch(/\| Clear\s+\|\s+[1-5]\s+\|/);
+      expect(evalMarkdown).toMatch(/\| Justified\s+\|\s+[1-5]\s+\|/);
+      expect(evalMarkdown).toMatch(/\| Comprehensive\s+\|\s+[1-5]\s+\|/);
+      expect(evalMarkdown).toMatch(/\| Actionable\s+\|\s+[1-5]\s+\|/);
+      expect(evalMarkdown).toMatch(/\| \*\*Average\*\*\s+\|\s+\*\*[0-9]+\.[0-9]+\*\*\s+\|/);
+      expect(evalMarkdown).toMatch(/## Comments\n\n.+/);
+      expect(evalMarkdown).toMatch(/## Suggestions\n\n/);
     },
     E2E_TEST_TIMEOUT,
   );

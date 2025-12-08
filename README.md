@@ -38,7 +38,7 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 - **Step 00: Setup** ([docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)) - Provision and test a local LLM runtime
 - **Step 01: Single Prompt** ([docs/STEP_01_SINGLE_PROMPT.md](docs/STEP_01_SINGLE_PROMPT.md)) - Generate an ADR with a single prompt, then evaluate it
-- **Step 02: Sequential Chain** TODO - Generate ADRs using sequential chains
+- **Step 02: Sequential Chain** ([docs/STEP_02_SEQUENTIAL_CHAIN.md](docs/STEP_02_SEQUENTIAL_CHAIN.md)) - Generate ADRs using sequential chains
 - **Step 03: Retrieval-Augmented Generation** TODO - Generate ADRs with retrieval-augmented generation
 
 ## Getting Started

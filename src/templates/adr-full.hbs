@@ -1,0 +1,56 @@
+# {{title}}
+
+## Context and Problem Statement
+
+{{context.description}}
+
+## Decision Drivers
+
+{{#context.drivers}}
+- {{this}}
+{{/context.drivers}}
+
+## Considered Options
+
+{{#each options}}
+- {{this.title}}
+{{/each}}
+
+## Decision Outcome
+
+Chosen option: "{{decision.chosenOption}}"
+
+{{decision.justification}}.
+
+### Consequences
+
+{{#each decision.consequences}}
+- {{impact}}, because {{consequence}}
+{{/each}}
+
+## Pros and Cons of the Options
+
+{{#each options}}
+### {{this.title}}
+
+{{this.description}}
+
+{{#if this.arguments}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Good")}}
+- Good, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Neutral")}}
+- Neutral, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{#each this.arguments}}
+{{#if (eq this.impact "Bad")}}
+- Bad, because {{this.argument}}
+{{/if}}
+{{/each}}
+{{/if}}
+
+{{/each}}

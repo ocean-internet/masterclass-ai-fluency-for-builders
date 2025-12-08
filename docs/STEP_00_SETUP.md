@@ -59,7 +59,7 @@ everything is wired up correctly.
 
 #### macOS
 
-Download and install: https://ollama.com/download/mac
+Download and install: https://ollama.com/download
 
 #### Linux
 
@@ -75,8 +75,7 @@ systemctl --user start ollama
 
 #### Windows (via WSL2)
 
-1. Install WSL:
-   [https://learn.microsoft.com/en-us/windows/wsl/install](https://learn.microsoft.com/en-us/windows/wsl/install)
+1. Install WSL: https://learn.microsoft.com/en-us/windows/wsl/install
 2. Inside WSL (Ubuntu recommended), follow the Linux steps above.
 
 **Expected:** `ollama` is on your PATH.

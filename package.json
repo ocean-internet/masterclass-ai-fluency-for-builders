@@ -5,6 +5,7 @@
   "description": "Masterclass: Building AI-augmented tools with local LLMs",
   "type": "module",
   "scripts": {
+    "adr": "tsx -r tsconfig-paths/register src/index.ts",
     "tsx": "tsx -r tsconfig-paths/register",
     "test": "vitest run",
     "test:watch": "vitest --watch",
@@ -18,7 +19,12 @@
     "qa": "yarn tidy && yarn test:coverage"
   },
   "dependencies": {
+    "@langchain/core": "^1.1.2",
+    "@langchain/ollama": "^1.0.3",
+    "change-case": "^5.4.4",
     "dotenv": "^17.2.3",
+    "handlebars": "^4.7.8",
+    "html-entities": "^2.6.0",
     "ollama": "^0.6.3",
     "zod": "^4.1.13"
   },
@@ -35,11 +41,16 @@
     "eslint-plugin-vitest": "^0.5.4",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",
+    "madr": "^4.0.0",
+    "mdast": "^3.0.0",
+    "mdast-util-to-string": "^4.0.0",
     "prettier": "^3.7.4",
+    "remark-parse": "^11.0.0",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.1",
+    "unified": "^11.0.5",
     "vitest": "^4.0.15"
   }
 }

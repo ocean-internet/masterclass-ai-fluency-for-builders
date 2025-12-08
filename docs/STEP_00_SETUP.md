@@ -153,7 +153,7 @@ yarn test
 **Expected:**
 
 - Tests connect to the Ollama daemon.
-- Tests confirm both `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` are installed.
+- Tests confirm `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` are installed.
 - Clear failure messages if any check fails (no side effects).
 
 > Reference test file: [env.smoke.test.ts](../src/env.smoke.test.ts)
@@ -185,8 +185,8 @@ yarn test
 
 With your environment ready, you're set to generate your very first ADR.
 
-Continue to **Step 01 – Single Prompt**
-
 ```bash
 git checkout step-01-single-prompt
 ```
+
+Continue to **Step 01 — Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).

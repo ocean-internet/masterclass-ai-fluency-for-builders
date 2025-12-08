@@ -36,15 +36,16 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 ## Course Structure
 
-- **Step 00: Setup** – Provision and test a local LLM runtime ([STEP_00_SETUP.md](docs/STEP_00_SETUP.md))
-- **Step 01: Single Prompt** – Generate an ADR with a single prompt, then evaluate it
-- **Step 02: Sequential Chain** – Generate ADRs using sequential chains
-- **Step 03: Retrieval-Augmented Generation** – Generate ADRs with retrieval-augmented generation
+- **Step 00: Setup** - Provision and test a local LLM runtime ([docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md))
+- **Step 01: Single Prompt** - Generate an ADR with a single prompt, then evaluate it ([docs/STEP_01_SINGLE_PROMPT.md](docs/STEP_01_SINGLE_PROMPT.md))
+- **Step 02: Sequential Chain** - Generate ADRs using sequential chains
+- **Step 03: Retrieval-Augmented Generation** - Generate ADRs with retrieval-augmented generation
 
 ## Getting Started
 
 1. Follow the setup instructions in [STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
 2. Run `yarn test` to verify your environment
+3. Continue to [Step 01 — Single Prompt](docs/STEP_01_SINGLE_PROMPT.md)
 
 ## Further Reading
 

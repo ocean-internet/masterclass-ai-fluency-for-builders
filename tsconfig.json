@@ -23,6 +23,7 @@
     "types": ["node", "vitest/globals"],
 
     // Stricter Typechecking Options
+    "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 
@@ -39,5 +40,5 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.config.*", "**/*.test.*", "**/*.spec.*"]
+  "exclude": ["node_modules", "**/*.config.*", "**/*.{test,spec}.*"]
 }

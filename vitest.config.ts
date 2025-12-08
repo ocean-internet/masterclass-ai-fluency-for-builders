@@ -1,5 +1,5 @@
-import { configDefaults, defineConfig } from "vitest/config";
 // import { resolve } from "path";
+import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
@@ -13,23 +13,18 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html", "lcov"],
       include: ["src/**/*.ts"],
-      exclude: [
-        "node_modules/**",
-        "dist/**",
-        "**/*.{test,spec}.*",
-        "**/*.config.*",
-      ],
+      exclude: ["node_modules/**", "dist/**", "**/*.{test,spec}.*", "**/*.config.*"],
       thresholds: {
-        lines: 66,
-        functions: 100,
-        branches: 100,
-        statements: 66,
-        autoUpdate: (newThreshold) => Math.floor(newThreshold),
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+        // autoUpdate: (newThreshold) => Math.floor(newThreshold),
       },
     },
     exclude:
-      process.env.VITEST_WATCH === "true"
-        ? [...configDefaults.exclude, "**/*.smoke.test.ts"]
+      process.env["VITEST_WATCH"] === "true"
+        ? [...configDefaults.exclude, "**/*.{e2e,smoke}.test.ts"]
         : configDefaults.exclude,
   },
 });

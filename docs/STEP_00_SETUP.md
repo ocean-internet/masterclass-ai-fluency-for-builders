@@ -7,7 +7,7 @@
 
 ## ⚡ TL;DR
 
-Install Ollama, pull a small model, set `OLLAMA_MODEL` & `OLLAMA_MODEL_EMBED` in `.env`, install Node/Yarn deps, and run a smoke test that
+Install Ollama, pull a small model, set `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` in `.env`, install Node/Yarn deps, and run a smoke test that
 verifies: (1) the daemon is reachable and (2) the required model is installed.
 
 ---
@@ -24,7 +24,7 @@ By the end of this step, you will be able to:
 
 ## 🧠 Background
 
-**Why this matters:** A reliable local runtime removes "works on my machine" variability and avoids cloud dependencies
+**Why this matters:** A reliable local runtime removes _"works on my machine"_ variability and avoids cloud dependencies
 during learning.
 
 **Key ideas**
@@ -48,12 +48,12 @@ during learning.
 
 ## 🧭 Walkthrough
 
-This step is all about setup — making sure your environment is ready to run ADR generation locally.
+This step is all about setup – making sure your environment is ready to run ADR generation locally.
 
 Don't worry if you've never used Ollama or local LLMs before: the checks here are simple, and the tests will confirm
 everything is wired up correctly.
 
-**Note:** We'll use two models: a main language model (`OLLAMA_MODEL`) for text generation and an embedding model (`OLLAMA_MODEL_EMBED`) for vector operations. Both are required.
+**Note:** We'll use three models: a main language model (`OLLAMA_MODEL`) for text generation, a judge model(`OLLAMA_MODEL_JUDGE`) for AI-as-judge, and an embedding model (`OLLAMA_MODEL_EMBED`) for vector operations. All are required.
 
 ### 1. Install Ollama
 
@@ -97,6 +97,7 @@ curl -f http://localhost:11434/api/version
 
 ```bash
 ollama pull llama3.1:8b
+ollama pull qwen2.5:7b
 ollama pull nomic-embed-text
 ```
 
@@ -115,17 +116,16 @@ cp .env.example .env
 #### .env
 
 ```env
-# The local model you expect to be present
+# The local models you expect to be present
 OLLAMA_MODEL=llama3.1:8b
-
-# The embedding model for vector operations
+OLLAMA_MODEL_JUDGE=qwen2.5:7b
 OLLAMA_MODEL_EMBED=nomic-embed-text
 
 # Optional: override host (e.g., WSL/remote)
 # OLLAMA_HOST=http://127.0.0.1:11434
 ```
 
-**Expected:** `.env` exists and includes both `OLLAMA_MODEL=llama3.1:8b` and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices).
+**Expected:** `.env` exists and includes `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices).
 
 ---
 
@@ -154,10 +154,10 @@ yarn test
 **Expected:**
 
 - Tests connect to the Ollama daemon.
-- Tests confirm both `OLLAMA_MODEL` and `OLLAMA_MODEL_EMBED` are installed.
+- Tests confirm both `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` are installed.
 - Clear failure messages if any check fails (no side effects).
 
-> Reference test file: `src/env.test.ts`
+> Reference test file: [env.smoke.test.ts](../src/env.smoke.test.ts)
 
 ---
 
@@ -165,9 +165,9 @@ yarn test
 
 - ⬜ Ollama installed and running (`curl -f http://localhost:11434/api/version` returns version JSON)
 - ⬜ Models pulled (`ollama list` shows both `llama3.1:8b` and `nomic-embed-text`, or your chosen models)
-- ⬜ `.env` contains both `OLLAMA_MODEL=llama3.1:8b` and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
+- ⬜ `.env` contains both `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
 - ⬜ `yarn install` completes without error
-- ⬜ `yarn test` passes (all 4 tests: connectivity + both model presence checks)
+- ⬜ `yarn test` passes (all 3 tests: connectivity, model presence, and llm generation)
 - ⬜ I can explain why _offline-first_ matters
 
 ---
@@ -186,8 +186,8 @@ yarn test
 
 With your environment ready, you're set to generate your very first ADR.
 
-Continue to **Step 01 — TODO**, TODO.
+Continue to **Step 01 – Single Prompt**
 
 ```bash
-git checkout step-01-TODO
+git checkout step-01-single-prompt
 ```

@@ -1,7 +1,7 @@
 # Step {{NN}}: {{Title}}
 
 **Branch**: `step-{{NN}}-{{slug}}`  
-**Goal**: {{1–2 lines describing the outcome.}}
+**Goal**: {{1-2 lines describing the outcome.}}
 
 ---
 
@@ -32,6 +32,14 @@ By the end of this step, you will be able to:
 - {{Constraint or trade-off}}
 
 **Read more:** {{link 1}}, {{link 2}}
+
+---
+
+## 📊 Workflow Diagram
+
+```mermaid
+{{mermaid diagram showing the step workflow}}
+```
 
 ---
 
@@ -75,7 +83,7 @@ By the end of this step, you will be able to:
 - ⬜ {{Concrete state #1 with verification (e.g., `File exists: docs/decisions/NNNN-*.md` or `Command succeeds: {{command}}`)}}
 - ⬜ {{Concrete state #2 with verification (e.g., `Prettier + markdownlint pass` or `Test output shows: {{success signal}}`)}}
 - ⬜ {{Quality gate with verification (e.g., `Schema valid; chosenOption ∈ options` or `yarn test` passes all checks)}}
-- ⬜ {{ Reflection: one sentence about the key lesson - e.g. I can explain why offline-first matters}}
+- ⬜ {{ Reflection: one sentence about the key lesson – e.g. I can explain why offline-first matters}}
 
 ---
 
@@ -88,7 +96,7 @@ By the end of this step, you will be able to:
 
 ## ➡️ Next
 
-Continue to **Step {{NN+1}} — {{Next title}}**
+Continue to **Step {{NN+1}} – {{Next title}}**
 
 ```bash
 git checkout step-{{NN+1}}-{{next-slug}}

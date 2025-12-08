@@ -1,16 +1,31 @@
-import { describe, it, expect } from "vitest";
 import ollama from "ollama";
-import { env } from "./env";
+import { describe, expect, it } from "vitest";
 
-const MODEL = env.OLLAMA_MODEL;
-const OLLAMA_GENERATE_TIMEOUT = 30_000;
+import { env } from "./env";
+import { E2E_TEST_TIMEOUT } from "./test-utils/config";
 
 describe("Environment Setup", () => {
+  it("connects to the local Ollama server", async () => {
+    const response = await ollama.list();
+    expect(response).toHaveProperty("models");
+    expect(response.models).toBeInstanceOf(Array);
+  });
+
+  it.each([
+    [env.OLLAMA_MODEL, "main model"],
+    [env.OLLAMA_MODEL_JUDGE, "judge model"],
+    [env.OLLAMA_MODEL_EMBED, "embed model"],
+  ])(`has the required %s loaded`, async (modelName) => {
+    const { models } = await ollama.list();
+    const names = models.flatMap((model) => [model.name, model.model].filter(Boolean));
+    expect(names.some((name) => name.startsWith(modelName))).toBe(true);
+  });
+
   it(
     "should successfully generate text when making LLM call",
     async () => {
       const { response } = await ollama.generate({
-        model: MODEL,
+        model: env.OLLAMA_MODEL,
         prompt: 'Say "OK',
         stream: false,
         options: {
@@ -19,6 +34,6 @@ describe("Environment Setup", () => {
       });
       expect(response.toLowerCase()).toContain("ok");
     },
-    OLLAMA_GENERATE_TIMEOUT,
+    E2E_TEST_TIMEOUT,
   );
 });

@@ -5,17 +5,16 @@
   "description": "Masterclass: Building AI-augmented tools with local LLMs",
   "type": "module",
   "scripts": {
-    "start": "tsx -r tsconfig-paths/register src/index.ts",
     "tsx": "tsx -r tsconfig-paths/register",
-    "dev": "tsx watch -r tsconfig-paths/register src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
+    "lint:files": "ls-lint",
     "lint:fix": "eslint . --fix",
     "format:fix": "prettier --write .",
     "types:check": "tsc --noEmit",
-    "tidy": "yarn format:fix && yarn lint:fix && yarn types:check",
+    "tidy": "yarn format:fix && yarn lint:files && yarn lint:fix && yarn types:check",
     "qa": "yarn tidy && yarn test:coverage"
   },
   "dependencies": {
@@ -26,11 +25,13 @@
   "devDependencies": {
     "@eslint/json": "^0.14.0",
     "@eslint/markdown": "^7.5.1",
+    "@ls-lint/ls-lint": "^2.3.1",
     "@tsconfig/node-lts": "^24.0.0",
     "@types/node": "^24.10.1",
     "@vitest/coverage-v8": "^4.0.15",
     "@vitest/ui": "4.0.15",
     "eslint": "^9.39.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-vitest": "^0.5.4",
     "globals": "^16.5.0",
     "jiti": "^2.6.1",

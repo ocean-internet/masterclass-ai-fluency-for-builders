@@ -1,3 +1,5 @@
-console.log("Hello, world! This is the main entry point of the application.");
+// CLI entry point for all runnable commands.
+// Usage: yarn adr <command> [args...]
+// Commands: TODO
 
 export {};

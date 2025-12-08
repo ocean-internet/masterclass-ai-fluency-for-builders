@@ -96,8 +96,8 @@ By the end of this step, you will be able to:
 
 ## ➡️ Next
 
-Continue to **Step {{NN+1}} – {{Next title}}**
-
 ```bash
 git checkout step-{{NN+1}}-{{next-slug}}
 ```
+
+Continue to **Step {{NN+1}} – {{Next title}}**

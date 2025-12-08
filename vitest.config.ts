@@ -6,8 +6,11 @@ export const E2E_TEST_TIMEOUT = 60_000;
 export default defineConfig({
   resolve: {
     alias: {
+      "@cli": resolve(__dirname, "./src/cli"),
       "@step01": resolve(__dirname, "./src/step01"),
+      "@step02": resolve(__dirname, "./src/step02"),
       "@shared": resolve(__dirname, "./src/shared"),
+      "@test-utils": resolve(__dirname, "./src/test-utils"),
     },
   },
   test: {

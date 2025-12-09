@@ -144,6 +144,18 @@ Then re-run generation and evaluation to see if the tradeoffs score improves.
 
 ---
 
+## ➡️ Next
+
+Step 02 introduces sequential chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
+
+```bash
+git checkout step-02-sequential-chain
+```
+
+Continue to **Step 02 — Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))
+
+---
+
 ## 🛠️ Troubleshooting
 
 - **Validation errors** → Check prompt template for typos → Fix `src/step01/prompts/adr-prompt.md`
@@ -162,15 +174,3 @@ Then re-run generation and evaluation to see if the tradeoffs score improves.
 - **Ignoring evaluation suggestions**: The LLM-as-judge often catches real issues you might miss. If the evaluator suggests improvements, try them—this is the pattern working as intended.
 
 - **Not saving intermediate outputs**: Keep drafts of your ADRs and evaluations. Compare iterations to see how prompt changes affect output quality.
-
----
-
-## ➡️ Next
-
-Step 02 introduces sequential chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
-
-```bash
-git checkout step-02-sequential-chain
-```
-
-Continue to **Step 02 — Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))

@@ -7,7 +7,7 @@
 
 ## ⚡ TL;DR
 
-Install Ollama, pull a small model, set `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` in `.env`, install Node/Yarn deps, and run a smoke test that
+Install Ollama, pull a small model, install Node/Yarn deps, set `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` in `.env`, and run a smoke test that
 verifies: (1) the daemon is reachable and (2) the required model is installed.
 
 ---
@@ -84,11 +84,15 @@ systemctl --user start ollama
 
 ### 2. Ensure the daemon is running
 
+Check if Ollama is running:
+
 ```bash
 curl -f http://localhost:11434/api/version
 ```
 
 **Expected:** Command returns JSON with version info (e.g., `{"version":"0.13.1"}`) and exits with status 0, confirming the daemon is reachable.
+
+> **Troubleshooting:** If you get a "connection refused" error, see [Troubleshooting](#%EF%B8%8F-troubleshooting) below.
 
 ---
 
@@ -104,7 +108,23 @@ ollama pull nomic-embed-text
 
 ---
 
-### 4. Configure environment
+### 4. Set up Node.js, Yarn, and dependencies
+
+Using **nvm** + **Corepack** (recommended):
+
+```bash
+nvm install && nvm use   # installs/uses the .nvmrc or latest LTS
+corepack enable          # enables Yarn bundled with Node
+yarn install             # installs package.json dependencies
+```
+
+(If you prefer global Yarn: `npm i -g yarn && yarn`.)
+
+**Expected:** dependencies install successfully.
+
+---
+
+### 5. Configure environment
 
 Copy the example and set your default model:
 
@@ -128,22 +148,6 @@ OLLAMA_MODEL_EMBED=nomic-embed-text
 
 ---
 
-### 5. Set up Node.js, Yarn, and dependencies
-
-Using **nvm** + **Corepack** (recommended):
-
-```bash
-nvm install && nvm use   # installs/uses the .nvmrc or latest LTS
-corepack enable          # enables Yarn bundled with Node
-yarn install             # installs package.json dependencies
-```
-
-(If you prefer global Yarn: `npm i -g yarn && yarn`.)
-
-**Expected:** dependencies install successfully.
-
----
-
 ### 6. Run the smoke test
 
 ```bash
@@ -164,20 +168,10 @@ yarn test
 
 - ⬜ Ollama installed and running (`curl -f http://localhost:11434/api/version` returns version JSON)
 - ⬜ Models pulled (`ollama list` shows both `llama3.1:8b` and `nomic-embed-text`, or your chosen models)
-- ⬜ `.env` contains both `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
 - ⬜ `yarn install` completes without error
+- ⬜ `.env` contains both `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
 - ⬜ `yarn test` passes (all 3 tests: connectivity, model presence, and llm generation)
 - ⬜ I can explain why _offline-first_ matters
-
----
-
-## 🛠️ Troubleshooting
-
-- **Model won't load** → insufficient RAM/VRAM → try a smaller quantised build (e.g., `llama3.1:8b-instruct:q4_0`).
-- **Ollama not reachable** → daemon not running → start with `ollama serve` (foreground) or
-  `systemctl --user start ollama` (Linux).
-- **WSL networking issues** → set `OLLAMA_HOST=http://127.0.0.1:11434` in `.env`.
-- **Node/Yarn issues** → confirm `node -v` (LTS); run `corepack enable` before `yarn install`.
 
 ---
 
@@ -190,3 +184,39 @@ git checkout step-01-single-prompt
 ```
 
 Continue to **Step 01 — Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
+
+---
+
+## 🛠️ Troubleshooting
+
+### Fix "Connection Refused" Error
+
+If you see `curl: (7) Failed to connect to localhost port 11434 after 0 ms: Connection refused`:
+
+1. **Try `127.0.0.1` instead of `localhost`:**
+   ```bash
+   curl -f http://127.0.0.1:11434/api/version
+   ```
+   If you see version JSON, it works. Skip to step 3.
+
+2. **If you still get "connection refused," start Ollama:**
+   - **macOS**: `ollama serve` (or open the Ollama app)
+   - **Linux/WSL**: `systemctl --user start ollama`
+   
+   Then run the curl command from step 1 again.
+
+3. **If it works, update your `.env` file:**
+   ```env
+   OLLAMA_HOST=http://127.0.0.1:11434
+   ```
+
+4. **If it still doesn't work:**
+   - Check if Ollama is running: `ps aux | grep ollama` (macOS/Linux) or `systemctl --user status ollama` (Linux)
+   - Check if port 11434 is in use: `lsof -i :11434` (macOS) or `netstat -tuln | grep 11434` (Linux)
+
+**What "connection refused" means:** Your computer is reachable, but nothing is listening on port 11434. This usually means Ollama isn't running.
+
+### Other Issues
+
+- **Model won't load** → insufficient RAM/VRAM → try a smaller quantised build (e.g., `llama3.1:8b-instruct:q4_0`).
+- **Node/Yarn issues** → confirm `node -v` (LTS); run `corepack enable` before `yarn install`.

@@ -96,7 +96,7 @@ curl -f http://localhost:11434/api/version
 
 ---
 
-### 3. Pull a compact model
+### 3. Pull compact models
 
 ```bash
 ollama pull llama3.1:8b

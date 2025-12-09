@@ -1,6 +1,6 @@
+import { loadMadrTemplate } from "@shared/load-madr-template";
 import { describe, expect, it } from "vitest";
 
-import { loadMadrTemplate } from "../shared/load-madr-template";
 import { parseMadr } from "./parse-madr";
 
 describe("parseMadr", () => {

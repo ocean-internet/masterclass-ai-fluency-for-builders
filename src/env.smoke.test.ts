@@ -1,8 +1,8 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
 import ollama from "ollama";
 import { describe, expect, it } from "vitest";
 
 import { env } from "./env";
-import { E2E_TEST_TIMEOUT } from "./test-utils/config";
 
 describe("Environment Setup", () => {
   it("connects to the local Ollama server", async () => {

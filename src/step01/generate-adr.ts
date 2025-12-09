@@ -4,10 +4,10 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { RunnableLambda } from "@langchain/core/runnables";
 import { ChatOllama } from "@langchain/ollama";
+import { jsonToMarkdown } from "@shared/json-to-markdown";
+import { loadPromptTemplate } from "@shared/load-prompt-template";
 
 import { env } from "../env";
-import { jsonToMarkdown } from "../shared/json-to-markdown";
-import { loadPromptTemplate } from "../shared/load-prompt-template";
 import { type Adr, adrSchema } from "./adr/schema";
 
 const ADR_PROMPT = "generate-adr-minimal.md";

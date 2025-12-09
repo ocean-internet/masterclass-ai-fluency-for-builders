@@ -1,23 +1,12 @@
-export type InputType = "file" | "string";
+export type SaveParams = { input: string; output: string };
+export type SaveFunction = (params: SaveParams) => string;
 
-export type SaveFunction = (params: { input: string; output: string }) => string | null;
+export type SaveCommand = {
+  readonly description: string;
+  readonly usage: string;
+  readonly handler: (input: string) => Promise<string>;
+  readonly save: SaveFunction;
+  readonly successMessage: string;
+};
 
-export type CommandConfig =
-  | {
-      readonly description: string;
-      readonly usage: string;
-      readonly input: InputType;
-      readonly handler: (input: string) => Promise<string>;
-      readonly save: SaveFunction;
-      readonly successMessage: string;
-      readonly outputToStdout?: false;
-    }
-  | {
-      readonly description: string;
-      readonly usage: string;
-      readonly input: InputType;
-      readonly handler: (input: string, ...args: string[]) => Promise<string>;
-      readonly save: null;
-      readonly successMessage: null;
-      readonly outputToStdout: true;
-    };
+export type CommandConfig = SaveCommand;

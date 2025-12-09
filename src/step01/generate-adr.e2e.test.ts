@@ -1,10 +1,10 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
+import { parseMadr } from "@test-utils/parse-madr";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { beforeAll, describe, expect, it } from "vitest";
 
-import { E2E_TEST_TIMEOUT } from "../test-utils/config";
-import { parseMadr } from "../test-utils/parse-madr";
 import { generateAdr } from "./generate-adr";
 
 const EXAMPLE_CONTEXT_FILE = "example-context.md";

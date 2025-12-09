@@ -1,12 +1,13 @@
 // CLI entry point for all runnable commands.
 // Usage: yarn adr <command> [args...]
-// Commands: generate, evaluate
+// Commands: generate, generate-01, generate-02, context, options, decision, render, evaluate
 
-import { commands } from "./cli/commands";
-import { executeFileCommand } from "./cli/execute-file-command";
-import { handleError } from "./cli/handle-error";
-import { showHelp } from "./cli/show-help";
-import { validateCommandArgs } from "./cli/validate-args";
+import { commands } from "@cli/commands";
+import { executeSaveCommand } from "@cli/execute-save-command";
+import { handleError } from "@cli/handle-error";
+import { showHelp } from "@cli/show-help";
+import type { SaveCommand } from "@cli/types";
+import { validateCommandArgs } from "@cli/validate-args";
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   main();
@@ -19,9 +20,9 @@ async function runCommand(command: string, args: string[]): Promise<void> {
   if (!config) return showHelp();
 
   const inputArg = validateCommandArgs(config, args);
-  if (!inputArg) return;
+  if (!inputArg) return showHelp();
 
-  await executeFileCommand(config as Extract<typeof config, { outputToStdout?: false }>, inputArg);
+  await executeSaveCommand(config as SaveCommand, inputArg);
 }
 
 export async function main(): Promise<void> {

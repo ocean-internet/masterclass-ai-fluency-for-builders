@@ -1,9 +1,9 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
-import { E2E_TEST_TIMEOUT } from "../test-utils/config";
 import { evaluateAdr } from "./evaluate-adr";
 
 describe("evaluateAdr E2E", () => {

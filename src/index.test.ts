@@ -1,85 +1,90 @@
+import { executeSaveCommand } from "@cli/execute-save-command";
+import { handleError } from "@cli/handle-error";
+import { showHelp } from "@cli/show-help";
+import { validateCommandArgs } from "@cli/validate-args";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("./cli/execute-file-command", () => ({
-  executeFileCommand: vi.fn(),
-}));
+import { main } from "./index";
+
+vi.mock("./cli/show-help");
+vi.mock("./cli/validate-args");
+vi.mock("./cli/execute-save-command");
+vi.mock("./cli/handle-error");
 
 describe("main", () => {
   const exitSpy = vi.fn();
-  const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-  const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
   let originalArgv: string[];
   let originalExit: typeof process.exit;
+  let consoleLogSpy: ReturnType<typeof vi.spyOn>;
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
+    consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     vi.clearAllMocks();
     originalArgv = process.argv;
     originalExit = process.exit;
     process.exit = exitSpy as never;
+    vi.mocked(showHelp).mockReturnValue(undefined);
+    vi.mocked(validateCommandArgs).mockReturnValue("test-file.md");
+    vi.mocked(executeSaveCommand).mockResolvedValue(undefined);
+    vi.mocked(handleError).mockReturnValue(undefined);
   });
 
   afterEach(() => {
     process.argv = originalArgv;
     process.exit = originalExit;
+    consoleLogSpy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 
-  it("exits with code 0 when command executes successfully", async () => {
-    const { main } = await import("./index");
-    const { executeFileCommand } = await import("./cli/execute-file-command");
-    vi.mocked(executeFileCommand).mockResolvedValueOnce(undefined);
-
-    process.argv = ["node", "index.ts", "generate", "test-file.md"];
-
-    await main();
-
-    expect(exitSpy).toHaveBeenCalledWith(0);
-  });
-
-  it("exits with code 1 when executeFileCommand throws an error", async () => {
-    const { main } = await import("./index");
-    const { executeFileCommand } = await import("./cli/execute-file-command");
-    const testError = new Error("Test error");
-    vi.mocked(executeFileCommand).mockRejectedValueOnce(testError);
-
-    process.argv = ["node", "index.ts", "generate", "test-file.md"];
-
-    await main();
-
-    expect(consoleErrorSpy).toHaveBeenCalledWith("Test error");
-    expect(exitSpy).toHaveBeenCalledWith(1);
-  });
-
-  it("shows help message and exits 0 when no command provided", async () => {
-    const { main } = await import("./index");
-
+  it("calls showHelp when command is missing", async () => {
     process.argv = ["node", "index.ts"];
 
     await main();
 
-    expect(consoleLogSpy).toHaveBeenCalledWith("Usage: yarn adr <command> [args...]\n");
+    expect(showHelp).toHaveBeenCalled();
     expect(exitSpy).toHaveBeenCalledWith(0);
   });
 
-  it("shows help message and exits 0 when invalid command provided", async () => {
-    const { main } = await import("./index");
-
+  it("calls showHelp when command is invalid", async () => {
     process.argv = ["node", "index.ts", "invalid-command"];
 
     await main();
 
-    expect(consoleLogSpy).toHaveBeenCalledWith("Usage: yarn adr <command> [args...]\n");
+    expect(showHelp).toHaveBeenCalled();
     expect(exitSpy).toHaveBeenCalledWith(0);
   });
 
-  it("calls executeFileCommand with correct arguments when valid command provided", async () => {
-    const { main } = await import("./index");
-    const { executeFileCommand } = await import("./cli/execute-file-command");
-    vi.mocked(executeFileCommand).mockResolvedValueOnce(undefined);
+  it("calls showHelp when args are invalid", async () => {
+    process.argv = ["node", "index.ts", "generate"];
+    vi.mocked(validateCommandArgs).mockReturnValue(null);
 
+    await main();
+
+    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(showHelp).toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
+
+  it("calls executeSaveCommand for generate command", async () => {
     process.argv = ["node", "index.ts", "generate", "test-file.md"];
 
     await main();
 
-    expect(executeFileCommand).toHaveBeenCalledOnce();
+    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(executeSaveCommand).toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
+
+  it("calls handleError and exits with 1 when error occurs", async () => {
+    process.argv = ["node", "index.ts", "generate", "test-file.md"];
+    const testError = new Error("Test error");
+    vi.mocked(executeSaveCommand).mockRejectedValue(testError);
+
+    await main();
+
+    expect(handleError).toHaveBeenCalledWith(testError);
+    expect(exitSpy).toHaveBeenCalledWith(1);
   });
 });

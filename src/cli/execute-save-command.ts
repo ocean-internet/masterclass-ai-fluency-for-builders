@@ -1,11 +1,8 @@
 import { readFileSync } from "node:fs";
 
-import type { CommandConfig } from "./types";
+import type { SaveCommand } from "./types";
 
-export async function executeFileCommand(
-  config: Extract<CommandConfig, { outputToStdout?: false }>,
-  input: string,
-): Promise<void> {
+export async function executeSaveCommand(config: SaveCommand, input: string): Promise<void> {
   const content = readFileSync(input, "utf-8");
   const output = await config.handler(content);
   const filename = config.save({ input, output });

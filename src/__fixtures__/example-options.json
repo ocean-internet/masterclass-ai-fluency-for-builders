@@ -1,8 +1,8 @@
 [
   {
-    "uuid": "8d2e8fce-459f-4dc4-98c8-5382411a84b0",
+    "uuid": "d09fbb2c-813e-4420-8184-5e23af3460f2",
     "title": "Standardise on PostgreSQL",
-    "description": "PostgreSQL is a powerful, open-source relational database that supports strong ACID guarantees and has good support for transactions.",
+    "description": "PostgreSQL is a powerful, open-source relational database that supports ACID guarantees and has strong transactional support.",
     "arguments": [
       {
         "impact": "Good",
@@ -15,32 +15,32 @@
     ]
   },
   {
-    "uuid": "ea8c3da5-813c-4e5a-b067-42c12276bb15",
+    "uuid": "ff37b430-3892-4083-8bc2-b8e4a4114980",
     "title": "Standardise on MongoDB",
-    "description": "MongoDB is a popular, open-source NoSQL database that supports flexible schema and has good support for document-oriented workloads.",
+    "description": "MongoDB is a popular, open-source NoSQL database that supports flexible schema and high performance.",
     "arguments": [
       {
         "impact": "Good",
-        "argument": "Supports flexible schema"
+        "argument": "Well-suited for document-oriented workloads"
       },
       {
         "impact": "Bad",
-        "argument": "May not provide strong ACID guarantees"
+        "argument": "May not support strong ACID guarantees"
       }
     ]
   },
   {
-    "uuid": "c88f2976-b779-4a4e-b8e7-6f0c8e9ef9ab",
+    "uuid": "b2459ef5-428d-4f1d-a778-18de0275fe4a",
     "title": "Allow teams to choose their own strategy",
-    "description": "This option allows each team to choose the best database solution for their specific needs, but may lead to unnecessary tool sprawl and increased complexity.",
+    "description": "This option allows each team to select the best database solution for their specific needs, but may lead to tool sprawl and increased complexity.",
     "arguments": [
       {
         "impact": "Good",
-        "argument": "Supports fast delivery"
+        "argument": "Teams can choose the best solution for their workload"
       },
       {
         "impact": "Bad",
-        "argument": "May increase team cognitive load"
+        "argument": "May lead to unnecessary tool sprawl"
       }
     ]
   }

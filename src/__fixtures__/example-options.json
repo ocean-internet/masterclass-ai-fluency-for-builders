@@ -1,6 +1,6 @@
 [
   {
-    "uuid": "d09fbb2c-813e-4420-8184-5e23af3460f2",
+    "uuid": "231c0306-f83a-4875-897a-0086f679d3fb",
     "title": "Standardise on PostgreSQL",
     "description": "PostgreSQL is a powerful, open-source relational database that supports ACID guarantees and has strong transactional support.",
     "arguments": [
@@ -15,7 +15,7 @@
     ]
   },
   {
-    "uuid": "ff37b430-3892-4083-8bc2-b8e4a4114980",
+    "uuid": "808e58b5-81eb-44fa-bd2f-8b5d797376a5",
     "title": "Standardise on MongoDB",
     "description": "MongoDB is a popular, open-source NoSQL database that supports flexible schema and high performance.",
     "arguments": [
@@ -30,7 +30,7 @@
     ]
   },
   {
-    "uuid": "b2459ef5-428d-4f1d-a778-18de0275fe4a",
+    "uuid": "12b5e687-9d7e-495e-9afb-012842773835",
     "title": "Allow teams to choose their own strategy",
     "description": "This option allows each team to select the best database solution for their specific needs, but may lead to tool sprawl and increased complexity.",
     "arguments": [

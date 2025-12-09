@@ -87,13 +87,6 @@ By the end of this step, you will be able to:
 
 ---
 
-## 🛠️ Troubleshooting
-
-- **{{Symptom}}** → {{Cause}} → **Fix:** `{{command}}`
-- **{{Symptom}}** → {{Cause}} → **Fix:** `{{command}}`
-
----
-
 ## ➡️ Next
 
 ```bash
@@ -101,3 +94,10 @@ git checkout step-{{NN+1}}-{{next-slug}}
 ```
 
 Continue to **Step {{NN+1}} – {{Next title}}** (STEP*{{NN+1}}*{{Next title}}.md)
+
+---
+
+## 🛠️ Troubleshooting
+
+- **{{Symptom}}** → {{Cause}} → **Fix:** `{{command}}`
+- **{{Symptom}}** → {{Cause}} → **Fix:** `{{command}}`

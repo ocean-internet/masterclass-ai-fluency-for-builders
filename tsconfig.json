@@ -7,7 +7,7 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      //"@module-alias/*": ["module-path/*"]
+      "@test-utils/*": ["test-utils/*"]
     },
 
     // tsx recommended options

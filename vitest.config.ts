@@ -1,10 +1,10 @@
-// import { resolve } from "path";
+import { resolve } from "path";
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
     alias: {
-      // "@module-alias": resolve(__dirname, "./src/module-path"),
+      "@test-utils": resolve(__dirname, "./src/test-utils"),
     },
   },
   test: {

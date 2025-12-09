@@ -1,8 +1,8 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
 import ollama from "ollama";
 import { describe, expect, it } from "vitest";
 
 import { env } from "./env";
-import { E2E_TEST_TIMEOUT } from "./test-utils/config";
 
 describe("Environment Setup", () => {
   it("connects to the local Ollama server", async () => {
@@ -15,14 +15,14 @@ describe("Environment Setup", () => {
     [env.OLLAMA_MODEL, "main model"],
     [env.OLLAMA_MODEL_JUDGE, "judge model"],
     [env.OLLAMA_MODEL_EMBED, "embed model"],
-  ])(`has the required %s loaded`, async (modelName) => {
+  ])(`has the required %s model loaded in Ollama`, async (modelName) => {
     const { models } = await ollama.list();
     const names = models.flatMap((model) => [model.name, model.model].filter(Boolean));
     expect(names.some((name) => name.startsWith(modelName))).toBe(true);
   });
 
   it(
-    "should successfully generate text when making LLM call",
+    "successfully generates text response from Ollama model",
     async () => {
       const { response } = await ollama.generate({
         model: env.OLLAMA_MODEL,

@@ -1,0 +1,47 @@
+[
+  {
+    "uuid": "8d2e8fce-459f-4dc4-98c8-5382411a84b0",
+    "title": "Standardise on PostgreSQL",
+    "description": "PostgreSQL is a powerful, open-source relational database that supports strong ACID guarantees and has good support for transactions.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Supports strong ACID guarantees"
+      },
+      {
+        "impact": "Bad",
+        "argument": "May not be the best choice for document-oriented workloads"
+      }
+    ]
+  },
+  {
+    "uuid": "ea8c3da5-813c-4e5a-b067-42c12276bb15",
+    "title": "Standardise on MongoDB",
+    "description": "MongoDB is a popular, open-source NoSQL database that supports flexible schema and has good support for document-oriented workloads.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Supports flexible schema"
+      },
+      {
+        "impact": "Bad",
+        "argument": "May not provide strong ACID guarantees"
+      }
+    ]
+  },
+  {
+    "uuid": "c88f2976-b779-4a4e-b8e7-6f0c8e9ef9ab",
+    "title": "Allow teams to choose their own strategy",
+    "description": "This option allows each team to choose the best database solution for their specific needs, but may lead to unnecessary tool sprawl and increased complexity.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Supports fast delivery"
+      },
+      {
+        "impact": "Bad",
+        "argument": "May increase team cognitive load"
+      }
+    ]
+  }
+]

@@ -169,8 +169,8 @@ Then re-run generation and evaluation to see if the tradeoffs score improves.
 
 Step 02 introduces sequential chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
 
-Continue to **Step 02 — Sequential Chain**
-
 ```bash
 git checkout step-02-sequential-chain
 ```
+
+Continue to **Step 02 — Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))

@@ -6,6 +6,18 @@ Chosen option: "{{chosenOption}}"
 
 ### Consequences
 
-{{#each consequences}}
-- {{impact}}, because {{consequence}}
+{{#if consequences.good}}
+{{#each consequences.good}}
+- Good, because {{this}}
 {{/each}}
+{{/if}}
+{{#if consequences.neutral}}
+{{#each consequences.neutral}}
+- Neutral, because {{this}}
+{{/each}}
+{{/if}}
+{{#if consequences.bad}}
+{{#each consequences.bad}}
+- Bad, because {{this}}
+{{/each}}
+{{/if}}

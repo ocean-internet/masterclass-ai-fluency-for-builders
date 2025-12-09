@@ -1,93 +1,105 @@
-import "./index.test-setup";
+import { executePrintCommand } from "@cli/execute-print-command";
+import { executeSaveCommand } from "@cli/execute-save-command";
+import { handleError } from "@cli/handle-error";
+import { showHelp } from "@cli/show-help";
+import { validateCommandArgs } from "@cli/validate-args";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { readFileSync } from "node:fs";
+import { main } from "./index";
 
-import { beforeEach, describe, expect, it, vi } from "vitest";
+vi.mock("./cli/show-help");
+vi.mock("./cli/validate-args");
+vi.mock("./cli/execute-save-command");
+vi.mock("./cli/execute-print-command");
+vi.mock("./cli/handle-error");
 
-describe("runCommand", () => {
-  const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
-  const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+describe("main", () => {
   const exitSpy = vi.fn();
+  let originalArgv: string[];
+  let originalExit: typeof process.exit;
+  let consoleLogSpy: ReturnType<typeof vi.spyOn>;
+  let consoleErrorSpy: ReturnType<typeof vi.spyOn>;
 
   beforeEach(() => {
+    consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+    consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
     vi.clearAllMocks();
-    process.exitCode = undefined;
+    originalArgv = process.argv;
+    originalExit = process.exit;
     process.exit = exitSpy as never;
-    vi.mocked(readFileSync).mockReturnValue("test content");
+    vi.mocked(showHelp).mockReturnValue(undefined);
+    vi.mocked(validateCommandArgs).mockReturnValue("test-file.md");
+    vi.mocked(executeSaveCommand).mockResolvedValue(undefined);
+    vi.mocked(executePrintCommand).mockResolvedValue(undefined);
+    vi.mocked(handleError).mockReturnValue(undefined);
   });
 
-  describe("error handling", () => {
-    it("shows help for invalid command", async () => {
-      const { runCommand } = await import("./index");
-
-      try {
-        await runCommand("invalid-command", []);
-      } catch {
-        // Expected to exit
-      }
-
-      expect(exitSpy).toHaveBeenCalledWith(0);
-    });
-
-    it("handles errors gracefully", async () => {
-      const { runCommand } = await import("./index");
-      const { generateAdr } = await import("./step01/generate-adr");
-
-      vi.mocked(readFileSync).mockReturnValue("test context");
-      vi.mocked(generateAdr).mockRejectedValueOnce(new Error("Test error"));
-
-      await expect(runCommand("generate-01", ["test-context.md"])).rejects.toThrow("Test error");
-    });
+  afterEach(() => {
+    process.argv = originalArgv;
+    process.exit = originalExit;
+    consoleLogSpy.mockRestore();
+    consoleErrorSpy.mockRestore();
   });
 
-  describe("routing", () => {
-    it.each([
-      ["generate-01", "ADR generated successfully!"],
-      ["evaluate", "ADR evaluated successfully!"],
-      ["generate-02", "ADR generated successfully!"],
-    ])("routes %s to file output handler", async (command, expectedMessage) => {
-      const { runCommand } = await import("./index");
+  it("calls showHelp when command is missing", async () => {
+    process.argv = ["node", "index.ts"];
 
-      vi.mocked(readFileSync).mockReturnValue("test input");
+    await main();
 
-      await runCommand(command, ["test-file.md"]);
+    expect(showHelp).toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
 
-      expect(consoleLogSpy).toHaveBeenCalledWith(expectedMessage);
-      expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining("Filename:"));
-    });
+  it("calls showHelp when command is invalid", async () => {
+    process.argv = ["node", "index.ts", "invalid-command"];
 
-    it.each([
-      ["context", ["test-file.md"], "test context"],
-      ["options", ["test-file.json"], '{"description": "Test context", "drivers": ["Driver 1"]}'],
-      [
-        "render",
-        ["test-file.json"],
-        '{"title": "Test", "context": {"description": "Test", "drivers": ["Driver 1"]}, "options": [], "decision": {"chosenOption": "Option", "justification": "Test", "consequences": [{"impact": "Good", "consequence": "Good"}, {"impact": "Bad", "consequence": "Bad"}]}}',
-      ],
-    ])("routes %s to stdout handler", async (command, args, mockData) => {
-      const { runCommand } = await import("./index");
+    await main();
 
-      vi.mocked(readFileSync).mockReturnValue(mockData);
+    expect(showHelp).toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
 
-      await runCommand(command, args);
+  it("calls showHelp when args are invalid", async () => {
+    process.argv = ["node", "index.ts", "generate"];
+    vi.mocked(validateCommandArgs).mockReturnValue(null);
 
-      expect(consoleLogSpy).toHaveBeenCalled();
-      expect(consoleErrorSpy).not.toHaveBeenCalled();
-    });
+    await main();
 
-    it("routes decision to stdout handler", async () => {
-      const { runCommand } = await import("./index");
+    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(showHelp).toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
 
-      const contextJson = '{"description": "Test context", "drivers": ["Driver 1"]}';
-      const optionsJson =
-        '[{"uuid": "550e8400-e29b-41d4-a716-446655440000", "title": "Option 1", "description": "Desc", "arguments": [{"impact": "Good", "argument": "Good"}, {"impact": "Bad", "argument": "Bad"}]}]';
+  it("calls executeSaveCommand for generate command", async () => {
+    process.argv = ["node", "index.ts", "generate", "test-file.md"];
 
-      vi.mocked(readFileSync).mockReturnValueOnce(contextJson).mockReturnValueOnce(optionsJson);
+    await main();
 
-      await runCommand("decision", ["context.json", "options.json"]);
+    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(executeSaveCommand).toHaveBeenCalled();
+    expect(executePrintCommand).not.toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
 
-      expect(consoleLogSpy).toHaveBeenCalled();
-      expect(consoleErrorSpy).not.toHaveBeenCalled();
-    });
+  it("calls executePrintCommand for context command", async () => {
+    process.argv = ["node", "index.ts", "context", "test-file.md"];
+
+    await main();
+
+    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(executePrintCommand).toHaveBeenCalled();
+    expect(executeSaveCommand).not.toHaveBeenCalled();
+    expect(exitSpy).toHaveBeenCalledWith(0);
+  });
+
+  it("calls handleError and exits with 1 when error occurs", async () => {
+    process.argv = ["node", "index.ts", "generate", "test-file.md"];
+    const testError = new Error("Test error");
+    vi.mocked(executeSaveCommand).mockRejectedValue(testError);
+
+    await main();
+
+    expect(handleError).toHaveBeenCalledWith(testError);
+    expect(exitSpy).toHaveBeenCalledWith(1);
   });
 });

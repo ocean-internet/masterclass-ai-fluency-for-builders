@@ -1,19 +1,18 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
 
-import { E2E_TEST_TIMEOUT } from "../../vitest.config";
 import { evaluateAdr } from "./evaluate-adr";
 
-const EXAMPLE_ADR_FILE = "0000-use-markdown-architectural-decision-records.md";
 describe("evaluateAdr E2E", () => {
   it(
     "evaluates ADR end-to-end with Ollama",
     async () => {
       const __dirname = fileURLToPath(new URL(".", import.meta.url));
-      const decisionsDir = join(__dirname, "../../docs/decisions/");
-      const adrMarkdown = readFileSync(join(decisionsDir, EXAMPLE_ADR_FILE), "utf-8");
+      const fixturesDir = join(__dirname, "../__fixtures__");
+      const adrMarkdown = readFileSync(join(fixturesDir, "example-adr.md"), "utf-8");
 
       const evalMarkdown = await evaluateAdr(adrMarkdown);
 

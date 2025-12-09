@@ -1,10 +1,9 @@
 import { readFileSync } from "node:fs";
 
+import { contextSchema } from "@step02/context/schema";
+import { generateDecision } from "@step02/decision/generate";
+import { optionSchema } from "@step02/options/schema";
 import * as z from "zod";
-
-import { contextSchema } from "../step02/context/schema";
-import { generateDecision } from "../step02/decision/generate";
-import { optionSchema } from "../step02/options/schema";
 
 export async function handleDecision(contextJsonFile: string, optionsJsonFile: string): Promise<string> {
   const contextJson = readFileSync(contextJsonFile, "utf-8");

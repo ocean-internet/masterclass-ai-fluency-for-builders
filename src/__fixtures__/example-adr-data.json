@@ -1,0 +1,74 @@
+{
+  "title": "Reduce Team Cognitive Load by Standardising on PostgreSQL",
+  "context": {
+    "description": "We need to make a decision about our database strategy for new services. The main options are to standardise on PostgreSQL, standardise on MongoDB, or allow teams to choose their own strategy.\n\nWhat's driving this decision is the need to reduce team cognitive load, preserve strong ACID guarantees where required, and avoid unnecessary tool sprawl while still supporting fast delivery. At the same time, we have to deal with mixed workloads — some transaction-heavy, some document-oriented — and our teams don't all have the same level of database expertise.\n\nThis decision will impact team productivity, system reliability, and overall cost of ownership.",
+    "drivers": [
+      "reduce team cognitive load",
+      "preserve strong ACID guarantees where required",
+      "avoid unnecessary tool sprawl",
+      "deal with mixed workloads",
+      "teams don't all have the same level of database expertise"
+    ]
+  },
+  "options": [
+    {
+      "uuid": "a4b4e625-331b-4a2c-924e-2e45977ff7ae",
+      "title": "Standardise on PostgreSQL",
+      "description": "PostgreSQL is a powerful, open-source relational database that supports strong ACID guarantees and has good support for transactions.",
+      "arguments": [
+        {
+          "impact": "Good",
+          "argument": "Supports strong ACID guarantees"
+        },
+        {
+          "impact": "Bad",
+          "argument": "May not be the best choice for document-oriented workloads"
+        }
+      ]
+    },
+    {
+      "uuid": "3b859766-ab50-49a2-a89d-cc62cface807",
+      "title": "Standardise on MongoDB",
+      "description": "MongoDB is a popular, open-source NoSQL database that supports flexible schema and has good support for document-oriented workloads.",
+      "arguments": [
+        {
+          "impact": "Good",
+          "argument": "Supports flexible schema"
+        },
+        {
+          "impact": "Bad",
+          "argument": "May not provide strong ACID guarantees"
+        }
+      ]
+    },
+    {
+      "uuid": "aa31db21-1ecb-42f3-9228-cad86e9716c4",
+      "title": "Allow teams to choose their own strategy",
+      "description": "This option allows each team to choose the best database solution for their specific needs, but may lead to unnecessary tool sprawl and increased complexity.",
+      "arguments": [
+        {
+          "impact": "Good",
+          "argument": "Supports fast delivery"
+        },
+        {
+          "impact": "Bad",
+          "argument": "May increase team cognitive load"
+        }
+      ]
+    }
+  ],
+  "decision": {
+    "chosenOption": "Standardise on PostgreSQL",
+    "justification": "This option best meets the need to preserve strong ACID guarantees where required, while also reducing team cognitive load and avoiding unnecessary tool sprawl.",
+    "consequences": [
+      {
+        "impact": "Good",
+        "consequence": "Supports strong ACID guarantees"
+      },
+      {
+        "impact": "Bad",
+        "consequence": "May not be the best choice for document-oriented workloads"
+      }
+    ]
+  }
+}

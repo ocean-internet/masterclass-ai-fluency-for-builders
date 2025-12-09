@@ -1,3 +1,4 @@
+import { E2E_TEST_TIMEOUT } from "@test-utils/config";
 import ollama from "ollama";
 import { describe, expect, it } from "vitest";
 
@@ -14,9 +15,25 @@ describe("Environment Setup", () => {
     [env.OLLAMA_MODEL, "main model"],
     [env.OLLAMA_MODEL_JUDGE, "judge model"],
     [env.OLLAMA_MODEL_EMBED, "embed model"],
-  ])(`has the required %s loaded`, async (modelName) => {
+  ])(`has the required %s model loaded in Ollama`, async (modelName) => {
     const { models } = await ollama.list();
     const names = models.flatMap((model) => [model.name, model.model].filter(Boolean));
     expect(names.some((name) => name.startsWith(modelName))).toBe(true);
   });
+
+  it(
+    "successfully generates text response from Ollama model",
+    async () => {
+      const { response } = await ollama.generate({
+        model: env.OLLAMA_MODEL,
+        prompt: 'Say "OK',
+        stream: false,
+        options: {
+          temperature: 0,
+        },
+      });
+      expect(response.toLowerCase()).toContain("ok");
+    },
+    E2E_TEST_TIMEOUT,
+  );
 });

@@ -1,8 +1,7 @@
-import "../index.test-setup";
-
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { showHelpAndExit } from "./show-help";
+import { commands } from "./commands";
+import { showHelp } from "./show-help";
 
 describe("showHelp", () => {
   const consoleLogSpy = vi.spyOn(console, "log").mockImplementation(() => {});
@@ -13,32 +12,17 @@ describe("showHelp", () => {
     process.exit = exitSpy as never;
   });
 
-  it("displays help message and exits", () => {
-    try {
-      showHelpAndExit();
-    } catch {
-      // Expected to exit
-    }
-
-    expect(consoleLogSpy).toHaveBeenCalledWith("Usage: yarn adr <command> [args...]\n");
-    expect(consoleLogSpy).toHaveBeenCalledWith("Commands:");
-    expect(exitSpy).toHaveBeenCalledWith(0);
+  it("displays usage message with command syntax", () => {
+    showHelp();
+    const output = consoleLogSpy.mock.calls.flat().join("\n");
+    expect(output).toContain("sage: yarn adr <command> [args...]");
+    expect(output).toContain("Commands:");
   });
 
   it("lists all commands", () => {
-    try {
-      showHelpAndExit();
-    } catch {
-      // Expected to exit
-    }
+    showHelp();
 
     const output = consoleLogSpy.mock.calls.flat().join("\n");
-    expect(output).toContain("generate-01");
-    expect(output).toContain("evaluate");
-    expect(output).toContain("generate-02");
-    expect(output).toContain("context");
-    expect(output).toContain("options");
-    expect(output).toContain("decision");
-    expect(output).toContain("render");
+    Object.keys(commands).forEach((command) => expect(output).toContain(command));
   });
 });

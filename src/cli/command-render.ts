@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 
-import { renderAdr } from "../step02/adr/render";
-import { adrDataSchema } from "../step02/adr/schema";
+import { renderAdr } from "@step02/adr/render";
+import { adrDataSchema } from "@step02/adr/schema";
 
 export async function handleRender(adrDataJsonFile: string): Promise<string> {
   const adrDataJson = readFileSync(adrDataJsonFile, "utf-8");

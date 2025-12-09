@@ -191,8 +191,10 @@ The evaluation feedback guides improvements. Since each stage has its own prompt
 
 Step 03 introduces retrieval-augmented generation (RAG) that adds real-world context to ADR generation, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
 
-Continue to **Step 03 — Retrieval-Augmented Generation**
-
 ```bash
 git checkout step-03-retrieval-augmented-generation
 ```
+
+Continue to **Step 03 — Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+
+

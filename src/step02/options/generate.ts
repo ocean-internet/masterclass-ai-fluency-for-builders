@@ -35,7 +35,7 @@ export function generateOptions(data: Context): Promise<Option[]> {
     ["human", humanPrompt],
   ])
     .pipe(model.withStructuredOutput(llmOptionsSchema))
-    .pipe((result) => z.array(optionSchema).parse(result.options));
+    .pipe(({ options }) => z.array(optionSchema).parse(options));
 
   return chain.invoke({ context });
 }

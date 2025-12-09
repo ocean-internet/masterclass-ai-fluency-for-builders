@@ -1,5 +1,25 @@
 import * as z from "zod";
 
+type ConsequenceInput = {
+  impact: "Good" | "Bad" | "Neutral";
+  consequence: string;
+};
+
+export const mappedConsequencesSchema = z.object({
+  good: z.array(z.string()),
+  neutral: z.array(z.string()),
+  bad: z.array(z.string()),
+});
+export type MappedConsequences = z.infer<typeof mappedConsequencesSchema>;
+
+export function transformConsequences(consequences: ConsequenceInput[]): MappedConsequences {
+  return {
+    good: consequences.filter(({ impact }) => impact === "Good").map(({ consequence }) => consequence),
+    neutral: consequences.filter(({ impact }) => impact === "Neutral").map(({ consequence }) => consequence),
+    bad: consequences.filter(({ impact }) => impact === "Bad").map(({ consequence }) => consequence),
+  };
+}
+
 export const decisionSchema = z.object({
   title: z
     .string()

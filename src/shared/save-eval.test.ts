@@ -15,7 +15,7 @@ vi.mock("../env", () => ({
 
 import { saveEval } from "./save-eval";
 
-describe("saveEvalMarkdown", () => {
+describe("saveEval", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });

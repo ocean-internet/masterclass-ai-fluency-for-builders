@@ -1,5 +1,5 @@
 import globals from "globals";
-import tseslint from "typescript-eslint";
+import tslint from "typescript-eslint";
 import json from "@eslint/json";
 import markdown from "@eslint/markdown";
 import vitest from "eslint-plugin-vitest";
@@ -10,7 +10,7 @@ export default defineConfig([
   {
     ignores: ["dist/**", "node_modules/**", "eslint.config.mts"],
   },
-  ...tseslint.configs.recommended,
+  ...tslint.configs.recommended,
   {
     files: ["**/*.{ts,mts,cts}"],
     languageOptions: { globals: globals.node },

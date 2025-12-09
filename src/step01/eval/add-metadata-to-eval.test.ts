@@ -9,7 +9,7 @@ const baseInput = {
 } satisfies Pick<LlmSchema, "comments" | "suggestions">;
 
 describe("addMetadataToEval", () => {
-  it("adds title", () => {
+  it("adds title from ADR to evaluation result", () => {
     const input: LlmSchema = {
       ...baseInput,
       clear: 3,
@@ -27,7 +27,7 @@ describe("addMetadataToEval", () => {
     { scores: { clear: 1, justified: 1, comprehensive: 1, actionable: 1 }, expected: "1.00" },
     { scores: { clear: 5, justified: 5, comprehensive: 5, actionable: 5 }, expected: "5.00" },
     { scores: { clear: 1, justified: 2, comprehensive: 4, actionable: 5 }, expected: "3.00" },
-  ])("calculates scores", ({ scores, expected }) => {
+  ])("calculates average score from individual criterion scores", ({ scores, expected }) => {
     const input: LlmSchema = {
       ...baseInput,
       ...scores,
@@ -38,7 +38,7 @@ describe("addMetadataToEval", () => {
     expect(result.average).toBe(expected);
   });
 
-  it("preserves data", () => {
+  it("preserves comments and suggestions in evaluation result", () => {
     const input: LlmSchema = {
       ...baseInput,
       clear: 3,

@@ -1,11 +1,9 @@
 import { commands } from "./commands";
 
-export function showHelpAndExit(): never {
+export function showHelp() {
   console.log("Usage: yarn adr <command> [args...]\n");
   console.log("Commands:");
   for (const [name, cmd] of Object.entries(commands)) {
-    console.log(`  ${name.padEnd(20)} ${cmd.description}`);
-    console.log(`  ${"".padEnd(20)} Usage: ${cmd.usage}`);
+    console.log(`  ${name.padEnd(10)} ${cmd.description}`);
   }
-  process.exit(0);
 }

@@ -5,7 +5,7 @@ import { loadPromptTemplate } from "@shared/load-prompt-template";
 
 import { env } from "../../env";
 import { type Context } from "../context/schema";
-import { type Option } from "../options/schema";
+import { type Option, transformArguments } from "../options/schema";
 import { type Decision, decisionSchema } from "./schema";
 
 const SYSTEM_PROMPT = "system.md";
@@ -21,9 +21,14 @@ export function generateDecision(context: Context, options: Option[]): Promise<D
   const systemPrompt = loadPromptTemplate(SYSTEM_PROMPT);
   const humanPrompt = loadPromptTemplate(DECISION_PROMPT);
 
+  const transformedOptions = options.map((option) => ({
+    ...option,
+    arguments: transformArguments(option.arguments),
+  }));
+
   const decisionContext = [
     jsonToMarkdown<Context>("context.partial.hbs", context),
-    jsonToMarkdown<Option[]>("options.partial.hbs", options),
+    jsonToMarkdown<typeof transformedOptions>("options.partial.hbs", transformedOptions),
   ].join("\n\n");
 
   const chain = ChatPromptTemplate.fromMessages([

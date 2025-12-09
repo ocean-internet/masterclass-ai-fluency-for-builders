@@ -4,7 +4,7 @@ ls:
   .js: kebab-case
   .jsx: kebab-case
   .json: kebab-case
-  .md: kebab-case | screamingsnakecase
+  .md: kebab-case | SCREAMING_SNAKE_CASE
   .yml: kebab-case
   .yaml: kebab-case
   .hbs: kebab-case

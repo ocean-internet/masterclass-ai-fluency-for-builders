@@ -12,7 +12,7 @@ Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to gener
 
 AI is everywhere – but most teams still struggle to use it in practice. You don't need specialist knowledge to start experimenting.
 
-This masterclass gives you the confidence to build and test a working AI-powered tool, even if your organisation hasn't yet found the "right" use case.
+This course gives you the confidence to build and test a working AI-powered tool, even if your organisation hasn't yet found the "right" use case.
 
 We'll use a straightforward example – documenting software decisions – as the vehicle. Step by step, you'll connect to open models, refine prompts, review outputs, and guide AI towards results you can trust.
 
@@ -22,7 +22,7 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 ## Who can benefit
 
-- Developers and technical practitioners curious about AI
+- Developers and technical practitioners are curious about AI
 - Comfortable with git and reading TypeScript/JavaScript
 - Teams that want confidence to explore AI, even without a business case in hand
 
@@ -36,14 +36,14 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 ## Course Structure
 
-- **Step 00: Setup** ([docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)) - Provision and test a local LLM runtime
-- **Step 01: Single Prompt** ([docs/STEP_01_SINGLE_PROMPT.md](docs/STEP_01_SINGLE_PROMPT.md)) - Generate an ADR with a single prompt, then evaluate it
-- **Step 02: Sequential Chain** ([docs/STEP_02_SEQUENTIAL_CHAIN.md](docs/STEP_02_SEQUENTIAL_CHAIN.md)) - Generate ADRs using sequential chains
-- **Step 03: Retrieval-Augmented Generation** TODO - Generate ADRs with retrieval-augmented generation
+- **Step 00: Setup** - Provision and test a local LLM runtime ([docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md))
+- **Step 01: Single Prompt** - Generate an ADR with a single prompt, then evaluate it ([docs/STEP_01_SINGLE_PROMPT.md](docs/STEP_01_SINGLE_PROMPT.md))
+- **Step 02: Sequential Chain** - Generate ADRs using sequential chains
+- **Step 03: Retrieval-Augmented Generation** - Generate ADRs with retrieval-augmented generation
 
 ## Getting Started
 
-1. Follow the setup instructions in [docs/STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
+1. Follow the setup instructions in [STEP_00_SETUP.md](docs/STEP_00_SETUP.md)
 2. Run `yarn test` to verify your environment
 3. Continue to [Step 01 — Single Prompt](docs/STEP_01_SINGLE_PROMPT.md)
 
@@ -51,7 +51,7 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 - [Agents: Chip Huyen](https://huyenchip.com/2025/01/07/agents.html)
 - [Building effective agents: Anthropic](https://www.anthropic.com/engineering/building-effective-agents)
-- [The DNA of AI Agents - Common Patterns in Recent Design Principles: Cedric Chee](https://cedricchee.com/blog/the-dna-of-ai-agents/)
+- [The DNA of AI Agents – Common Patterns in Recent Design Principles: Cedric Chee](https://cedricchee.com/blog/the-dna-of-ai-agents/)
 - [Emerging Patterns in Building GenAI Products: Bharani Subramaniam & Martin Fowler](https://martinfowler.com/articles/gen-ai-patterns/)
 
 ### AI Engineering

@@ -3,22 +3,19 @@
 
 {{this.description}}
 
-{{#if this.arguments}}
-{{#each this.arguments}}
-{{#if (eq this.impact "Good")}}
-- Good, because {{this.argument}}
-{{/if}}
-{{/each}}
-{{#each this.arguments}}
-{{#if (eq this.impact "Neutral")}}
-- Neutral, because {{this.argument}}
-{{/if}}
-{{/each}}
-{{#each this.arguments}}
-{{#if (eq this.impact "Bad")}}
-- Bad, because {{this.argument}}
-{{/if}}
+{{#if this.arguments.good}}
+{{#each this.arguments.good}}
+- Good, because {{this}}
 {{/each}}
 {{/if}}
-
+{{#if this.arguments.neutral}}
+{{#each this.arguments.neutral}}
+- Neutral, because {{this}}
+{{/each}}
+{{/if}}
+{{#if this.arguments.bad}}
+{{#each this.arguments.bad}}
+- Bad, because {{this}}
+{{/each}}
+{{/if}}
 {{/each}}

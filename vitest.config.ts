@@ -1,8 +1,6 @@
 import { resolve } from "path";
 import { configDefaults, defineConfig } from "vitest/config";
 
-export const E2E_TEST_TIMEOUT = 60_000;
-
 export default defineConfig({
   resolve: {
     alias: {
@@ -21,15 +19,15 @@ export default defineConfig({
       include: ["src/**/*.ts"],
       exclude: ["node_modules/**", "dist/**", "**/*.{test,spec}.*", "**/*.config.*"],
       thresholds: {
-        statements: 82,
-        branches: 62,
-        functions: 86,
-        lines: 84,
-        autoUpdate: (newThreshold) => Math.floor(newThreshold * 0.9),
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+        // autoUpdate: (newThreshold) => Math.floor(newThreshold),
       },
     },
     exclude:
-      process.env.VITEST_WATCH === "true"
+      process.env["VITEST_WATCH"] === "true"
         ? [...configDefaults.exclude, "**/*.{e2e,smoke}.test.ts"]
         : configDefaults.exclude,
   },

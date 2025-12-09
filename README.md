@@ -22,7 +22,7 @@ No prior AI experience required – just curiosity, a decent dev machine, and a 
 
 ## Who can benefit
 
-- Developers and technical practitioners are curious about AI
+- Developers and technical practitioners curious about AI
 - Comfortable with git and reading TypeScript/JavaScript
 - Teams that want confidence to explore AI, even without a business case in hand
 

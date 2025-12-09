@@ -167,6 +167,18 @@ The evaluation feedback guides improvements. Since each stage has its own prompt
 
 ---
 
+## ➡️ Next
+
+Step 03 introduces retrieval-augmented generation (RAG) that adds real-world context to ADR generation, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
+
+```bash
+git checkout step-03-retrieval-augmented-generation
+```
+
+Continue to **Step 03 — Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+
+---
+
 ## 🛠️ Troubleshooting
 
 - **Validation errors at a stage** → Check that stage's prompt matches its schema → Fix `src/step02/stageXX-*/prompt.md`
@@ -184,15 +196,3 @@ The evaluation feedback guides improvements. Since each stage has its own prompt
 - **Mixing up markdown partials**: Each stage renders its output to markdown for the next stage. Make sure you're passing the correct partial (accumulated from previous stages) to each stage.
 
 - **Over-editing multiple stages at once**: Make one change at a time. Test the full chain after each change to see which modifications actually improve the output.
-
----
-
-## ➡️ Next
-
-Step 03 introduces retrieval-augmented generation (RAG) that adds real-world context to ADR generation, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
-
-```bash
-git checkout step-03-retrieval-augmented-generation
-```
-
-Continue to **Step 03 — Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))

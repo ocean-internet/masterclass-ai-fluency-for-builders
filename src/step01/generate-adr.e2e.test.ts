@@ -1,8 +1,8 @@
-import { E2E_TEST_TIMEOUT } from "@test-utils/config";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
+import { E2E_TEST_TIMEOUT, FIXTURES_DIR } from "@test-utils/config";
 import { parseMadr } from "@test-utils/parse-madr";
-import { readFileSync } from "fs";
-import { join } from "path";
-import { fileURLToPath } from "url";
 import { beforeAll, describe, expect, it } from "vitest";
 
 import { generateAdr } from "./generate-adr";
@@ -16,9 +16,7 @@ describe("Single-Prompt ADR", () => {
   let consequences: string[] = [];
 
   beforeAll(async () => {
-    const __dirname = fileURLToPath(new URL(".", import.meta.url));
-    const fixturesDir = join(__dirname, "../__fixtures__");
-    const contextMarkdown = readFileSync(join(fixturesDir, EXAMPLE_CONTEXT_FILE), "utf-8");
+    const contextMarkdown = readFileSync(join(FIXTURES_DIR, EXAMPLE_CONTEXT_FILE), "utf-8");
 
     adr = await generateAdr(contextMarkdown);
     const parsed = await parseMadr(adr);

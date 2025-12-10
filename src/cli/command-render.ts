@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-import { renderAdr } from "@step02/adr/render";
+import { renderAdr } from "@step02/adr/render-adr";
 import { adrDataSchema } from "@step02/adr/schema";
 
 export async function handleRender(adrDataJsonFile: string): Promise<string> {

@@ -20,5 +20,5 @@ export function jsonToMarkdown<Data>(templateFilename: string, data: Data): stri
   const templatePath = join(templatesDir, templateFilename);
   const templateSource = readFileSync(templatePath, "utf-8");
   const template = Handlebars.compile<Data>(templateSource);
-  return decode(template(data));
+  return decode(template(data)).replace(/\n{3,}/g, "\n\n");
 }

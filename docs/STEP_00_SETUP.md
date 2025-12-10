@@ -183,7 +183,7 @@ With your environment ready, you're set to generate your very first ADR.
 git checkout step-01-single-prompt
 ```
 
-Continue to **Step 01 — Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
+Continue to **Step 01 – Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
 
 ---
 
@@ -194,18 +194,21 @@ Continue to **Step 01 — Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SI
 If you see `curl: (7) Failed to connect to localhost port 11434 after 0 ms: Connection refused`:
 
 1. **Try `127.0.0.1` instead of `localhost`:**
+
    ```bash
    curl -f http://127.0.0.1:11434/api/version
    ```
+
    If you see version JSON, it works. Skip to step 3.
 
 2. **If you still get "connection refused," start Ollama:**
    - **macOS**: `ollama serve` (or open the Ollama app)
    - **Linux/WSL**: `systemctl --user start ollama`
-   
+
    Then run the curl command from step 1 again.
 
 3. **If it works, update your `.env` file:**
+
    ```env
    OLLAMA_HOST=http://127.0.0.1:11434
    ```

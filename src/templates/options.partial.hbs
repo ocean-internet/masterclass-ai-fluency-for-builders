@@ -5,17 +5,18 @@
 
 {{#if this.arguments.good}}
 {{#each this.arguments.good}}
-- Good, because {{this}}
+- Good: {{this}}
 {{/each}}
 {{/if}}
 {{#if this.arguments.neutral}}
 {{#each this.arguments.neutral}}
-- Neutral, because {{this}}
+- Neutral: {{this}}
 {{/each}}
 {{/if}}
 {{#if this.arguments.bad}}
 {{#each this.arguments.bad}}
-- Bad, because {{this}}
+- Bad: {{this}}
 {{/each}}
 {{/if}}
+
 {{/each}}

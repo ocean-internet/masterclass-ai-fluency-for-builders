@@ -211,6 +211,9 @@
 - "What did the evaluator catch that you might have missed?"
 - "Which suggestion will you implement first?"
 - "How does this change affect the output?"
+- "What score would you consider 'good enough' to stop iterating? Why?" (addresses: when to stop iterating)
+- "Can someone share an evaluation snippet? What does a score of 2 vs 4 actually look like in the `.eval.md` file?" (addresses: rubric illustration)
+- "How many iterations is too many? When do you hit diminishing returns?" (addresses: stopping criteria)
 
 **Prompt Engineering Guidance:**
 
@@ -231,6 +234,7 @@
 4. Share results in chat: "What changed? Did scores improve? What surprised you?" (3 min)
    - Focus on learning, not perfection
    - Celebrate small improvements
+   - "Show me a 'bad' ADR you generated - what did the evaluator catch that you missed?" (addresses: bad example)
    - **Transferability prompt**: "This pattern isn't ADR-specific. How would you apply it to `docs/testing/support`? We'll discuss more in wrap-up."
 
 **Common Pitfalls:**
@@ -280,6 +284,8 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 - **Intermediate validation**: Check each step works before moving on (like unit tests)
 - **Consistency**: Each stage builds on previous output (like a pipeline)
 - **Trade-off**: More complexity, but often better quality
+- **Performance consideration**: Notice we're making 4 LLM calls instead of 1. Is the quality improvement worth the latency? When would you choose one-shot vs chain?
+- **Debugging guidance**: If this chain fails at stage 3, how would you debug it? What would you check first? (Hint: run each stage independently)
 
 **Advanced Patterns Preview:**
 
@@ -348,6 +354,8 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 - "Did chain scores improve over one-shot?"
 - "Which criteria improved most with chains?"
 - "How does improving one stage affect overall scores?"
+- "Did chain scores improve over one-shot? Was the 4x latency worth it?"
+- "Show me the working memory - here's the JSON from Stage 1, here's how it merges into Stage 2's input" (visual example)
 
 **Common Pitfalls:**
 
@@ -410,12 +418,14 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 - **Vector store**: Like a search index, but for semantic similarity
 - **Retrieval**: Find documents that match your question (like Google search, but for meaning)
 - **Augmentation**: Add those documents to your prompt so the LLM has real context
+- **Vector store lifecycle**: The vector store is saved to disk - first run builds it, subsequent runs load it. How would you force a rebuild if PDFs change? (Hint: delete `.vectorstore/` directory)
+- **Performance note**: Notice the first retrieval is slow (building the store). Subsequent retrievals are faster. This is expected.
 
 **Evaluation Depth:**
 
-- **Context-aware evaluator**: Checks "does ADR actually use retrieved info?"
-- **Grounding**: Are claims supported by retrieved documents?
-- **Citation quality**: Are sources cited correctly?
+- Same evaluation schema as Steps 01–02 (clear, justified, comprehensive, actionable).
+- Focus on whether retrieval improved these scores; no special RAG-specific judge.
+- Optional homework: separately check if retrieved docs are relevant/used.
 
 **Transition:**
 "Now let's evaluate the RAG output using the same evaluation from Step 01."
@@ -483,6 +493,9 @@ During the "Share results" discussion, add: "This pattern isn't ADR-specific. Ho
 - "Did RAG scores improve over one-shot or chain?"
 - "Which criteria improved most with real context?"
 - "How does retrieval quality affect evaluation scores?"
+- "How do you know if the retrieved chunks are actually relevant? What would you check?"
+- "Try changing k from 5 to 10 (via `RAG_RETRIEVER_K` in `.env`). Does it improve scores? What's the trade-off?"
+- "Why do you think chunk size is 600? What happens if it's too small or too large?"
 
 **Reflection Exercises:**
 

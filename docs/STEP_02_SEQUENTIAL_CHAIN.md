@@ -43,25 +43,29 @@ By the end of this step, you will be able to:
 ## 📊 Workflow Diagram
 
 ```mermaid
-graph LR
-    A[Decision Context] --> B[Stage 1: Context + Drivers]
-    B --> C[JSON: context + decisionDrivers]
-    C --> D[Validate with Zod]
-    D --> E[Render Markdown Partial]
-    E --> F[Stage 2: Options + Pros/Cons]
-    F --> G[JSON: prosCons]
-    G --> H[Validate with Zod]
-    H --> I[Merge to Working Memory]
-    I --> J[Render Markdown Partial]
-    J --> K[Stage 3: Decision]
-    K --> L[JSON: decision + title]
-    L --> M[Validate with Zod]
-    M --> N[Merge to Working Memory]
-    N --> O[Render Markdown Partial]
-    O --> P[Stage 4: Final Template]
-    P --> Q[Complete ADR Markdown]
-    Q --> R[Evaluation: Same as Step 01]
-    R --> S[Compare Scores]
+graph TD
+    A@{shape: doc, label: "Problem Statement"}
+    B@{shape: doc, label: "Markdown ADR"}
+    C@{shape: doc, label: "Evaluation Report"}
+
+    subgraph chain ["Generate"]
+        D[generateContext]
+        E[generateOptions]
+        F[generateDecision]
+        G[renderAdr]
+    end
+
+    subgraph evaluate ["Evaluate"]
+        H[evaluateAdr]
+    end
+
+    A --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> B
+    B --> H
+    H --> C
 ```
 
 ---
@@ -175,7 +179,7 @@ Step 03 introduces retrieval-augmented generation (RAG) that adds real-world con
 git checkout step-03-retrieval-augmented-generation
 ```
 
-Continue to **Step 03 — Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+Continue to **Step 03 – Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
 
 ---
 

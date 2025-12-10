@@ -1,0 +1,44 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`generateAdrData > maps input to output structure 1`] = `
+{
+  "context": {
+    "description": "Test",
+    "drivers": [
+      "Driver 1",
+    ],
+  },
+  "decision": {
+    "chosenOption": "Option 1",
+    "consequences": [
+      {
+        "consequence": "Good consequence",
+        "impact": "Good",
+      },
+      {
+        "consequence": "Bad consequence",
+        "impact": "Bad",
+      },
+    ],
+    "justification": "Justification",
+  },
+  "options": [
+    {
+      "arguments": [
+        {
+          "argument": "Good point",
+          "impact": "Good",
+        },
+        {
+          "argument": "Bad point",
+          "impact": "Bad",
+        },
+      ],
+      "description": "Description",
+      "title": "Option 1",
+      "uuid": "uuid-1",
+    },
+  ],
+  "title": "Test Title",
+}
+`;

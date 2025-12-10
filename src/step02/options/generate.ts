@@ -11,12 +11,7 @@ import { type Option, optionSchema } from "./schema";
 const SYSTEM_PROMPT = "system.md";
 const OPTIONS_PROMPT = "generate-options.md";
 
-const llmOptionsSchema = z.object({
-  options: z
-    .array(optionSchema.omit({ uuid: true }))
-    .min(2)
-    .max(5),
-});
+const llmOptionsSchema = z.object({ options: z.array(optionSchema.omit({ uuid: true })) });
 
 export function generateOptions(data: Context): Promise<Option[]> {
   const model = new ChatOllama({

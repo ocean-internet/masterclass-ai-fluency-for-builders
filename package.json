@@ -19,13 +19,19 @@
     "qa": "yarn tidy && yarn test:coverage"
   },
   "dependencies": {
+    "@langchain/classic": "^1.0.5",
+    "@langchain/community": "^1.0.7",
     "@langchain/core": "^1.1.2",
     "@langchain/ollama": "^1.0.3",
+    "@langchain/textsplitters": "^1.0.1",
     "change-case": "^5.4.4",
     "dotenv": "^17.2.3",
+    "faiss-node": "^0.5.1",
     "handlebars": "^4.7.8",
     "html-entities": "^2.6.0",
     "ollama": "^0.6.3",
+    "ora": "^9.0.0",
+    "pdf-parse": "^1",
     "zod": "^4.1.13"
   },
   "devDependencies": {
@@ -44,6 +50,7 @@
     "madr": "^4.0.0",
     "mdast": "^3.0.0",
     "mdast-util-to-string": "^4.0.0",
+    "memfs": "^4.51.1",
     "prettier": "^3.7.4",
     "remark-parse": "^11.0.0",
     "tsconfig-paths": "^4.2.0",

@@ -34,7 +34,6 @@ export function evaluateAdr(madr: string): Promise<string> {
   const chain = ChatPromptTemplate.fromTemplate(promptTemplate)
     .pipe(model.withStructuredOutput(llmSchema))
     .pipe(RunnableLambda.from((adrEval) => addMetadataToEval(adrEval, title)))
-    .pipe(RunnableLambda.from((adrEval) => adrEvalSchema.parse(adrEval)))
     .pipe(RunnableLambda.from((adrEval) => jsonToMarkdown<AdrEval>(EVAL_TEMPLATE, adrEval)));
 
   const madrTemplate = loadMadrTemplate(MADR_TEMPLATE);

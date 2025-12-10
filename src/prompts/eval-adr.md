@@ -151,9 +151,9 @@ This MADR scores **5 across all criteria** because it provides comprehensive con
 
 ## Context and Problem Statement
 
-We need to make a decision about our database strategy for new services. Our current landscape is fragmented—3 teams use PostgreSQL, 2 use MongoDB, and teams spend 15-20 hours monthly resolving database-specific operational issues. We're experiencing data consistency problems in services that chose MongoDB for convenience but actually needed ACID guarantees.
+We need to make a decision about our database strategy for new services. Our current landscape is fragmented – 3 teams use PostgreSQL, 2 use MongoDB, and teams spend 15-20 hours monthly resolving database-specific operational issues. We're experiencing data consistency problems in services that chose MongoDB for convenience but actually needed ACID guarantees.
 
-What's driving this decision is the need to reduce team cognitive load (measured by context-switching overhead and on-call incidents), preserve strong ACID guarantees where required (financial transactions, inventory management), and avoid unnecessary tool sprawl while still supporting fast delivery. At the same time, we have to deal with mixed workloads — some transaction-heavy (checkout, payments), some document-oriented (user profiles, content management) — and our teams don't all have the same level of database expertise (only 2 developers familiar with MongoDB's aggregation pipeline).
+What's driving this decision is the need to reduce team cognitive load (measured by context-switching overhead and on-call incidents), preserve strong ACID guarantees where required (financial transactions, inventory management), and avoid unnecessary tool sprawl while still supporting fast delivery. At the same time, we have to deal with mixed workloads – some transaction-heavy (checkout, payments), some document-oriented (user profiles, content management) – and our teams don't all have the same level of database expertise (only 2 developers familiar with MongoDB's aggregation pipeline).
 
 How can we balance ACID transaction requirements with document-oriented data flexibility while minimizing team cognitive load and operational complexity?
 
@@ -177,13 +177,13 @@ Chosen option: Standardise on PostgreSQL
 
 PostgreSQL's JSONB support provides the document flexibility that MongoDB offers while maintaining ACID guarantees that MongoDB sacrifices in distributed scenarios. For our document-oriented use cases (user profiles, content), JSONB with GIN indexes performs adequately (benchmarked at 15-20% slower than MongoDB for read-heavy workloads, but acceptable given our query patterns). For transaction-heavy services (checkout, payments), PostgreSQL's native ACID support eliminates the data consistency issues we've experienced with MongoDB.
 
-Team choice would perpetuate the cognitive load problem—maintaining expertise in two database systems, dual operational tooling, and fragmented knowledge. The 15-20 hours monthly spent on database-specific issues would continue. Standardising on MongoDB would force us to implement application-level transaction logic in our payment services, introducing complexity and consistency risks we cannot accept for financial data.
+Team choice would perpetuate the cognitive load problem – maintaining expertise in two database systems, dual operational tooling, and fragmented knowledge. The 15-20 hours monthly spent on database-specific issues would continue. Standardising on MongoDB would force us to implement application-level transaction logic in our payment services, introducing complexity and consistency risks we cannot accept for financial data.
 
 ### Consequences
 
-- Good: Reduced operational overhead—consolidating to single database technology eliminates duplicate monitoring dashboards, backup procedures, and security audit processes, saving estimated 15-20 hours monthly in operations team effort
-- Good: Faster onboarding for new developers—single database technology to learn instead of two, reducing ramp-up time from 4-6 weeks to 2-3 weeks based on past onboarding metrics
-- Good: Improved database expertise across teams—8 developers can now share knowledge and support each other instead of being split across two technology silos
+- Good: Reduced operational overhead – consolidating to single database technology eliminates duplicate monitoring dashboards, backup procedures, and security audit processes, saving estimated 15-20 hours monthly in operations team effort
+- Good: Faster onboarding for new developers – single database technology to learn instead of two, reducing ramp-up time from 4-6 weeks to 2-3 weeks based on past onboarding metrics
+- Good: Improved database expertise across teams – 8 developers can now share knowledge and support each other instead of being split across two technology silos
 - Bad: Document-heavy services (user profiles, content management) may experience 15-20% slower query performance versus MongoDB for read-heavy workloads until teams master JSONB indexing strategies, estimated 2-3 week learning curve per team
 - Bad: Initial productivity dip for the 2 developers with MongoDB expertise who need to learn PostgreSQL JSONB patterns, estimated 1-2 week transition period
 - Neutral: Teams already experienced with PostgreSQL (60% of developers) can remain productive immediately, while MongoDB-experienced developers need to adapt their mental models for JSONB query patterns

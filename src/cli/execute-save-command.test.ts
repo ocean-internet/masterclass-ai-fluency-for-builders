@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 
+import { FIXTURES_DIR } from "@test-utils/config";
 import { join } from "path";
-import { fileURLToPath } from "url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { executeSaveCommand } from "./execute-save-command";
@@ -30,9 +30,7 @@ describe("executeSaveCommand", () => {
   });
 
   it("reads file, calls handler, calls save, and logs success message and filename", async () => {
-    const __dirname = fileURLToPath(new URL(".", import.meta.url));
-    const fixturesDir = join(__dirname, "../__fixtures__");
-    const inputFile = join(fixturesDir, "example-context.md");
+    const inputFile = join(FIXTURES_DIR, "example-context.md");
     const mockOutput = "Test output";
     const mockFilename = "/test/output/file.md";
 

@@ -1,32 +1,31 @@
 // CLI entry point for all runnable commands.
 // Usage: yarn adr <command> [args...]
-// Commands: generate, generate-01, generate-02, context, options, decision, render, evaluate
+// Commands: generate, generate-01, generate-02, context, options, decision, render, evaluate, vectorstore:build, vectorstore:status, vectorstore:delete
 
 import { commands } from "@cli/commands";
 import { executePrintCommand } from "@cli/execute-print-command";
 import { executeSaveCommand } from "@cli/execute-save-command";
+import { extractCommandArgs } from "@cli/extract-args";
 import { handleError } from "@cli/handle-error";
-import { showHelp } from "@cli/show-help";
+import { showHelp, ShowHelpError } from "@cli/show-help";
 import type { PrintCommand, SaveCommand } from "@cli/types";
-import { validateCommandArgs } from "@cli/validate-args";
 
 if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }
 
 async function runCommand(command: string, args: string[]): Promise<void> {
-  if (!command) return showHelp();
+  if (!command) throw new ShowHelpError();
 
   const config = commands[command as keyof typeof commands];
-  if (!config) return showHelp();
+  if (!config) throw new ShowHelpError();
 
-  const inputArg = validateCommandArgs(config, args);
-  if (!inputArg) return showHelp();
+  const inputArg = extractCommandArgs(config, args);
 
   if ("save" in config) {
-    await executeSaveCommand(config as SaveCommand, inputArg);
+    await executeSaveCommand(config as SaveCommand, inputArg ?? "");
   } else {
-    await executePrintCommand(config as PrintCommand, inputArg, args);
+    await executePrintCommand(config as PrintCommand, inputArg ?? "", args);
   }
 }
 
@@ -36,7 +35,12 @@ export async function main(): Promise<void> {
     await runCommand(command ?? "", args);
     process.exit(0);
   } catch (error) {
-    handleError(error);
-    process.exit(1);
+    if (error instanceof ShowHelpError) {
+      showHelp();
+      process.exit(0);
+    } else {
+      handleError(error);
+      process.exit(1);
+    }
   }
 }

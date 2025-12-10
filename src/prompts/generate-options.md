@@ -4,6 +4,8 @@ Based on the context and decision drivers provided, identify viable options and 
 
 Provide a list of 2 to 5 viable options with their pros and cons.
 
+**IMPORTANT**: Each option MUST include at least one argument with "Good" impact and at least one argument with "Bad" impact. This ensures balanced analysis of each option.
+
 ## CONTEXT
 
 """

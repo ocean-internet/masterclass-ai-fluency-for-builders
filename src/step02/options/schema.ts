@@ -38,7 +38,6 @@ export const optionSchema = z.object({
       }),
     )
     .min(2)
-    .max(5)
     .refine((args) => args.some((arg) => arg.impact === "Good"), { message: "Must have at least one Good argument" })
     .refine((args) => args.some((arg) => arg.impact === "Bad"), { message: "Must have at least one Bad argument" })
     .describe("List of arguments for this option (pros, cons, and neutral)"),

@@ -112,6 +112,8 @@ ollama pull nomic-embed-text
 
 Using **[nvm](https://nodejs.org/en/download)** + **Corepack** (recommended):
 
+> Corepack is included with all official Node.js releases; you'll need to run corepack enable before it's active.
+
 ```bash
 nvm install && nvm use   # installs/uses the .nvmrc or latest LTS
 corepack enable          # enables Yarn bundled with Node

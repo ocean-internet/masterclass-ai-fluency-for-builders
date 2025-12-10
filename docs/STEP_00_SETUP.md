@@ -110,7 +110,7 @@ ollama pull nomic-embed-text
 
 ### 4. Set up Node.js, Yarn, and dependencies
 
-Using **nvm** + **Corepack** (recommended):
+Using **[nvm](https://nodejs.org/en/download)** + **Corepack** (recommended):
 
 ```bash
 nvm install && nvm use   # installs/uses the .nvmrc or latest LTS

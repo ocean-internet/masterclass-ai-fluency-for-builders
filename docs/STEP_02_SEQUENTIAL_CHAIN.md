@@ -36,7 +36,15 @@ By the end of this step, you will be able to:
 - **Hybrid approach**: LLM sees markdown (natural), we validate JSON (structured)
 - **Trade-off**: More complexity, but often better quality
 
-**Read more:** [LangChain chains documentation](https://js.langchain.com/docs/modules/chains/), [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
+**Read more:** [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for chain composition (chains are deprecated in v1.0 in favor of Runnables), [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
+
+## 📚 LangChain Concepts
+
+This step builds on Step 01 and introduces chain composition:
+
+- **[Runnables](https://reference.langchain.com/javascript/modules/_langchain_core.runnables.html)** - `RunnablePassthrough`, `RunnableLambda`, and chain composition with `.assign()` and `.pipe()` (see [RunnablePassthrough](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.RunnablePassthrough.html) and [RunnableLambda](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.RunnableLambda.html))
+- **[ChatPromptTemplate](https://reference.langchain.com/javascript/classes/_langchain_core.prompts.ChatPromptTemplate.html)** - Prompt templates (introduced in Step 01; see [prompts module](https://reference.langchain.com/javascript/modules/_langchain_core.prompts.html))
+- **[Ollama Integration](https://docs.langchain.com/oss/javascript/integrations/chat/ollama)** - `ChatOllama` model (introduced in Step 01)
 
 ## 📊 Workflow Diagram
 
@@ -92,9 +100,15 @@ yarn adr generate src/__fixtures__/example-context.md
 
 **Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` with full template structure (Context, Decision Drivers, Options, Pros/Cons, Decision, Consequences). The command prints the filename on success.
 
+> [!NOTE]
+> **About CLI commands:** The `yarn adr generate`, `yarn adr context`, `yarn adr options`, etc. commands are debugging/scaffolding tools provided for convenience. The actual LLM logic lives in the step functions (`generateAdr`, `generateContext`, `generateOptions`, etc. in `src/step02/`) which can be called programmatically from your own code. These CLI commands wrap the functions to make testing and iteration easier.
+
 Open the generated file and review it. Compare it to the Step 01 output. What's different? What's better?
 
 ### 2. Run stages independently (optional)
+
+> [!NOTE]
+> **CLI commands for debugging:** The commands below (`yarn adr context`, `yarn adr options`, etc.) are provided as debugging tools. They call the underlying step functions (`generateContext`, `generateOptions`, etc.) which contain the actual LLM logic. In production, you'd call these functions programmatically rather than via CLI.
 
 Each stage can be run standalone for testing or debugging:
 
@@ -125,7 +139,7 @@ yarn adr render src/__fixtures__/example-adr-data.json
 ### 3. Evaluate the ADR (same as Step 01)
 
 ```bash
-yyarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
+yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 ```
 
 Replace `0000-{{ADR TITLE}}.md` with the actual filename from step 1.
@@ -174,6 +188,8 @@ git checkout step-03-retrieval-augmented-generation
 ```
 
 Continue to **Step 03 - Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+
+For next steps specific to sequential chains, see [Taking Sequential Chain Further](STEP_04_WHAT_NEXT.md#taking-sequential-chain-further) in What Next.
 
 ## 🛠️ Troubleshooting
 

@@ -2,11 +2,11 @@
 
 ## TL;DR
 
-Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to generate and evaluate Architecture Decision Records. Learn the Generate → Evaluate → Iterate pattern that scales to any AI workflow.
+> Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to generate and evaluate Architecture Decision Records. Learn the Generate → Evaluate → Iterate pattern that scales to any AI workflow.
 
 ## Inspiration
 
-- [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
+> [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
 
 ## Course details
 
@@ -54,8 +54,11 @@ No prior AI experience required - just curiosity, a decent dev machine, and a wo
 - [The DNA of AI Agents - Common Patterns in Recent Design Principles: Cedric Chee](https://cedricchee.com/blog/the-dna-of-ai-agents/)
 - [Emerging Patterns in Building GenAI Products: Bharani Subramaniam & Martin Fowler](https://martinfowler.com/articles/gen-ai-patterns/)
 
-### AI Engineering
+<div>
 
-[![image](https://www.oreilly.com/covers/urn:orm:book:9781098166298/100w/)](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)
+[![image](https://www.oreilly.com/covers/urn:orm:book:9781098166298/150w/)](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)
 
-> by Chip Huyen
+**AI Engineering**  
+by Chip Huyen
+
+</div>

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import type { Context } from "../context/schema";
 import type { Decision } from "../decision/schema";
 import type { Option } from "../options/schema";
-import { generateAdrData } from "./generate-adr-data";
+import { extractAdrData } from "./extract-adr-data";
 
 describe("generateAdrData", () => {
   it("maps input to output structure", () => {
@@ -34,20 +34,8 @@ describe("generateAdrData", () => {
       ],
     };
 
-    const result = generateAdrData({ context, options, decision });
+    const result = extractAdrData({ context, options, decision });
 
-    expect(result).toEqual({
-      title: "Test Title",
-      context,
-      options,
-      decision: {
-        chosenOption: "Option 1",
-        justification: "Justification",
-        consequences: [
-          { impact: "Good", consequence: "Good consequence" },
-          { impact: "Bad", consequence: "Bad consequence" },
-        ],
-      },
-    });
+    expect(result).toMatchSnapshot();
   });
 });

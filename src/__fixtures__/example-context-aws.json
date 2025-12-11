@@ -1,0 +1,10 @@
+{
+  "description": "We need to decide how our services should communicate: keep using synchronous APIs, move to a pub/sub event-driven model, or let each team choose their own approach. Teams own their services independently and can’t always coordinate changes, which creates bottlenecks. Pub/sub could reduce these dependencies and make it easier to add or change services, but not everyone is familiar with asynchronous patterns and different workloads may need different styles. We also want predictable behaviour, lower operational overhead, and to rely more on AWS managed services. If every team picks something different, operations, training, and ownership all get harder. We need a direction that reduces dependencies without blocking team flexibility.",
+  "drivers": [
+    "predictable behaviour",
+    "lower operational overhead",
+    "rely more on AWS managed services",
+    "reduce dependencies",
+    "team flexibility"
+  ]
+}

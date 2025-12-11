@@ -9,7 +9,7 @@ type AdrDataInput = {
   decision: Decision;
 };
 
-export function generateAdrData(input: AdrDataInput): AdrData {
+export function extractAdrData(input: AdrDataInput): AdrData {
   const {
     context,
     options,

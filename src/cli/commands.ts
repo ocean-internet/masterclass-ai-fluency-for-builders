@@ -8,6 +8,7 @@ import { handleContext } from "./command-context";
 import { handleDecision } from "./command-decision";
 import { handleOptions } from "./command-options";
 import { handleRender } from "./command-render";
+import { showHelp } from "./show-help";
 import type { CommandConfig } from "./types";
 
 const GENERATE_COMMAND = "generate-02";
@@ -58,6 +59,14 @@ const commandsBase = {
 
 export const commands = {
   ...commandsBase,
+  help: {
+    description: "Show this help message",
+    usage: "help",
+    handler: async (): Promise<string> => {
+      showHelp();
+      return "";
+    },
+  },
   generate: {
     ...commandsBase[GENERATE_COMMAND],
     description: commandsBase[GENERATE_COMMAND].description.replace(GENERATE_COMMAND, "generate"),

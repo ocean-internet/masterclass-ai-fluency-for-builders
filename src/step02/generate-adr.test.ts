@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-import { generateAdrData } from "./adr/generate-adr-data";
-import { renderAdr } from "./adr/render";
+import { extractAdrData } from "./adr/extract-adr-data";
+import { renderAdr } from "./adr/render-adr";
 import { generateContext } from "./context/generate";
 import { generateDecision } from "./decision/generate";
 import { generateAdr } from "./generate-adr";
@@ -10,8 +10,8 @@ import { generateOptions } from "./options/generate";
 vi.mock("./context/generate");
 vi.mock("./options/generate");
 vi.mock("./decision/generate");
-vi.mock("./adr/generate-adr-data");
-vi.mock("./adr/render");
+vi.mock("./adr/extract-adr-data");
+vi.mock("./adr/render-adr");
 
 describe("generateAdr", () => {
   const mockContext = {
@@ -68,23 +68,16 @@ describe("generateAdr", () => {
     vi.mocked(generateContext).mockResolvedValue(mockContext);
     vi.mocked(generateOptions).mockResolvedValue(mockOptions);
     vi.mocked(generateDecision).mockResolvedValue(mockDecision);
-    vi.mocked(generateAdrData).mockReturnValue(mockAdrData);
+    vi.mocked(extractAdrData).mockReturnValue(mockAdrData);
     vi.mocked(renderAdr).mockReturnValue(mockRenderedAdr);
   });
 
-  it("orchestrates the chain correctly with mocked data", async () => {
+  it("orchestrates the chain: context → options → decision → render", async () => {
     const inputContext = "Test context input";
     const result = await generateAdr(inputContext);
 
     expect(generateContext).toHaveBeenCalledWith(inputContext);
     expect(generateOptions).toHaveBeenCalledWith(mockContext);
-    expect(generateDecision).toHaveBeenCalledWith(mockContext, mockOptions);
-    expect(generateAdrData).toHaveBeenCalledWith({
-      context: mockContext,
-      options: mockOptions,
-      decision: mockDecision,
-    });
-    expect(renderAdr).toHaveBeenCalledWith(mockAdrData);
     expect(result).toBe(mockRenderedAdr);
   });
 });

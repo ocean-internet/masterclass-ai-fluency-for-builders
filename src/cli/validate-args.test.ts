@@ -1,3 +1,4 @@
+import { ShowHelpError } from "@cli/show-help";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { commands } from "./commands";
@@ -11,17 +12,33 @@ describe("validateCommandArgs", () => {
     process.exitCode = undefined;
   });
 
-  it.each((Object.keys(commands) as Array<keyof typeof commands>).map((key) => [key, commands[key]]))(
-    "shows error when %s called without arguments",
-    (_commandName, config) => {
-      const result = validateCommandArgs(config, []);
+  it.each(
+    (Object.entries(commands) as Array<[string, (typeof commands)[keyof typeof commands]]>).filter(([, config]) =>
+      config.usage.includes("<"),
+    ),
+  )("shows error when %s called without arguments", (_commandName, config) => {
+    let thrownError: unknown;
+    try {
+      validateCommandArgs(config, []);
+    } catch (error) {
+      thrownError = error;
+    }
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining("Error: Missing required argument"));
-      expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining(`Usage: ${config.usage}`));
-      expect(process.exitCode).toBe(1);
-      expect(result).toBeNull();
-    },
-  );
+    expect(thrownError).toBe(ShowHelpError);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(expect.stringContaining("Error: Missing required argument"));
+  });
+
+  it.each(
+    (Object.entries(commands) as Array<[string, (typeof commands)[keyof typeof commands]]>).filter(
+      ([, config]) => !config.usage.includes("<"),
+    ),
+  )("allows %s to be called without arguments", (_commandName, config) => {
+    const result = validateCommandArgs(config, []);
+
+    expect(consoleErrorSpy).not.toHaveBeenCalled();
+    expect(process.exitCode).toBeUndefined();
+    expect(result).toBeUndefined();
+  });
 
   it("returns input argument when valid argument provided", () => {
     const config = commands.generate;

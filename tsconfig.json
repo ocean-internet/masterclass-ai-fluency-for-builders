@@ -44,5 +44,5 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.config.*", "**/*.{test,spec}.*"]
+  "exclude": ["node_modules", "**/*.config.*"]
 }

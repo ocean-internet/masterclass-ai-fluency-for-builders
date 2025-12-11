@@ -1,0 +1,47 @@
+[
+  {
+    "uuid": "4bfb0d55-bcb0-4583-b1ba-65170a2c5e32",
+    "title": "Synchronous APIs",
+    "description": "Use synchronous APIs for predictable behaviour and lower operational overhead.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Predictable Behaviour"
+      },
+      {
+        "impact": "Bad",
+        "argument": "Operational Overhead"
+      }
+    ]
+  },
+  {
+    "uuid": "e4ea9884-2527-4b97-86ca-ab519129e7eb",
+    "title": "Pub/Sub Event-Driven Model",
+    "description": "Move to a pub/sub event-driven model to reduce dependencies and increase team flexibility.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Reduced Dependencies"
+      },
+      {
+        "impact": "Bad",
+        "argument": "Complexity of Asynchronous Patterns"
+      }
+    ]
+  },
+  {
+    "uuid": "024bbb25-ddff-4966-ad50-f50491975a48",
+    "title": "Team Choice",
+    "description": "Let each team choose their own approach, allowing for flexibility but increasing operational overhead and reducing predictable behaviour.",
+    "arguments": [
+      {
+        "impact": "Good",
+        "argument": "Team Flexibility"
+      },
+      {
+        "impact": "Bad",
+        "argument": "Increased Operational Overhead"
+      }
+    ]
+  }
+]

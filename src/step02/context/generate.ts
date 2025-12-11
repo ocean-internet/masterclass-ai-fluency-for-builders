@@ -1,4 +1,5 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { RunnableLambda } from "@langchain/core/runnables";
 import { ChatOllama } from "@langchain/ollama";
 import { loadPromptTemplate } from "@shared/load-prompt-template";
 
@@ -23,7 +24,7 @@ export function generateContext(context: string): Promise<Context> {
     ["human", promptTemplate],
   ])
     .pipe(model.withStructuredOutput(contextSchema))
-    .pipe((result) => contextSchema.parse(result));
+    .pipe(RunnableLambda.from((result) => contextSchema.parse(result)));
 
   return chain.invoke({ context });
 }

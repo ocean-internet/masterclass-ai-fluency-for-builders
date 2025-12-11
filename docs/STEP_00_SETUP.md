@@ -36,6 +36,7 @@ By the end of this step, you will be able to:
 - Inputs/outputs stay on your machine
 
 **Model flexibility:** While we use Ollama with local models in this course, the LangChain + Ollama setup supports other models too. You can:
+
 - Use more powerful local models (larger Ollama models, or other local runtimes)
 - Switch to cloud-based models (OpenAI, Anthropic, AWS Bedrock, etc.) via LangChain's model integrations
 - Swap `ChatOllama` for other LangChain model classes with minimal code changes - the same patterns (prompts, chains, structured output) work across providers

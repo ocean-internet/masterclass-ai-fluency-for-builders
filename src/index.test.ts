@@ -1,14 +1,15 @@
 import { executeSaveCommand } from "@cli/execute-save-command";
+import { extractCommandArgs } from "@cli/extract-args";
 import { handleError } from "@cli/handle-error";
-import { showHelp } from "@cli/show-help";
-import { validateCommandArgs } from "@cli/validate-args";
+import { showHelp, ShowHelpError } from "@cli/show-help";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { main } from "./index";
 
 vi.mock("./cli/show-help");
-vi.mock("./cli/validate-args");
+vi.mock("./cli/extract-args");
 vi.mock("./cli/execute-save-command");
+vi.mock("./cli/execute-print-command");
 vi.mock("./cli/handle-error");
 
 describe("main", () => {
@@ -26,7 +27,7 @@ describe("main", () => {
     originalExit = process.exit;
     process.exit = exitSpy as never;
     vi.mocked(showHelp).mockReturnValue(undefined);
-    vi.mocked(validateCommandArgs).mockReturnValue("test-file.md");
+    vi.mocked(extractCommandArgs).mockReturnValue("test-file.md");
     vi.mocked(executeSaveCommand).mockResolvedValue(undefined);
     vi.mocked(handleError).mockReturnValue(undefined);
   });
@@ -58,11 +59,13 @@ describe("main", () => {
 
   it("calls showHelp when args are invalid", async () => {
     process.argv = ["node", "index.ts", "generate"];
-    vi.mocked(validateCommandArgs).mockReturnValue(null);
+    vi.mocked(extractCommandArgs).mockImplementation(() => {
+      throw new ShowHelpError();
+    });
 
     await main();
 
-    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(extractCommandArgs).toHaveBeenCalled();
     expect(showHelp).toHaveBeenCalled();
     expect(exitSpy).toHaveBeenCalledWith(0);
   });
@@ -72,7 +75,7 @@ describe("main", () => {
 
     await main();
 
-    expect(validateCommandArgs).toHaveBeenCalled();
+    expect(extractCommandArgs).toHaveBeenCalled();
     expect(executeSaveCommand).toHaveBeenCalled();
     expect(exitSpy).toHaveBeenCalledWith(0);
   });

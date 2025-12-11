@@ -1,0 +1,23 @@
+## Decision Outcome
+
+**Chosen option**: {{chosenOption}}
+
+{{justification}}
+
+### Consequences
+
+{{#if consequences.good}}
+{{#each consequences.good}}
+- Good: {{this}}
+{{/each}}
+{{/if}}
+{{#if consequences.neutral}}
+{{#each consequences.neutral}}
+- Neutral: {{this}}
+{{/each}}
+{{/if}}
+{{#if consequences.bad}}
+{{#each consequences.bad}}
+- Bad: {{this}}
+{{/each}}
+{{/if}}

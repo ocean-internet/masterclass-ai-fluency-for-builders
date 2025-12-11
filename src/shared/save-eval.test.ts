@@ -9,7 +9,7 @@ vi.mock("node:fs", () => ({
 
 vi.mock("../env", () => ({
   env: {
-    ADR_OUTPUT_DIR: "/test/output",
+    ADR_DRAFTS_DIR: "/test/output",
   },
 }));
 

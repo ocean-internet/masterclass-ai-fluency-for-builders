@@ -1,0 +1,22 @@
+{{#each this}}
+### {{this.title}}
+
+{{this.description}}
+
+{{#if this.arguments.good}}
+{{#each this.arguments.good}}
+- Good: {{this}}
+{{/each}}
+{{/if}}
+{{#if this.arguments.neutral}}
+{{#each this.arguments.neutral}}
+- Neutral: {{this}}
+{{/each}}
+{{/if}}
+{{#if this.arguments.bad}}
+{{#each this.arguments.bad}}
+- Bad: {{this}}
+{{/each}}
+{{/if}}
+
+{{/each}}

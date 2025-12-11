@@ -28,7 +28,7 @@ By the end of this step, you will be able to:
 
 **Key ideas**
 
-- Retrieval adds context; evaluation stays the same (clarity, justified, comprehensive, actionable).
+- Retrieval adds context; evaluation stays the same (clear, justified, comprehensive, actionable).
 - Keep it simple: vector store persisted to disk, top-k search, no reranking.
 - Follow-along git tutorial; confidence builder, not a test.
 
@@ -136,7 +136,7 @@ yarn adr generate-03 src/__fixtures__/example-context.md
 yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 ```
 
-**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores: clarity, justified, comprehensive, actionable.
+**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores: clear, justified, comprehensive, actionable.
 
 ### 4. Compare against Steps 01 - 02
 
@@ -147,7 +147,7 @@ yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 
 - ⬜ PDFs present in `docs/source-pdfs/`
 - ⬜ ADR generated via `yarn adr generate-03 ...` (file exists in `docs/decisions/drafts/`)
-- ⬜ Evaluation generated via `yarn adr evaluate ...` with same rubric (clarity, justified, comprehensive, actionable)
+- ⬜ Evaluation generated via `yarn adr evaluate ...` with same rubric (clear, justified, comprehensive, actionable)
 - ⬜ Retrieved context is visible in the options prompt (check logs or prompt composition if needed)
 - ⬜ I can explain how retrieval changed the options compared to Step 02
 

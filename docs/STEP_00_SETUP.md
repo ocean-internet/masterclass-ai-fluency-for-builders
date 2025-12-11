@@ -59,7 +59,7 @@ See [LangChain model integrations](https://docs.langchain.com/oss/javascript/int
 > [!NOTE]
 > This step is all about setup - making sure your environment is ready to run ADR generation locally. Don't worry if you've never used Ollama or local LLMs before: the checks here are simple, and the tests will confirm everything is wired up correctly.
 
-**Note:** We'll use three models: a main language model (`OLLAMA_MODEL`) for text generation, a judge model(`OLLAMA_MODEL_JUDGE`) for AI-as-judge, and an embedding model (`OLLAMA_MODEL_EMBED`) for vector operations. All are required.
+**Note:** We'll use three models: a main language model (`OLLAMA_MODEL`) for text generation, a judge model (`OLLAMA_MODEL_JUDGE`) for AI-as-judge, and an embedding model (`OLLAMA_MODEL_EMBED`) for vector operations. All are required.
 
 ### 1. Clone the repository
 

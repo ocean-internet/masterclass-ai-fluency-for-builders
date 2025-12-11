@@ -36,7 +36,7 @@ By the end of this step, you will be able to:
 - **Hybrid approach**: LLM sees markdown (natural), we validate JSON (structured)
 - **Trade-off**: More complexity, but often better quality
 
-**Read more:** [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for chain composition (chains are deprecated in v1.0 in favor of Runnables), [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
+**Read more:** [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for chain composition (chains are deprecated in v1.0 in favour of Runnables), [Using generative AI as an architect buddy for creating architecture decision records](https://handsonarchitects.com/blog/2025/using-generative-ai-as-architect-buddy-for-adrs/)
 
 ## 📚 LangChain Concepts
 
@@ -144,14 +144,14 @@ yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 
 Replace `0000-{{ADR TITLE}}.md` with the actual filename from step 1.
 
-**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores (clarity, justified, comprehensive, actionable) and suggestions.
+**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores (clear, justified, comprehensive, actionable) and suggestions.
 
 ### 4. Compare chain vs single-prompt
 
 Open both ADR files (Step 01 single-prompt and Step 02 chain) and their evaluations:
 
 - Did the chain approach produce better scores?
-- Which criteria improved most? (clarity, justified, comprehensive, actionable)
+- Which criteria improved most? (clear, justified, comprehensive, actionable)
 - What's still missing or wrong?
 - How does the full template (Decision Drivers, Pros/Cons) compare to the minimal template?
 

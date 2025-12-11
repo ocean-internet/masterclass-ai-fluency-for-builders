@@ -40,6 +40,7 @@ No prior AI experience required - just curiosity, a decent dev machine, and a wo
 - **Step 01: Single Prompt** (`step-01-single-prompt`) - Generate an ADR with a single prompt, then evaluate it ([STEP_01_SINGLE_PROMPT.md](docs/STEP_01_SINGLE_PROMPT.md))
 - **Step 02: Sequential Chain** (`step-02-sequential-chain`) - Generate ADRs using sequential chains ([STEP_02_SEQUENTIAL_CHAIN.md](docs/STEP_02_SEQUENTIAL_CHAIN.md))
 - **Step 03: Retrieval-Augmented Generation** (`step-03-retrieval-augmented-generation`) - Generate ADRs with retrieval-augmented options ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](docs/STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+- **What Next** - Continue your AI fluency journey with guidance on taking each approach further ([STEP_04_WHAT_NEXT.md](docs/STEP_04_WHAT_NEXT.md))
 
 ## Getting Started
 

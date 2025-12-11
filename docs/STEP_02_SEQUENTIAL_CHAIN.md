@@ -2,7 +2,7 @@
 
 ## ⚡ TL;DR
 
-Break ADR generation into 4 stages (Context+Drivers → Options+ProsCons → Decision → Final), each producing validated JSON that accumulates into working memory. Each stage renders its output to markdown for the next stage's input. Final stage renders complete ADR template. Use the same evaluation from Step 01 to compare chain vs one-shot scores.
+Break ADR generation into 4 stages (Context+Drivers → Options+ProsCons → Decision → Final), each producing validated JSON that accumulates into working memory. Each stage renders its output to markdown for the next stage's input. Final stage renders complete ADR template. Use the same evaluation from Step 01 to compare chain vs single-prompt scores.
 
 > **Getting Started**
 >
@@ -21,7 +21,7 @@ By the end of this step, you will be able to:
 - Accumulate structured data in working memory across chain stages
 - Use markdown partials to provide human-readable context to LLM stages
 - Understand the trade-off: more complexity (chains) but often better quality
-- Compare chain vs one-shot approaches using the same evaluation criteria
+- Compare chain vs single-prompt approaches using the same evaluation criteria
 
 ## 🧠 Background
 
@@ -101,43 +101,40 @@ Each stage can be run standalone for testing or debugging:
 **Stage 1: Context + Decision Drivers**
 
 ```bash
-yarn adr context src/__fixtures__/example-context.md > context-output.md
+yarn adr context src/__fixtures__/example-context.md
 ```
 
 **Stage 2: Options + Pros/Cons** (requires Stage 1 JSON output)
 
 ```bash
-# First, generate context JSON, then:
-yarn adr context src/__fixtures__/example-context.md | jq . > context.json
-yarn adr options context.json > options.json
+yarn adr options src/__fixtures__/example-context.json
 ```
 
 **Stage 3: Decision** (requires Context and Options JSON)
 
 ```bash
-yarn adr decision context.json options.json > decision.json
+yarn adr decision  src/__fixtures__/example-context.json src/__fixtures__/example-options.json
 ```
 
 **Stage 4: Render Final ADR** (requires AdrData JSON)
 
 ```bash
-# Combine context, options, and decision into AdrData format, then:
-yarn adr render adr-data.json > final-adr.md
+yarn adr render src/__fixtures__/example-adr-data.json
 ```
 
 ### 3. Evaluate the ADR (same as Step 01)
 
 ```bash
-yarn adr evaluate docs/decisions/drafts/NNNN-*.md
+yyarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 ```
 
-Replace `NNNN-*.md` with the actual filename from step 1.
+Replace `0000-{{ADR TITLE}}.md` with the actual filename from step 1.
 
-**Expected:** Evaluation saved to `docs/decisions/drafts/NNNN-*.eval.md` with scores (clarity, justified, comprehensive, actionable) and suggestions.
+**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores (clarity, justified, comprehensive, actionable) and suggestions.
 
-### 4. Compare chain vs one-shot
+### 4. Compare chain vs single-prompt
 
-Open both ADR files (Step 01 one-shot and Step 02 chain) and their evaluations:
+Open both ADR files (Step 01 single-prompt and Step 02 chain) and their evaluations:
 
 - Did the chain approach produce better scores?
 - Which criteria improved most? (clarity, justified, comprehensive, actionable)
@@ -161,7 +158,7 @@ The evaluation feedback guides improvements. Since each stage has its own prompt
 - ⬜ Working memory accumulates correctly across stages
 - ⬜ Final ADR includes all sections: Context, Decision Drivers, Options, Pros/Cons, Decision, Consequences
 - ⬜ Evaluation generated successfully (same schema as Step 01)
-- ⬜ I can compare chain vs one-shot scores
+- ⬜ I can compare chain vs single-prompt scores
 - ⬜ I understand that intermediate validation catches errors early
 - ⬜ I can explain the trade-off: more complexity (chains) but often better quality
 

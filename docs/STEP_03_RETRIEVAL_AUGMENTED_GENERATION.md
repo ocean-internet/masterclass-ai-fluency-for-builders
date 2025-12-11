@@ -32,6 +32,17 @@ By the end of this step, you will be able to:
 - Keep it simple: vector store persisted to disk, top-k search, no reranking.
 - Follow-along git tutorial; confidence builder, not a test.
 
+## 📚 LangChain Concepts
+
+This step introduces retrieval-augmented generation (RAG):
+
+- **[RAG](https://docs.langchain.com/oss/javascript/langchain/rag)** - RAG concepts and retrieval patterns
+- **[Vector Stores](https://docs.langchain.com/oss/javascript/integrations/vectorstores/faiss/)** - `FaissStore` for local vector storage and similarity search
+- **[Document Loaders](https://docs.langchain.com/oss/javascript/integrations/document_loaders/file_loaders/pdf)** - `PDFLoader` for loading PDF documents
+- **[Text Splitters](https://docs.langchain.com/oss/javascript/integrations/splitters/recursive_text_splitter)** - `RecursiveCharacterTextSplitter` for chunking documents
+- **[Ollama Embeddings](https://docs.langchain.com/oss/javascript/integrations/text_embedding/ollama/)** - `OllamaEmbeddings` for generating embeddings
+- **[Runnables](https://reference.langchain.com/javascript/modules/_langchain_core.runnables.html)** - Chain composition (introduced in Step 02; see [RunnablePassthrough](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.RunnablePassthrough.html) and [RunnableLambda](https://reference.langchain.com/javascript/classes/_langchain_core.runnables.RunnableLambda.html))
+
 ## 📊 Workflow Diagram
 
 ```mermaid
@@ -111,6 +122,9 @@ yarn adr generate-03 src/__fixtures__/example-context.md
 
 **Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` using RAG-backed options. Filename is printed on success.
 
+> [!NOTE]
+> **About CLI commands:** The `yarn adr generate-03` and `yarn adr evaluate` commands are debugging/scaffolding tools provided for convenience. The actual LLM logic lives in the step functions (`generateAdr`, `generateOptions`, `retrieveContext`, etc. in `src/step03/`) which can be called programmatically from your own code. These CLI commands wrap the functions to make testing and iteration easier.
+
 **Implementation notes**
 
 - Vector store is lazy-initialised and persisted to disk. First run builds it; subsequent runs load it from `.vectorstore/` directory (faster). Expect a slower first call while the store is built.
@@ -152,6 +166,10 @@ yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 > [!IMPORTANT]
 > **Congratulations!** You've completed all the steps. Use what you've learned to build your own AI-augmented tools.
 
-- Iterate on prompt augmentation: adjust how retrieved snippets are formatted or limited.
-- Try different `k` values in retrieval for quality vs. conciseness.
-- Apply the same pattern to your own PDFs or knowledge base.
+For next steps specific to RAG, see [Taking RAG Further](STEP_04_WHAT_NEXT.md#taking-rag-further) in What Next.
+
+Continue to [What Next: Continuing Your AI Fluency Journey](STEP_04_WHAT_NEXT.md) for comprehensive guidance on taking your skills further, including:
+- Iterating on prompt augmentation: adjust how retrieved snippets are formatted or limited
+- Trying different `k` values in retrieval for quality vs. conciseness
+- Applying the same pattern to your own PDFs or knowledge base
+- Productionizing your AI-augmented tools

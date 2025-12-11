@@ -25,12 +25,12 @@ export function generateOptions(data: Context): Promise<Option[]> {
 
   const context = jsonToMarkdown<Context>("context.partial.hbs", data);
 
-  const chain = ChatPromptTemplate.fromMessages([
+  const runnable = ChatPromptTemplate.fromMessages([
     ["system", systemPrompt],
     ["human", humanPrompt],
   ])
     .pipe(model.withStructuredOutput(llmOptionsSchema))
     .pipe(({ options }) => z.array(optionSchema).parse(options));
 
-  return chain.invoke({ context });
+  return runnable.invoke({ context });
 }

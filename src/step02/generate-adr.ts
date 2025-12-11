@@ -31,7 +31,7 @@ export async function generateAdr(context: string): Promise<string> {
   progress.info("Generating ADR:");
   progress.indent = 2;
   try {
-    const chain = RunnablePassthrough.assign({})
+    const runnable = RunnablePassthrough.assign({})
       .assign({
         context: async () => {
           progress.start("Generating context...");
@@ -73,7 +73,7 @@ export async function generateAdr(context: string): Promise<string> {
           return result;
         }),
       );
-    return await chain.invoke({ context });
+    return await runnable.invoke({ context });
   } catch (error) {
     progress.fail(`Failed to generate ADR: ${error instanceof Error ? error.message : String(error)}`);
     throw error;

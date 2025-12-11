@@ -19,12 +19,12 @@ export function generateContext(context: string): Promise<Context> {
   const systemPrompt = loadPromptTemplate(SYSTEM_PROMPT);
   const promptTemplate = loadPromptTemplate(ADR_PROMPT);
 
-  const chain = ChatPromptTemplate.fromMessages([
+  const runnable = ChatPromptTemplate.fromMessages([
     ["system", systemPrompt],
     ["human", promptTemplate],
   ])
     .pipe(model.withStructuredOutput(contextSchema))
     .pipe(RunnableLambda.from((result) => contextSchema.parse(result)));
 
-  return chain.invoke({ context });
+  return runnable.invoke({ context });
 }

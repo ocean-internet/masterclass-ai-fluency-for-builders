@@ -72,7 +72,7 @@ describe("generateAdr", () => {
     vi.mocked(renderAdr).mockReturnValue(mockRenderedAdr);
   });
 
-  it("orchestrates the chain: context → options → decision → render", async () => {
+  it("orchestrates the runnable: context → options → decision → render", async () => {
     const inputContext = "Test context input";
     const result = await generateAdr(inputContext);
 

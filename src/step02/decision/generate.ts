@@ -36,12 +36,12 @@ export function generateDecision(context: Context, options: Option[]): Promise<D
     options: transformedOptions,
   });
 
-  const chain = ChatPromptTemplate.fromMessages([
+  const runnable = ChatPromptTemplate.fromMessages([
     ["system", systemPrompt],
     ["human", humanPrompt],
   ])
     .pipe(model.withStructuredOutput(decisionSchema))
     .pipe((result) => decisionSchema.parse(result));
 
-  return chain.invoke({ context: decisionContext });
+  return runnable.invoke({ context: decisionContext });
 }

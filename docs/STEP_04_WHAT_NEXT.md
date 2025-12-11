@@ -2,7 +2,7 @@
 
 You've built a working AI tool. You're not an expert, but you can do it - and you can take it further. The Generate → Evaluate → Iterate pattern you learned scales from Single Prompt → Sequential Chain → RAG. Keep using it.
 
-## Taking Single Prompt Further {#taking-single-prompt-further}
+## Taking Single Prompt Further
 
 Continue improving your single-prompt approach with these next steps:
 
@@ -14,9 +14,7 @@ Keep using the Generate → Evaluate → Iterate pattern. Use evaluation scores 
 
 **Reference**: Step 01 code in `src/step01/` and documentation in `docs/STEP_01_SINGLE_PROMPT.md`.
 
-**Learn more**: [learn.deeplearning.ai](https://learn.deeplearning.ai/) for prompt engineering courses, [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for advanced prompt patterns.
-
-## Taking Sequential Chain Further {#taking-sequential-chain-further}
+## Taking Sequential Chain Further
 
 Build multi-step chains to handle complex tasks:
 
@@ -26,11 +24,9 @@ Build multi-step chains to handle complex tasks:
 
 Use the same evaluation pattern from Step 01. Evaluate both the final output and intermediate stages to understand where quality degrades.
 
-**Reference**: Step 02 code in `src/step02/` and documentation in `docs/STEP_02_SEQUENTIAL_CHAIN.md`, or [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for chain composition (chains are deprecated in v1.0 in favour of Runnables).
+**Reference**: Step 02 code in `src/step02/` and documentation in `docs/STEP_02_SEQUENTIAL_CHAIN.md`.
 
-**Learn more**: [learn.deeplearning.ai](https://learn.deeplearning.ai/) for advanced chain patterns, [LangChain documentation](https://docs.langchain.com/oss/javascript/langchain/overview) for chain composition.
-
-## Taking RAG Further {#taking-rag-further}
+## Taking RAG Further
 
 Add retrieval to your prompts for context-aware generation:
 
@@ -41,8 +37,6 @@ Add retrieval to your prompts for context-aware generation:
 Evaluate both retrieval quality and final output. Check if retrieved documents are actually used in your generated content.
 
 **Reference**: Step 03 code in `src/step03/` and documentation in `docs/STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md`, or [LangChain RAG documentation](https://docs.langchain.com/oss/javascript/langchain/rag).
-
-**Learn more**: [learn.deeplearning.ai](https://learn.deeplearning.ai/) for RAG courses, [LangChain RAG documentation](https://docs.langchain.com/oss/javascript/langchain/rag) for retrieval strategies.
 
 ## Productionising
 
@@ -55,8 +49,6 @@ When moving to production, focus on these essentials:
 Continue evaluation in production. Monitor evaluation scores over time and use them to track quality.
 
 **Reference**: [LangChain deployment guide](https://docs.langchain.com/oss/javascript/langchain/deploy) and [observability guide](https://docs.langchain.com/oss/javascript/langchain/observability), [LangSmith](https://smith.langchain.com/) for production tracing.
-
-**Learn more**: [learn.deeplearning.ai](https://learn.deeplearning.ai/) for production courses, cloud platform documentation.
 
 ## Further Reading/Learning
 

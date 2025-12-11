@@ -36,7 +36,7 @@ By the end of this step, you will be able to:
 
 **Model flexibility:** While we use [ChatOllama](https://docs.langchain.com/oss/javascript/integrations/chat/ollama) with [local models](https://docs.langchain.com/oss/javascript/langchain/models#local-models), you can swap it for other LangChain model integrations (OpenAI, Anthropic, AWS Bedrock, etc.) with minimal code changes. The same patterns (prompts, structured output, evaluation) work across different model providers. See [LangChain model integrations](https://docs.langchain.com/oss/javascript/integrations/providers/overview) for options.
 
-**Read more:** [MADR template](https://adr.github.io/madr/), [Architecture Decision Records (Martin Fowler)](https://martinfowler.com/articles/architecture-decision-records.html)
+**Read more:** [MADR template](https://adr.github.io/madr/), [Architecture Decision Records (Martin Fowler)](https://martinfowler.com/articles/scaling-architecture-conversationally.html#adr)
 
 ## 📚 LangChain Concepts
 

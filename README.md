@@ -2,7 +2,7 @@
 
 ## TL;DR
 
-Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to generate and evaluate Architecture Decision Records. Learn the Generate → Evaluate → Iterate pattern that scales to any AI workflow.
+> Build a working AI-augmented tool using local LLMs (Ollama + LangChain) to generate and evaluate Architecture Decision Records. Learn the Generate → Evaluate → Iterate pattern that scales to any AI workflow.
 
 ## Inspiration
 

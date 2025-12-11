@@ -1,16 +1,19 @@
 # Step 00: Setup
 
-**Branch**: `main`  
-**Goal**: provision and test a local LLM runtime in a reproducible way.
-
----
-
 ## ⚡ TL;DR
 
 Install Ollama, pull a small model, install Node/Yarn deps, set `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` in `.env`, and run a smoke test that
 verifies: (1) the daemon is reachable and (2) the required model is installed.
 
----
+## 🚀 Quickstart
+
+1. [Clone the repository](#1-clone-the-repository)
+2. [Install Ollama](#2-install-ollama)
+3. [Ensure `ollama` is running](#3-ensure-the-daemon-is-running)
+4. [Pull local models](#4-pull-local-models)
+5. [Set up Node.js, Yarn, and dependencies](#5-set-up-nodejs-yarn-and-dependencies)
+6. [Configure environment](#6-configure-environment)
+7. [Run the smoke test](#7-run-the-smoke-test)
 
 ## 🎯 Learning Outcomes
 
@@ -20,12 +23,11 @@ By the end of this step, you will be able to:
 - Execute a **smoke test** (`vitest` + `ollama-js`) that verifies connectivity and that your chosen model is installed.
 - Explain why an _offline-first design_ is valuable (reproducibility, latency control, data privacy).
 
----
-
 ## 🧠 Background
 
-**Why this matters:** A reliable local runtime removes _"works on my machine"_ variability and avoids cloud dependencies
-during learning.
+> [!IMPORTANT]
+> **Why this matters:** A reliable local runtime removes _"works on my machine"_ variability and avoids cloud dependencies
+> during learning.
 
 **Key ideas**
 
@@ -33,29 +35,43 @@ during learning.
 - Lower latency and no API bills
 - Inputs/outputs stay on your machine
 
-**Read more:** see Further Reading in [README.md](../README.md).
-
----
+**Read more:** see Further Reading in [README.md](../README.md#further-reading).
 
 ## 🔑 Prerequisites
+
+> [!TIP]
+> **Before starting:** Make sure you have all prerequisites ready to avoid interruptions during setup.
 
 - **Operating system:** macOS, Linux, or Windows via **WSL2**
 - **Tools:** Git, Node LTS, Yarn (via Corepack or global install)
 - **Connectivity:** Internet access to download Ollama + model
 - **Disk/RAM:** enough for a small instruct model (e.g., `llama3.1:8b`)
 
----
-
 ## 🧭 Walkthrough
 
-This step is all about setup - making sure your environment is ready to run ADR generation locally.
-
-Don't worry if you've never used Ollama or local LLMs before: the checks here are simple, and the tests will confirm
-everything is wired up correctly.
+> [!NOTE]
+> This step is all about setup - making sure your environment is ready to run ADR generation locally. Don't worry if you've never used Ollama or local LLMs before: the checks here are simple, and the tests will confirm everything is wired up correctly.
 
 **Note:** We'll use three models: a main language model (`OLLAMA_MODEL`) for text generation, a judge model(`OLLAMA_MODEL_JUDGE`) for AI-as-judge, and an embedding model (`OLLAMA_MODEL_EMBED`) for vector operations. All are required.
 
-### 1. Install Ollama
+### 1. Clone the repository
+
+Clone the project and navigate to the directory:
+
+```bash
+git clone https://github.com/ocean-internet/masterclass-ai-fluency-for-builders.git
+cd masterclass-ai-fluency-for-builders
+```
+
+Verify you're on the `main` branch:
+
+```bash
+git checkout main
+```
+
+**Expected:** You're in the project directory and on the `main` branch.
+
+### 2. Install Ollama
 
 #### macOS
 
@@ -80,9 +96,7 @@ systemctl --user start ollama
 
 **Expected:** `ollama` is on your PATH.
 
----
-
-### 2. Ensure the daemon is running
+### 3. Ensure the daemon is running
 
 Check if Ollama is running:
 
@@ -94,9 +108,7 @@ curl -f http://localhost:11434/api/version
 
 > **Troubleshooting:** If you get a "connection refused" error, see [Troubleshooting](#%EF%B8%8F-troubleshooting) below.
 
----
-
-### 3. Pull compact models
+### 4. Pull local models
 
 ```bash
 ollama pull llama3.1:8b
@@ -104,13 +116,12 @@ ollama pull qwen2.5:7b
 ollama pull nomic-embed-text
 ```
 
-**Expected:** download completes; `ollama list` shows both `llama3.1:8b` and `nomic-embed-text`.
+**Expected:** download completes; `ollama list` shows `llama3.1:8b`, `qwen2.5:7b`, and `nomic-embed-text`.
 
----
+### 5. Set up Node.js, Yarn, and dependencies
 
-### 4. Set up Node.js, Yarn, and dependencies
-
-Using **nvm** + **Corepack** (recommended):
+> [!TIP]
+> **Recommended approach:** Using **nvm** + **Corepack** ensures you're using the correct Node version and Yarn version specified in the project.
 
 ```bash
 nvm install && nvm use   # installs/uses the .nvmrc or latest LTS
@@ -122,9 +133,7 @@ yarn install             # installs package.json dependencies
 
 **Expected:** dependencies install successfully.
 
----
-
-### 5. Configure environment
+### 6. Configure environment
 
 Copy the example and set your default model:
 
@@ -146,12 +155,10 @@ OLLAMA_MODEL_EMBED=nomic-embed-text
 
 **Expected:** `.env` exists and includes `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices).
 
----
-
-### 6. Run the smoke test
+### 7. Run the smoke test
 
 ```bash
-yarn test
+yarn test src/env.smoke.test.ts
 ```
 
 **Expected:**
@@ -162,20 +169,19 @@ yarn test
 
 > Reference test file: [env.smoke.test.ts](../src/env.smoke.test.ts)
 
----
-
 ## ✅ Checklist
 
 - ⬜ Ollama installed and running (`curl -f http://localhost:11434/api/version` returns version JSON)
 - ⬜ Models pulled (`ollama list` shows both `llama3.1:8b` and `nomic-embed-text`, or your chosen models)
 - ⬜ `yarn install` completes without error
-- ⬜ `.env` contains both `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
+- ⬜ `.env` contains `OLLAMA_MODEL=llama3.1:8b`, `OLLAMA_MODEL_JUDGE=qwen2.5:7b`, and `OLLAMA_MODEL_EMBED=nomic-embed-text` (or your choices)
 - ⬜ `yarn test` passes (all 3 tests: connectivity, model presence, and llm generation)
 - ⬜ I can explain why _offline-first_ matters
 
----
-
 ## ➡️ Next
+
+> [!IMPORTANT]
+> **Before moving on:** Complete the checklist above to ensure your environment is fully configured and tested.
 
 With your environment ready, you're set to generate your very first ADR.
 
@@ -185,9 +191,10 @@ git checkout step-01-single-prompt
 
 Continue to **Step 01 - Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
 
----
-
 ## 🛠️ Troubleshooting
+
+> [!CAUTION]
+> **If you encounter issues:** Check the troubleshooting section below before asking for help. Most setup issues are resolved by following these steps.
 
 ### Fix "Connection Refused" Error
 

@@ -90,7 +90,7 @@ graph TD
 yarn adr generate src/__fixtures__/example-context.md
 ```
 
-**Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` with full template structure (Context, Decision Drivers, Options, Pros/Cons, Decision, Consequences). The command prints the filename on success.
+**Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` with full template structure (Context, Decision Drivers, Options, Pros/Cons, Decision, Consequences). The command prints the filename on success.
 
 Open the generated file and review it. Compare it to the Step 01 output. What's different? What's better?
 

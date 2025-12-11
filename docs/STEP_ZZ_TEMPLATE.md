@@ -94,7 +94,7 @@ By the end of this step, you will be able to:
 
 ## ✅ Checklist
 
-- ⬜ {{Concrete state #1 with verification (e.g., `File exists: docs/decisions/NNNN-*.md` or `Command succeeds: {{command}}`)}}
+- ⬜ {{Concrete state #1 with verification (e.g., `File exists: docs/decisions/0000-{{ADR TITLE}}.md` or `Command succeeds: {{command}}`)}}
 - ⬜ {{Concrete state #2 with verification (e.g., `Prettier + markdownlint pass` or `Test output shows: {{success signal}}`)}}
 - ⬜ {{Quality gate with verification (e.g., `Schema valid; chosenOption ∈ options` or `yarn test` passes all checks)}}
 - ⬜ {{ Reflection: one sentence about the key lesson - e.g. I can explain why offline-first matters}}

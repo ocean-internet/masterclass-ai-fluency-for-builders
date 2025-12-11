@@ -109,7 +109,7 @@ graph TD
 yarn adr generate-03 src/__fixtures__/example-context.md
 ```
 
-**Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` using RAG-backed options. Filename is printed on success.
+**Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` using RAG-backed options. Filename is printed on success.
 
 **Implementation notes**
 
@@ -119,10 +119,10 @@ yarn adr generate-03 src/__fixtures__/example-context.md
 ### 3. Evaluate with the same rubric
 
 ```bash
-yarn adr evaluate docs/decisions/drafts/NNNN-*.md
+yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 ```
 
-**Expected:** Evaluation saved to `docs/decisions/drafts/NNNN-*.eval.md` with scores: clarity, justified, comprehensive, actionable.
+**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores: clarity, justified, comprehensive, actionable.
 
 ### 4. Compare against Steps 01 - 02
 

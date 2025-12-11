@@ -81,19 +81,19 @@ graph TD
 yarn adr generate src/__fixtures__/example-context.md
 ```
 
-**Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` with valid structure. The command prints the filename on success.
+**Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` with valid structure. The command prints the filename on success.
 
 Open the generated file and review it. What looks good? What's missing or wrong?
 
 ### 2. Evaluate the ADR
 
 ```bash
-yarn adr evaluate docs/decisions/drafts/NNNN-*.md
+yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 ```
 
-Replace `NNNN-*.md` with the actual filename from step 1.
+Replace `0000-{{ADR TITLE}}.md` with the actual filename from step 1.
 
-**Expected:** Evaluation saved to `docs/decisions/drafts/NNNN-*.eval.md` with scores (clear, justified, comprehensive, actionable, average) and suggestions.
+**Expected:** Evaluation saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.eval.md` with scores (clear, justified, comprehensive, actionable, average) and suggestions.
 
 ### 3. Review and reflect
 

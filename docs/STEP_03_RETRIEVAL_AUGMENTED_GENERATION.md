@@ -1,15 +1,17 @@
 # Step 03: Retrieval-Augmented Generation
 
-**Branch**: `step-03-retrieval-augmented-generation`  
-**Goal**: Generate ADR options using retrieval-augmented context from provided AWS PDFs, then complete the chain with existing Step 02 decision and render stages. Uses the same evaluation schema as Steps 01 - 02.
-
----
-
 ## ⚡ TL;DR
 
-Load PDFs into a vector store (persisted to disk), retrieve the most relevant chunks for your decision context, and feed them into options generation. Run the full chain: `context-02 → options-03 → decision-02 → render`, then evaluate with the same rubric as Steps 01 - 02.
+Load PDFs into a vector store (persisted to disk), retrieve the most relevant chunks for your decision context, and feed them into options generation. Run the full chain: `context → options-03 → decision → render`, then evaluate with the same rubric as Steps 01 - 02.
 
----
+> **Getting Started**
+>
+> - Ensure you've completed Step 00 - Setup ([STEP_00_SETUP.md](./STEP_00_SETUP.md))
+> - Checkout the branch: `git checkout step-03-retrieval-augmented-generation`
+> - Run `yarn install` to ensure dependencies are up to date
+> - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
+> - Verify `.env` is configured with `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED`
+> - Ensure PDFs are in `docs/source-pdfs/` directory
 
 ## 🎯 Learning Outcomes
 
@@ -19,18 +21,16 @@ By the end of this step, you will be able to:
 - Augment prompts with retrieved context while keeping structured outputs validated by Zod.
 - Run a retrieval-augmented chain that reuses existing evaluation to compare quality across steps.
 
----
-
 ## 🧠 Background
 
-**Why this matters:** Retrieval grounds the LLM in a real context. You keep the familiar Generate → Evaluate → Iterate loop, but with better inputs.  
+> [!IMPORTANT]
+> **Why this matters:** Retrieval grounds the LLM in a real context. You keep the familiar Generate → Evaluate → Iterate loop, but with better inputs.
+
 **Key ideas**
 
 - Retrieval adds context; evaluation stays the same (clarity, justified, comprehensive, actionable).
 - Keep it simple: vector store persisted to disk, top-k search, no reranking.
 - Follow-along git tutorial; confidence builder, not a test.
-
----
 
 ## 📊 Workflow Diagram
 
@@ -76,9 +76,10 @@ graph TD
     M --> E
 ```
 
----
-
 ## 🔑 Prerequisites
+
+> [!TIP]
+> **Before starting:** Make sure you have downloaded the required PDFs and placed them in the correct directory. The vector store will be built automatically on first run.
 
 - PDFs placed at `docs/source-pdfs/` directory. Download the following PDFs and place them in this directory:
   - [Cloud design patterns, architectures, and implementations](https://docs.aws.amazon.com/pdfs/prescriptive-guidance/latest/cloud-design-patterns/cloud-design-patterns.pdf)
@@ -92,11 +93,11 @@ graph TD
   - `OLLAMA_MODEL_EMBED` (e.g., `nomic-embed-text`)
 - Dependencies installed (`yarn install`)
 - Ollama running (`curl -f http://localhost:11434/api/version`)
-- Branch: `git checkout step-03-retrieval-augmented-generation`
-
----
 
 ## 🧭 Walkthrough
+
+> [!NOTE]
+> This step combines retrieval-augmented generation with the sequential chain from Step 02. The vector store is built automatically on first run, so expect a slower first call.
 
 ### 1. Load and build the vector store (happens on first retrieval)
 
@@ -105,7 +106,7 @@ graph TD
 ### 2. Generate the ADR with RAG
 
 ```bash
-yarn adr generate-03 src/step01/__fixtures__/example-context.md
+yarn adr generate-03 src/__fixtures__/example-context.md
 ```
 
 **Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` using RAG-backed options. Filename is printed on success.
@@ -125,31 +126,31 @@ yarn adr evaluate docs/decisions/drafts/NNNN-*.md
 
 ### 4. Compare against Steps 01 - 02
 
-- Open the ADR and its eval; compare to Step 01 (one-shot) and Step 02 (chain) outputs.
+- Open the ADR and its eval; compare to Step 01 (single-prompt) and Step 02 (chain) outputs.
 - Did RAG improve comprehensive or actionable scores? What changed?
-
----
 
 ## ✅ Checklist
 
-- ⬜ PDFs present in `docs/source-pdfs/` (minimum: `cloud-design-patterns.pdf`, `agentic-ai-patterns.pdf`; additional PDFs enhance retrieval quality)
+- ⬜ PDFs present in `docs/source-pdfs/`
 - ⬜ ADR generated via `yarn adr generate-03 ...` (file exists in `docs/decisions/drafts/`)
 - ⬜ Evaluation generated via `yarn adr evaluate ...` with same rubric (clarity, justified, comprehensive, actionable)
 - ⬜ Retrieved context is visible in the options prompt (check logs or prompt composition if needed)
 - ⬜ I can explain how retrieval changed the options compared to Step 02
 
----
-
 ## 🛠️ Troubleshooting
+
+> [!CAUTION]
+> **If you encounter issues:** Check the troubleshooting section below before asking for help. Most issues are resolved by following these steps.
 
 - **PDF not found** → Ensure files are in `docs/source-pdfs/` with exact filenames above. Paths are case-sensitive; rerun after placing files.
 - **Slow or first-run delay** → Vector store builds on first retrieval; subsequent runs are faster.
 - **Validation errors** → Check that prompts align with schemas; confirm retrieved context isn’t malformed.
 - **Ollama connection errors** → `curl -f http://localhost:11434/api/version`; ensure models are pulled.
 
----
-
 ## ➡️ Next
+
+> [!IMPORTANT]
+> **Congratulations!** You've completed all the steps. Use what you've learned to build your own AI-augmented tools.
 
 - Iterate on prompt augmentation: adjust how retrieved snippets are formatted or limited.
 - Try different `k` values in retrieval for quality vs. conciseness.

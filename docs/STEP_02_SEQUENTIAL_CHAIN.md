@@ -2,7 +2,7 @@
 
 ## ⚡ TL;DR
 
-Break ADR generation into 4 stages (Context+Drivers → Options+ProsCons → Decision → Final), each producing validated JSON that accumulates into working memory. Each stage renders its output to markdown for the next stage's input. Final stage renders complete ADR template. Use the same evaluation from Step 01 to compare chain vs single-prompt scores.
+Break ADR generation into 4 stages (Context → Options → Decision → Render), each producing validated JSON that accumulates into working memory. Each stage renders its output to markdown for the next stage's input. Final stage renders complete ADR template. Use the same evaluation from Step 01 to compare chain vs single-prompt scores.
 
 > **Getting Started**
 >

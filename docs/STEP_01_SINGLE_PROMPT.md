@@ -34,7 +34,17 @@ By the end of this step, you will be able to:
 - **LLM-as-judge pattern**: Use AI to critique AI - this scales to any domain
 - **The loop**: Generate → Evaluate → Iterate. You'll use this same pattern in Steps 02 and 03
 
+**Model flexibility:** While we use [ChatOllama](https://docs.langchain.com/oss/javascript/integrations/chat/ollama) with [local models](https://docs.langchain.com/oss/javascript/langchain/models#local-models), you can swap it for other LangChain model integrations (OpenAI, Anthropic, AWS Bedrock, etc.) with minimal code changes. The same patterns (prompts, structured output, evaluation) work across different model providers. See [LangChain model integrations](https://docs.langchain.com/oss/javascript/integrations/providers/overview) for options.
+
 **Read more:** [MADR template](https://adr.github.io/madr/), [Architecture Decision Records (Martin Fowler)](https://martinfowler.com/articles/architecture-decision-records.html)
+
+## 📚 LangChain Concepts
+
+This step introduces several key LangChain concepts:
+
+- **[ChatPromptTemplate](https://reference.langchain.com/javascript/classes/_langchain_core.prompts.ChatPromptTemplate.html)** - Create structured prompts with placeholders for dynamic content
+- **[Structured Output](https://docs.langchain.com/oss/javascript/langchain/models#structured-output)** - Use `withStructuredOutput()` to get JSON responses validated against Zod schemas
+- **[Ollama Integration](https://docs.langchain.com/oss/javascript/integrations/chat/ollama)** - `ChatOllama` class for connecting to local Ollama models
 
 ## 📊 Workflow Diagram
 
@@ -83,6 +93,9 @@ yarn adr generate src/__fixtures__/example-context.md
 
 **Expected:** ADR saved to `docs/decisions/drafts/0000-{{ADR TITLE}}.md` with valid structure. The command prints the filename on success.
 
+> [!NOTE]
+> **About CLI commands:** The `yarn adr generate` and `yarn adr evaluate` commands are debugging/scaffolding tools provided for convenience. The actual LLM logic lives in the step functions (`generateAdr`, `evaluateAdr` in `src/step01/`) which can be called programmatically from your own code. These CLI commands wrap the functions to make testing and iteration easier.
+
 Open the generated file and review it. What looks good? What's missing or wrong?
 
 ### 2. Evaluate the ADR
@@ -117,7 +130,7 @@ The evaluation feedback is your guide to improving the prompt. This is the core 
 
 **Example iteration:**
 
-If the evaluation says "tradeoffs are superficial," you might modify `src/step01/prompts/adr-prompt.md` to add:
+If the evaluation says "tradeoffs are superficial," you might modify `src/prompts/generate-adr-minimal.md` to add:
 
 ```markdown
 For each considered option, explicitly analyze:
@@ -154,12 +167,14 @@ git checkout step-02-sequential-chain
 
 Continue to **Step 02 - Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))
 
+For next steps specific to single-prompt approaches, see [Taking Single Prompt Further](STEP_04_WHAT_NEXT.md#taking-single-prompt-further) in What Next.
+
 ## 🛠️ Troubleshooting
 
 > [!CAUTION]
 > **If you encounter issues:** Check the troubleshooting section below before asking for help. Most issues are resolved by following these steps.
 
-- **Validation errors** → Check prompt template for typos → Fix `src/step01/prompts/adr-prompt.md`
+- **Validation errors** → Check prompt template for typos → Fix `src/prompts/generate-adr-minimal.md`
 - **Ollama connection errors** → Verify daemon running → `curl -f http://localhost:11434/api/version`
 - **Model not found** → Check `.env` → `ollama pull <model>`
 - **Evaluation fails** → Check ADR file path is correct → Verify ADR file exists

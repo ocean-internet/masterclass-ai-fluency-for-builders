@@ -1,10 +1,19 @@
 import { join } from "node:path";
 
 import { E2E_TEST_TIMEOUT, FIXTURES_DIR } from "@test-utils/config";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-const fixturesPdfDir = join(FIXTURES_DIR, "source-pdfs");
-process.env["RAG_SOURCE_PDFS_DIR"] = fixturesPdfDir;
+vi.mock("../../env", async () => {
+  const actual = await vi.importActual<typeof import("../../env")>("../../env");
+  const fixturesPdfDir = join(FIXTURES_DIR, "source-pdfs");
+  return {
+    ...actual,
+    env: {
+      ...actual.env,
+      RAG_SOURCE_PDFS_DIR: fixturesPdfDir,
+    },
+  };
+});
 
 import { loadDocuments } from "./load-documents";
 

@@ -10,5 +10,5 @@ export async function handleRetrieve(contextJsonFile: string): Promise<string> {
 
   const query = `Description: ${context.description}\nDecision drivers:\n${context.drivers.join("\n")}`;
 
-  return await retrieveContext(query);
+  return retrieveContext(query);
 }

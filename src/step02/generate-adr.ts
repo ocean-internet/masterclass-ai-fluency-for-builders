@@ -73,7 +73,7 @@ export async function generateAdr(context: string): Promise<string> {
           return result;
         }),
       );
-    return await runnable.invoke({ context });
+    return runnable.invoke({ context });
   } catch (error) {
     progress.fail(`Failed to generate ADR: ${error instanceof Error ? error.message : String(error)}`);
     throw error;

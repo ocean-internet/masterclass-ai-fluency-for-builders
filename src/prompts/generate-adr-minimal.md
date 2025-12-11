@@ -11,14 +11,14 @@ A good ADR Title is a short sentence that:
 - Starts with the solution/action (Adopt…, Standardise…, Use…, Defer…).
 - Names the specific technology, approach, or choice (e.g. PostgreSQL, CI pipeline, monorepo).
 - Includes the key driver/problem being solved (e.g. speed, scalability, compliance, simplicity).
-- Keeps it concise – 8–12 words.
+- Keeps it concise - 8-12 words.
 
 ## TASK
 
 1. Analyse PROBLEM STATEMENT and identify:
-   - Problem – e.g. what problem are we trying to solve?
-   - Driver – e.g. why now, what's driving the decision?
-   - Options – e.g. what options have we considered?
+   - Problem - e.g. what problem are we trying to solve?
+   - Driver - e.g. why now, what's driving the decision?
+   - Options - e.g. what options have we considered?
 
 2. Provide a complete Architecture Decision Record (ADR) that includes:
 

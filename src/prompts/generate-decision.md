@@ -9,7 +9,7 @@ Based on the context, decision drivers, and pros/cons analysis provided, make a 
 3. **Provide justification** explaining why this option was selected.
 
 4. **List consequences** of choosing this option with their impact (Good, Bad, or Neutral)
-   **IMPORTANT**: Consequences MUST include at least one consequence with "Good" impact and at least one consequence with "Bad" impact. This ensures balanced justification for the selected option.
+   **IMPORTANT**: Consequences MUST include at least one consequence of "Good" impact and at least one consequence of "Bad" impact. This ensures balanced justification for the selected option.
 
 5. **Generate ADR title**: A short present tense imperative phrase - 8-12 words that:
    - Starts with the solution/action (Adopt…, Standardise…, Use…, Defer…)

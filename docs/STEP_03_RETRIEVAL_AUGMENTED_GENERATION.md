@@ -1,13 +1,13 @@
 # Step 03: Retrieval-Augmented Generation
 
 **Branch**: `step-03-retrieval-augmented-generation`  
-**Goal**: Generate ADR options using retrieval-augmented context from provided AWS PDFs, then complete the chain with existing Step 02 decision and render stages. Uses the same evaluation schema as Steps 01 – 02.
+**Goal**: Generate ADR options using retrieval-augmented context from provided AWS PDFs, then complete the chain with existing Step 02 decision and render stages. Uses the same evaluation schema as Steps 01 - 02.
 
 ---
 
 ## ⚡ TL;DR
 
-Load PDFs into a vector store (persisted to disk), retrieve the most relevant chunks for your decision context, and feed them into options generation. Run the full chain: `context-02 → options-03 → decision-02 → render`, then evaluate with the same rubric as Steps 01 – 02.
+Load PDFs into a vector store (persisted to disk), retrieve the most relevant chunks for your decision context, and feed them into options generation. Run the full chain: `context-02 → options-03 → decision-02 → render`, then evaluate with the same rubric as Steps 01 - 02.
 
 ---
 
@@ -123,7 +123,7 @@ yarn adr evaluate docs/decisions/drafts/NNNN-*.md
 
 **Expected:** Evaluation saved to `docs/decisions/drafts/NNNN-*.eval.md` with scores: clarity, justified, comprehensive, actionable.
 
-### 4. Compare against Steps 01 – 02
+### 4. Compare against Steps 01 - 02
 
 - Open the ADR and its eval; compare to Step 01 (one-shot) and Step 02 (chain) outputs.
 - Did RAG improve comprehensive or actionable scores? What changed?

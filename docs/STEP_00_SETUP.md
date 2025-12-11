@@ -48,7 +48,7 @@ during learning.
 
 ## 🧭 Walkthrough
 
-This step is all about setup – making sure your environment is ready to run ADR generation locally.
+This step is all about setup - making sure your environment is ready to run ADR generation locally.
 
 Don't worry if you've never used Ollama or local LLMs before: the checks here are simple, and the tests will confirm
 everything is wired up correctly.
@@ -183,7 +183,7 @@ With your environment ready, you're set to generate your very first ADR.
 git checkout step-01-single-prompt
 ```
 
-Continue to **Step 01 – Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
+Continue to **Step 01 - Single Prompt** ([STEP_01_SINGLE_PROMPT.md](STEP_01_SINGLE_PROMPT.md)).
 
 ---
 

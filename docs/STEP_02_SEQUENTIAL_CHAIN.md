@@ -179,7 +179,7 @@ Step 03 introduces retrieval-augmented generation (RAG) that adds real-world con
 git checkout step-03-retrieval-augmented-generation
 ```
 
-Continue to **Step 03 – Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
+Continue to **Step 03 - Retrieval-Augmented Generation** ([STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md](STEP_03_RETRIEVAL_AUGMENTED_GENERATION.md))
 
 ---
 

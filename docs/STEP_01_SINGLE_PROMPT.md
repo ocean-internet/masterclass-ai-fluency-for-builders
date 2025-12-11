@@ -7,7 +7,7 @@
 
 ## ⚡ TL;DR
 
-Generate an ADR in one LLM call, validate it with Zod, then have another LLM evaluate it. Learn why evaluation is foundational – not optional – for trusting AI outputs.
+Generate an ADR in one LLM call, validate it with Zod, then have another LLM evaluate it. Learn why evaluation is foundational - not optional - for trusting AI outputs.
 
 ---
 
@@ -19,7 +19,7 @@ By the end of this step, you will be able to:
 - Validate LLM responses with Zod schemas before use
 - Use an LLM as a judge to evaluate generated content (basic eval: clear, justified, comprehensive, actionable)
 - Understand the Generate → Evaluate → Iterate pattern that scales to all sophistication levels
-- Recognize that "AI drafts, humans decide" – evaluation helps you trust, not blindly accept
+- Recognize that "AI drafts, humans decide" - evaluation helps you trust, not blindly accept
 
 ---
 
@@ -31,7 +31,7 @@ By the end of this step, you will be able to:
 
 - **Evaluation is foundational**: Not a nice-to-have, but the mechanism that lets you trust AI outputs
 - **Structured output enables validation**: JSON + Zod catches errors before they propagate
-- **LLM-as-judge pattern**: Use AI to critique AI – this scales to any domain
+- **LLM-as-judge pattern**: Use AI to critique AI - this scales to any domain
 - **The loop**: Generate → Evaluate → Iterate. You'll use this same pattern in Steps 02 and 03
 
 **Read more:** [MADR template](https://adr.github.io/madr/), [Architecture Decision Records (Martin Fowler)](https://martinfowler.com/articles/architecture-decision-records.html)
@@ -75,7 +75,7 @@ graph TD
 
 This step introduces the foundational pattern: Generate → Evaluate → Iterate. You'll generate an ADR with a single prompt, then have another LLM evaluate it. Both outputs are validated with Zod to catch errors early.
 
-**Note:** The evaluation step is not optional – it's the mechanism that lets you trust AI outputs. This pattern scales to all sophistication levels.
+**Note:** The evaluation step is not optional - it's the mechanism that lets you trust AI outputs. This pattern scales to all sophistication levels.
 
 ### 1. Generate the ADR
 
@@ -131,7 +131,7 @@ For each considered option, explicitly analyze:
 
 Then re-run generation and evaluation to see if the comprehensive or justified score improves.
 
-**Key principle:** Make one change at a time. This lets you see which prompt modifications actually improve the output. Iteration is the core skill – you're learning to guide AI, not just accept its first attempt.
+**Key principle:** Make one change at a time. This lets you see which prompt modifications actually improve the output. Iteration is the core skill - you're learning to guide AI, not just accept its first attempt.
 
 ---
 
@@ -142,7 +142,7 @@ Then re-run generation and evaluation to see if the comprehensive or justified s
 - ⬜ I understand each evaluation score (clear, justified, comprehensive, actionable)
 - ⬜ I can identify at least one issue the evaluator found
 - ⬜ I can identify at least one issue neither the generator nor evaluator caught
-- ⬜ I understand this is the foundation – Steps 02 and 03 will improve generation, but evaluation remains central
+- ⬜ I understand this is the foundation - Steps 02 and 03 will improve generation, but evaluation remains central
 - ⬜ I can explain why evaluation is foundational, not optional
 
 ---
@@ -155,7 +155,7 @@ Step 02 introduces sequential chains that improve generation quality, but uses t
 git checkout step-02-sequential-chain
 ```
 
-Continue to **Step 02 – Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))
+Continue to **Step 02 - Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))
 
 ---
 
@@ -168,12 +168,12 @@ Continue to **Step 02 – Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP
 
 ### Common Mistakes
 
-- **Forgetting to validate outputs**: Zod validation catches errors early. If you see validation errors, the LLM output didn't match the expected schema – check your prompt template for mismatches.
+- **Forgetting to validate outputs**: Zod validation catches errors early. If you see validation errors, the LLM output didn't match the expected schema - check your prompt template for mismatches.
 
-- **Not reviewing evaluation scores**: The evaluation is meant to guide iteration. Don't just generate and move on – use the scores and suggestions to improve your prompt.
+- **Not reviewing evaluation scores**: The evaluation is meant to guide iteration. Don't just generate and move on - use the scores and suggestions to improve your prompt.
 
 - **Over-editing prompts too quickly**: Make one change at a time. This lets you see which modifications actually improve the output. Multiple changes at once make it hard to know what worked.
 
-- **Ignoring evaluation suggestions**: The LLM-as-judge often catches real issues you might miss. If the evaluator suggests improvements, try them – this is the pattern working as intended.
+- **Ignoring evaluation suggestions**: The LLM-as-judge often catches real issues you might miss. If the evaluator suggests improvements, try them - this is the pattern working as intended.
 
 - **Not saving intermediate outputs**: Keep drafts of your ADRs and evaluations. Compare iterations to see how prompt changes affect output quality.

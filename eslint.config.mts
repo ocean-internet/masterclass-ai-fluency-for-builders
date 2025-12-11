@@ -76,5 +76,17 @@ export default defineConfig([
     plugins: { markdown },
     language: "markdown/gfm",
     extends: ["markdown/recommended"],
+    ignores: ["**/adr-template*.md"],
+    rules: {
+      "markdown/no-missing-label-refs": "off",
+    },
+  },
+  {
+    files: ["**/STEP_ZZ_TEMPLATE.md"],
+    plugins: { markdown },
+    language: "markdown/gfm",
+    rules: {
+      "markdown/no-missing-link-fragments": "off",
+    },
   },
 ]);

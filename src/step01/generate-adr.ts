@@ -22,10 +22,9 @@ export function generateAdr(context: string): Promise<string> {
 
   const promptTemplate = loadPromptTemplate(ADR_PROMPT);
 
-  const chain = ChatPromptTemplate.fromTemplate(promptTemplate)
+  const runnable = ChatPromptTemplate.fromTemplate(promptTemplate)
     .pipe(model.withStructuredOutput(adrSchema))
-    .pipe((adr) => adrSchema.parse(adr))
     .pipe(RunnableLambda.from((adr) => jsonToMarkdown<Adr>(ADR_TEMPLATE, adr)));
 
-  return chain.invoke({ context });
+  return runnable.invoke({ context });
 }

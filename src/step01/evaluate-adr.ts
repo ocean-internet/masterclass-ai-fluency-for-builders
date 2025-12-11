@@ -31,13 +31,12 @@ export function evaluateAdr(madr: string): Promise<string> {
   const promptTemplate = loadPromptTemplate(EVAL_PROMPT);
   const title = extractTitle(madr);
 
-  const chain = ChatPromptTemplate.fromTemplate(promptTemplate)
+  const runnable = ChatPromptTemplate.fromTemplate(promptTemplate)
     .pipe(model.withStructuredOutput(llmSchema))
     .pipe(RunnableLambda.from((adrEval) => addMetadataToEval(adrEval, title)))
-    .pipe(RunnableLambda.from((adrEval) => adrEvalSchema.parse(adrEval)))
     .pipe(RunnableLambda.from((adrEval) => jsonToMarkdown<AdrEval>(EVAL_TEMPLATE, adrEval)));
 
   const madrTemplate = loadMadrTemplate(MADR_TEMPLATE);
 
-  return chain.invoke({ madrTemplate, madr });
+  return runnable.invoke({ madrTemplate, madr });
 }

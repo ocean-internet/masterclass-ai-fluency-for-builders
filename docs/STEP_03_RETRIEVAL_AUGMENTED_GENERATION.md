@@ -169,6 +169,7 @@ yarn adr evaluate docs/decisions/drafts/0000-{{ADR TITLE}}.md
 For next steps specific to RAG, see [Taking RAG Further](STEP_04_WHAT_NEXT.md#taking-rag-further) in What Next.
 
 Continue to [What Next: Continuing Your AI Fluency Journey](STEP_04_WHAT_NEXT.md) for comprehensive guidance on taking your skills further, including:
+
 - Iterating on prompt augmentation: adjust how retrieved snippets are formatted or limited
 - Trying different `k` values in retrieval for quality vs. conciseness
 - Applying the same pattern to your own PDFs or knowledge base

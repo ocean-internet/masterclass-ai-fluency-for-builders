@@ -33,6 +33,8 @@ export const adrSchema = z.object({
       }),
     )
     .min(2)
+    .refine((args) => args.some((arg) => arg.impact === "Good"), { message: "Must have at least one Good consequence" })
+    .refine((args) => args.some((arg) => arg.impact === "Bad"), { message: "Must have at least one Bad consequence" })
     .describe("Consequences"),
 });
 export type Adr = z.infer<typeof adrSchema>;

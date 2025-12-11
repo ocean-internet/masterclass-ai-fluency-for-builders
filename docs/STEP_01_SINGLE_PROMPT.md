@@ -10,7 +10,7 @@ Generate an ADR in one LLM call, validate it with Zod, then have another LLM eva
 > - Checkout the branch: `git checkout step-01-single-prompt`
 > - Run `yarn install` to ensure dependencies are up to date
 > - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
-> - Verify `.env` is configured with `OLLAMA_MODEL`
+> - Verify `.env` is configured with `OLLAMA_MODEL` and `OLLAMA_MODEL_JUDGE`
 
 ## 🎯 Learning Outcomes
 

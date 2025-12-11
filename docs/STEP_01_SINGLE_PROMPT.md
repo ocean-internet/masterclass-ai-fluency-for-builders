@@ -133,7 +133,7 @@ The evaluation feedback is your guide to improving the prompt. This is the core 
 If the evaluation says "tradeoffs are superficial," you might modify `src/prompts/generate-adr-minimal.md` to add:
 
 ```markdown
-For each considered option, explicitly analyze:
+For each considered option, explicitly analyse:
 
 - What problems does this option solve?
 - What new problems or constraints does it introduce?

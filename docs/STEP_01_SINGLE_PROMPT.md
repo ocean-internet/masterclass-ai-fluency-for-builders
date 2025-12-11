@@ -1,15 +1,16 @@
 # Step 01: Single Prompt
 
-**Branch**: `step-01-single-prompt`  
-**Goal**: Generate an ADR from a decision context using a single prompt, then evaluate it with a basic LLM-as-judge. Both outputs validated with Zod. This establishes the Generate → Evaluate → Iterate pattern.
-
----
-
 ## ⚡ TL;DR
 
 Generate an ADR in one LLM call, validate it with Zod, then have another LLM evaluate it. Learn why evaluation is foundational - not optional - for trusting AI outputs.
 
----
+> **Getting Started**
+>
+> - Ensure you've completed Step 00 - Setup ([STEP_00_SETUP.md](./STEP_00_SETUP.md))
+> - Checkout the branch: `git checkout step-01-single-prompt`
+> - Run `yarn install` to ensure dependencies are up to date
+> - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
+> - Verify `.env` is configured with `OLLAMA_MODEL`
 
 ## 🎯 Learning Outcomes
 
@@ -21,11 +22,10 @@ By the end of this step, you will be able to:
 - Understand the Generate → Evaluate → Iterate pattern that scales to all sophistication levels
 - Recognize that "AI drafts, humans decide" - evaluation helps you trust, not blindly accept
 
----
-
 ## 🧠 Background
 
-**Why this matters:** This is the simplest useful AI-augmented workflow. No chains, no retrieval, no complexity. Just: generate something, evaluate it, iterate on it. This pattern works at every level.
+> [!IMPORTANT]
+> **Why this matters:** This is the simplest useful AI-augmented workflow. No chains, no retrieval, no complexity. Just: generate something, evaluate it, iterate on it. This pattern works at every level.
 
 **Key ideas**
 
@@ -35,8 +35,6 @@ By the end of this step, you will be able to:
 - **The loop**: Generate → Evaluate → Iterate. You'll use this same pattern in Steps 02 and 03
 
 **Read more:** [MADR template](https://adr.github.io/madr/), [Architecture Decision Records (Martin Fowler)](https://martinfowler.com/articles/architecture-decision-records.html)
-
----
 
 ## 📊 Workflow Diagram
 
@@ -60,27 +58,27 @@ graph TD
     E --> C
 ```
 
----
-
 ## 🔑 Prerequisites
+
+> [!TIP]
+> **Before starting:** Make sure you have completed Step 00 and have all prerequisites ready to avoid interruptions.
 
 - Complete **Step 00 - Setup** ([STEP_00_SETUP.md](./STEP_00_SETUP.md))
 - Ollama running with model pulled
 - `.env` configured
 - Dependencies installed (`yarn install`)
 
----
-
 ## 🧭 Walkthrough
 
-This step introduces the foundational pattern: Generate → Evaluate → Iterate. You'll generate an ADR with a single prompt, then have another LLM evaluate it. Both outputs are validated with Zod to catch errors early.
+> [!NOTE]
+> This step introduces the foundational pattern: Generate → Evaluate → Iterate. You'll generate an ADR with a single prompt, then have another LLM evaluate it. Both outputs are validated with Zod to catch errors early.
 
 **Note:** The evaluation step is not optional - it's the mechanism that lets you trust AI outputs. This pattern scales to all sophistication levels.
 
 ### 1. Generate the ADR
 
 ```bash
-yarn adr generate src/step01/__fixtures__/example-context.md
+yarn adr generate src/__fixtures__/example-context.md
 ```
 
 **Expected:** ADR saved to `docs/decisions/drafts/NNNN-*.md` with valid structure. The command prints the filename on success.
@@ -133,8 +131,6 @@ Then re-run generation and evaluation to see if the comprehensive or justified s
 
 **Key principle:** Make one change at a time. This lets you see which prompt modifications actually improve the output. Iteration is the core skill - you're learning to guide AI, not just accept its first attempt.
 
----
-
 ## ✅ Checklist
 
 - ⬜ ADR generated successfully (valid JSON → validated by Zod → converted to MADR format)
@@ -145,9 +141,10 @@ Then re-run generation and evaluation to see if the comprehensive or justified s
 - ⬜ I understand this is the foundation - Steps 02 and 03 will improve generation, but evaluation remains central
 - ⬜ I can explain why evaluation is foundational, not optional
 
----
-
 ## ➡️ Next
+
+> [!IMPORTANT]
+> **Before moving on:** Complete the checklist above to ensure you understand the Generate → Evaluate → Iterate pattern.
 
 Step 02 introduces sequential chains that improve generation quality, but uses the same evaluation pattern. The Generate → Evaluate → Iterate loop remains the backbone.
 
@@ -157,9 +154,10 @@ git checkout step-02-sequential-chain
 
 Continue to **Step 02 - Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_02_SEQUENTIAL_CHAIN.md))
 
----
-
 ## 🛠️ Troubleshooting
+
+> [!CAUTION]
+> **If you encounter issues:** Check the troubleshooting section below before asking for help. Most issues are resolved by following these steps.
 
 - **Validation errors** → Check prompt template for typos → Fix `src/step01/prompts/adr-prompt.md`
 - **Ollama connection errors** → Verify daemon running → `curl -f http://localhost:11434/api/version`
@@ -167,6 +165,9 @@ Continue to **Step 02 - Sequential Chain** ([STEP_02_SEQUENTIAL_CHAIN.md](STEP_0
 - **Evaluation fails** → Check ADR file path is correct → Verify ADR file exists
 
 ### Common Mistakes
+
+> [!WARNING]
+> **Common mistakes to avoid:** The following mistakes can prevent you from getting the most out of this step.
 
 - **Forgetting to validate outputs**: Zod validation catches errors early. If you see validation errors, the LLM output didn't match the expected schema - check your prompt template for mismatches.
 

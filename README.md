@@ -48,6 +48,9 @@ No prior AI experience required - just curiosity, a decent dev machine, and a wo
 2. Run `yarn test` to verify your environment
 3. Continue to [Step 01 - Single Prompt](docs/STEP_01_SINGLE_PROMPT.md)
 
+> [!TIP]
+> **After switching branches:** Run `yarn install` to ensure dependencies are up to date.
+
 ## Further Reading
 
 - [Agents: Chip Huyen](https://huyenchip.com/2025/01/07/agents.html)

@@ -12,6 +12,16 @@ Break ADR generation into 4 stages (Context → Options → Decision → Render)
 > - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
 > - Verify `.env` is configured with `OLLAMA_MODEL` and `OLLAMA_MODEL_JUDGE`
 
+> [!TIP]
+> **Where the code lives:** The implementation for this step is in `src/step02/`. Key functions to explore:
+> - [`generateContext()`](../src/step02/context/generate.ts) - Stage 1: Extract context and decision drivers
+> - [`generateOptions()`](../src/step02/options/generate.ts) - Stage 2: Generate options with pros/cons
+> - [`generateDecision()`](../src/step02/decision/generate.ts) - Stage 3: Make the decision
+> - [`renderAdr()`](../src/step02/adr/render-adr.ts) - Stage 4: Render final ADR template
+> - [`generateAdr()`](../src/step02/generate-adr.ts) - Orchestrates the full chain
+>
+> Open these files to understand how sequential chains break complex tasks into stages.
+
 ## 🎯 Learning Outcomes
 
 By the end of this step, you will be able to:

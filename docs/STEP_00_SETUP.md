@@ -166,7 +166,7 @@ OLLAMA_MODEL_EMBED=nomic-embed-text
 ### 7. Run the smoke test
 
 ```bash
-yarn test src/env.smoke.test.ts
+yarn test:smoke
 ```
 
 **Expected:**

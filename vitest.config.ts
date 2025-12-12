@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { configDefaults, defineConfig } from "vitest/config";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   resolve: {
@@ -26,9 +26,5 @@ export default defineConfig({
         // autoUpdate: (newThreshold) => Math.floor(newThreshold),
       },
     },
-    exclude:
-      process.env["VITEST_WATCH"] === "true"
-        ? [...configDefaults.exclude, "**/*.{e2e,smoke}.test.ts"]
-        : configDefaults.exclude,
   },
 });

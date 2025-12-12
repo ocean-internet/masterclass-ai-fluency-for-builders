@@ -7,7 +7,10 @@
   "scripts": {
     "tsx": "tsx -r tsconfig-paths/register",
     "test": "vitest run",
-    "test:watch": "vitest --watch",
+    "test:unit": "vitest run --exclude \"**/*.{e2e,smoke}.test.ts\"",
+    "test:e2e": "vitest run e2e",
+    "test:smoke": "vitest run smoke",
+    "test:watch": "vitest --watch --exclude \"**/*.{e2e,smoke}.test.ts\"",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "lint:files": "ls-lint",

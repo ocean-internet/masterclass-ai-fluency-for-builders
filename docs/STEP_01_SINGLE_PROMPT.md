@@ -12,6 +12,13 @@ Generate an ADR in one LLM call, validate it with Zod, then have another LLM eva
 > - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
 > - Verify `.env` is configured with `OLLAMA_MODEL` and `OLLAMA_MODEL_JUDGE`
 
+> [!TIP]
+> **Where the code lives:** The implementation for this step is in `src/step01/`. Key functions to explore:
+> - [`generateAdr()`](../src/step01/generate-adr.ts) - Generates an ADR from a problem statement
+> - [`evaluateAdr()`](../src/step01/evaluate-adr.ts) - Evaluates an ADR using an LLM-as-judge
+>
+> Open these files to understand how the single-prompt pattern works in practice.
+
 ## 🎯 Learning Outcomes
 
 By the end of this step, you will be able to:

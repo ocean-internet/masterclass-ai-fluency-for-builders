@@ -12,6 +12,17 @@ Load PDFs into a vector store (persisted to disk), retrieve the most relevant ch
 > - Verify Ollama is running: `curl -f http://localhost:11434/api/version`
 > - Verify `.env` is configured with `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED`
 > - Ensure PDFs are in `docs/source-pdfs/` directory
+> - Run `yarn test:smoke` to verify PDFs are present
+
+> [!TIP]
+> **Where the code lives:** The implementation for this step is in `src/step03/`. Key functions to explore:
+> - [`loadDocuments()`](../src/step03/retrieval/load-documents.ts) - Loads PDFs from `docs/source-pdfs/`
+> - [`createVectorStore()`](../src/step03/retrieval/create-vector-store.ts) - Builds the vector store from documents
+> - [`retrieveContext()`](../src/step03/retrieval/retrieve-context.ts) - Retrieves relevant chunks for a query
+> - [`generateOptions()`](../src/step03/options/generate.ts) - Generates options with retrieved context
+> - [`generateAdr()`](../src/step03/generate-adr.ts) - Orchestrates the RAG-augmented chain
+>
+> Open these files to understand how retrieval-augmented generation works.
 
 ## 🎯 Learning Outcomes
 
@@ -174,3 +185,56 @@ Continue to [What Next: Continuing Your AI Fluency Journey](STEP_04_WHAT_NEXT.md
 - Trying different `k` values in retrieval for quality vs. conciseness
 - Applying the same pattern to your own PDFs or knowledge base
 - Productionizing your AI-augmented tools
+
+## 🔍 Embeddings and Vector Store Concepts
+
+The following diagram illustrates how embeddings and vector stores work conceptually:
+
+```mermaid
+graph LR
+        A@{shape: docs, label: "Documents"}
+        D[(Index/Store<br/>Store vectors)]
+        E@{shape: card, label: "Query"}
+        H@{shape: docs, label: "Top-K<br />Results"}
+
+        A --> B
+
+    subgraph indexing["Indexing Phase"]
+        B[Text Chunking<br/>Split into chunks]
+        C[Embedding<br/>Convert to vectors]
+        B --> C
+    end
+
+        C --> D --> G
+        
+        E --> F
+
+    subgraph querying["Query Phase"]
+        F[Embedding<br/>Convert to vector]
+        G[Similarity Search<br/>Find similar vectors]
+        
+        F --> G
+    end
+
+    G --> H
+
+    style indexing fill:#e1f5e1
+    style querying fill:#e1f5ff
+```
+
+**Key concepts:**
+
+- **Text Chunking/Splitting**: Documents are split into smaller chunks to improve retrieval accuracy and manage context window limits.
+- **Embedding**: Text chunks are converted to numerical vectors (embeddings) that capture semantic meaning. Similar texts have similar vectors.
+- **Index/Store Vectors**: Embeddings are stored in a vector database/index that enables fast similarity search.
+- **Similarity Search**: When querying, the query is embedded and compared to stored embeddings to find the most semantically similar chunks.
+- **Top-K**: Returns the K most relevant chunks based on similarity scores.
+
+**Learn more:**
+
+- [Ollama Embeddings](https://docs.langchain.com/oss/javascript/integrations/text_embedding/ollama/) - Using Ollama for embeddings
+- [Vector Stores](https://docs.langchain.com/oss/javascript/integrations/vectorstores/faiss/) - FAISS vector store integration
+- [RAG Concepts](https://docs.langchain.com/oss/javascript/langchain/rag) - Retrieval-augmented generation patterns
+
+> [!NOTE]
+> This diagram shows the conceptual flow of embeddings and vector stores. The [Workflow Diagram](#-workflow-diagram) above shows the process flow of the ADR generation pipeline.

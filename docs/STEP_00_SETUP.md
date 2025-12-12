@@ -165,6 +165,8 @@ OLLAMA_MODEL_EMBED=nomic-embed-text
 
 ### 7. Run the smoke test
 
+Run the smoke test to verify your environment is configured correctly:
+
 ```bash
 yarn test:smoke
 ```
@@ -174,6 +176,13 @@ yarn test:smoke
 - Tests connect to the Ollama daemon.
 - Tests confirm `OLLAMA_MODEL`, `OLLAMA_MODEL_JUDGE`, and `OLLAMA_MODEL_EMBED` are installed.
 - Clear failure messages if any check fails (no side effects).
+
+> [!TIP]
+> **Test commands:**
+> - `yarn test:smoke` - Run smoke tests (pre-flight/environment checks that verify your setup is correct, e.g., Ollama connectivity, models loaded)
+> - `yarn test:unit` - Run unit tests only (fast, isolated tests that don't require external services)
+> - `yarn test:e2e` - Run end-to-end tests (tests that exercise full workflows with real LLM calls)
+> - `yarn test` - Run full test suite (smoke + unit + e2e)
 
 > Reference test file: [env.smoke.test.ts](../src/env.smoke.test.ts)
 
@@ -238,3 +247,103 @@ If you see `curl: (7) Failed to connect to localhost port 11434 after 0 ms: Conn
 
 - **Model won't load** → insufficient RAM/VRAM → try a smaller quantised build (e.g., `llama3.1:8b-instruct:q4_0`).
 - **Node/Yarn issues** → confirm `node -v` (LTS); run `corepack enable` before `yarn install`.
+
+## 📊 Model Configuration Matrix
+
+This section provides guidance on model selection for each use case, including more powerful local and cloud alternatives.
+
+| Model Variable | Use Case | Default (Current) | More Powerful Local | More Powerful Cloud |
+|----------------|----------|-------------------|---------------------|---------------------|
+| `OLLAMA_MODEL` | ADR generation / Text generation | `llama3.1:8b` | `llama3.1:70b` or `qwen2.5:72b` | `claude-3-5-sonnet` (Anthropic) or `gpt-4`/`gpt-4-turbo` (OpenAI) |
+| `OLLAMA_MODEL_JUDGE` | Evaluation / Scoring | `qwen2.5:7b` | `qwen2.5:72b` or `llama3.1:70b` | `claude-3-5-sonnet` (Anthropic) or `gpt-4` (OpenAI) |
+| `OLLAMA_MODEL_EMBED` | Text embeddings | `nomic-embed-text` | `mxbai-embed-large` or `bge-m3` | `text-embedding-3-large` (OpenAI) or `voyage-large-3` (Voyage AI) |
+
+### Switching to Cloud Models
+
+To switch from local Ollama models to cloud-based models, replace `ChatOllama` with the appropriate LangChain integration:
+
+**OpenAI Example:**
+
+```typescript
+import { ChatOpenAI } from "@langchain/openai";
+
+// Replace ChatOllama with ChatOpenAI
+const model = new ChatOpenAI({
+  modelName: "gpt-4",
+  temperature: 0,
+});
+```
+
+**Anthropic Example:**
+
+```typescript
+import { ChatAnthropic } from "@langchain/anthropic";
+
+// Replace ChatOllama with ChatAnthropic
+const model = new ChatAnthropic({
+  modelName: "claude-3-5-sonnet-20241022",
+  temperature: 0,
+});
+```
+
+**Voyage AI Embeddings Example:**
+
+```typescript
+import { VoyageEmbeddings } from "@langchain/voyageai";
+
+// Replace OllamaEmbeddings with VoyageEmbeddings
+const embeddings = new VoyageEmbeddings({
+  modelName: "voyage-large-3",
+});
+```
+
+> [!NOTE]
+> **Trade-offs:**
+> - **Local models**: Privacy, no API costs, works offline, but may have lower quality
+> - **Cloud models**: Better quality, but requires internet, incurs API costs, data sent to provider
+>
+> **Model availability:** Verify Ollama model availability with `ollama list` or check the [Ollama library](https://ollama.com/library). Some models may need to be pulled manually or may not be available in the Ollama library.
+
+See [LangChain model integrations](https://docs.langchain.com/oss/javascript/integrations/providers/overview) for all available options.
+
+## 🏗️ Local vs Cloud Model Architecture
+
+The following diagram illustrates how local and cloud model architectures differ, showing what runs on your local machine versus what runs in the cloud:
+
+```mermaid
+---
+title: Local Architecture
+---
+graph
+    subgraph localMachine["🖥️ Your Local Machine"]
+        A[Your Application<br/>LangChain.js]
+        B[Ollama Daemon<br/>Local Runtime]
+        C[Model Files<br/>llama3.1:8b<br/>Stored on Disk]
+        A -->|HTTP API| B
+        B -->|Runs| C
+    end
+```
+```mermaid
+---
+title: Cloud Architecture
+---
+graph LR
+    subgraph cloudMachine["🖥️ Your Local Machine"]
+        D[Your Application<br/>LangChain.js]
+    end
+
+   D -->|HTTPS API| E
+
+    subgraph cloud["🌐 Cloud / Internet"]
+        E[Cloud API<br/>OpenAI/Anthropic]
+        F[Cloud Models<br/>GPT-4 / Claude<br/>Remote Servers]
+        E -->|Runs| F
+    end
+```
+
+**Key differences:**
+
+- **Local (Ollama)**: All components run on your machine. Models are stored locally, no internet required after initial download, no API costs, complete data privacy.
+- **Cloud (OpenAI/Anthropic)**: Your application communicates with remote APIs over the internet. Models run on provider servers, requires internet connection, incurs API costs, data sent to provider.
+
+Both architectures use the same LangChain patterns (prompts, chains, structured output), making it easy to switch between local and cloud models.
